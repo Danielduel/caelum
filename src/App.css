@@ -18,13 +18,16 @@
   padding: 4px 1rem;
 }
 
-
 .App > div > div:nth-child(1) {
   width: 13rem;
 }
 
 .App > div > div:nth-child(2) {
-  width: 3rem;
+  width: 10rem;
+}
+
+.App > div > div.rain {
+  background-color: #fcc;
 }
 
 .App > div > div:nth-child(3) {
