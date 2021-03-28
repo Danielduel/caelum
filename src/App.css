@@ -1,35 +1,36 @@
-.App {
-  text-align: center;
-}
-
-.App > div {
+.app-container {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-.App > div.marszowagodzina {
+table {
+  border-collapse: collapse;
+  margin: 3rem;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+table td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 3rem;
+  margin: 0;
+}
+
+table tr > td:first-child {
+  padding-left: 4rem;
+}
+
+table tr > td:last-child {
+  padding-right: 4rem;
+}
+
+table > tbody > tr.marszowagodzina {
   background-color: #fed;
 }
-.App > div.marszowagodzina + div {
+
+tr.marszowagodzina + tr {
   background-color: cornsilk;
-}
-
-.App > div > div {
-  padding: 4px 1rem;
-}
-
-.App > div > div:nth-child(1) {
-  width: 13rem;
-}
-
-.App > div > div:nth-child(2) {
-  width: 10rem;
-}
-
-.App > div > div.rain {
-  background-color: #fcc;
-}
-
-.App > div > div:nth-child(3) {
-  width: 5rem;
 }
