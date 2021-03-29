@@ -1,36 +1,99 @@
+body {
+  background-image: url("./assets/img/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 .app-container {
   display: flex;
-  justify-content: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem 0;
+  overflow: hidden;
 }
 
-table {
-  border-collapse: collapse;
-  margin: 3rem;
-  font-weight: 600;
+.weather-container {
   background-color: rgba(255, 255, 255, 0.7);
+  width: 100%; /* columnified flex-grow: 1 */
+  font-weight: 600;
+  white-space: normal;
+  padding: 1rem 0;
 }
 
-table td {
-  border-bottom: 1px solid #ddd;
-  padding: 8px 3rem;
-  margin: 0;
+@media (min-width: 50rem) {
+  .weather-container {
+    max-width: 50rem;
+  }
+  .weather-row {
+    padding: 0 5rem;
+  }
 }
 
-table tr > td:first-child {
-  padding-left: 4rem;
+@media (min-width: 36rem) and (max-width: 50rem) {
+  .weather-container {
+    max-width: 36rem;
+  }
+  .weather-row {
+    padding: 0 2rem;
+  }
 }
 
-table tr > td:last-child {
-  padding-right: 4rem;
+@media (max-width: 36rem) {
+  .weather-container {
+    max-width: initial;
+    width: 100%;
+  }
+  .weather-row {
+    grid-template-columns: 1fr 1fr repeat(2, 0fr);
+    padding: 0 1rem;
+  }
+
+  .weather-row__temp-temp {
+    display: none;
+  }
+
+  .weather-row__formattedDate {
+    word-spacing: 9999px; /* break words */
+  }
+
+  .app-container {
+    padding: 0;
+  }
 }
 
-table > tbody > tr.marszowagodzina {
-  background-color: #fed;
+.weather-row {
+  display: grid;
+  vertical-align: middle;
+  grid-template-columns: 1fr 1fr repeat(2, 0fr);
+  position: relative;
 }
 
-tr.marszowagodzina + tr {
-  background-color: cornsilk;
+.weather-row > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-row__formattedDate,
+.weather-row__temp {
+  justify-content: flex-start;
+}
+
+.marszowagodzina,
+.marszowagodzina + * {
+  overflow: visible;
+}
+
+.marszowagodzina::before,
+.marszowagodzina + *:before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: lightgoldenrodyellow;
 }
