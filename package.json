@@ -12,6 +12,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "serve": "^11.3.2",
     "typescript": "^4.2.3"
   },
   "devDependencies": {
@@ -20,7 +21,8 @@
     "prettier": "^2.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
