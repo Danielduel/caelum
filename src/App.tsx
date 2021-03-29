@@ -47,7 +47,7 @@ const WeatherTable = ({ data }: { data: TransformData | null }) => (
   <div className="weather-container">{data && data.map(WeatherRow)}</div>
 );
 
-const App = () => {
+const App: React.FunctionComponent = () => {
   const [fetched, setFetched] = React.useState(false);
   const [data, setData] = React.useState<TransformData | null>(null);
 
