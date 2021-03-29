@@ -1,4 +1,5 @@
 import React from "react";
+import cn from "classnames";
 import * as OpenWeatherMapForecastAPI from "./typings/OpenWeatherMapForecastAPI";
 import "./App.css";
 type Unpacked<T> = T extends (infer U)[] ? U : T;
@@ -22,24 +23,28 @@ type TransformData = ReturnType<typeof transformData>;
 type TransformDataItem = Unpacked<TransformData>;
 
 const WeatherRow = ({ formattedDate, temp, weather, tempFeel, icon }: TransformDataItem) => (
-  <tr className={formattedDate.includes("06:00:00") ? "marszowagodzina" : ""} key={formattedDate}>
-    <td>{formattedDate}</td>
-    <td>
-      temp. {temp}
-      <span>&#8451;</span> ({tempFeel}
+  <div
+    className={cn("weather-row", {
+      marszowagodzina: formattedDate.includes("06:00:00")
+    })}
+    key={formattedDate}
+  >
+    <div className="weather-row__formattedDate">{formattedDate}</div>
+    <div className="weather-row__temp">
+      <span className="weather-row__temp-temp">temp&nbsp;</span>
+      {temp}
+      <span>&#8451;</span>&nbsp;({tempFeel}
       <span>&#8451;</span>)
-    </td>
-    <td className={weather === "Rain" ? "rain" : ""}>{weather}</td>
-    <td>
+    </div>
+    <div className="weather-row__weather">{weather}</div>
+    <div className="weather-row__weather-icon">
       <img src={icon} alt="weather-icon" />
-    </td>
-  </tr>
+    </div>
+  </div>
 );
 
 const WeatherTable = ({ data }: { data: TransformData | null }) => (
-  <table>
-    <tbody>{data && data.map(WeatherRow)}</tbody>
-  </table>
+  <div className="weather-container">{data && data.map(WeatherRow)}</div>
 );
 
 const App = () => {
@@ -58,7 +63,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app-container" style={{ backgroundImage: "url(img/background.jpg)" }}>
+    <div className="app-container">
       {!fetched && "Loading..."}
       {fetched && <WeatherTable data={data} />}
     </div>
