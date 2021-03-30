@@ -22,6 +22,14 @@ body {
   padding: 1rem 0;
 }
 
+.weather-row {
+  display: grid;
+  vertical-align: middle;
+  grid-template-areas: "formattedDate temp weather weather-icon";
+  grid-template-columns: 1fr 1fr repeat(2, 0fr);
+  position: relative;
+}
+
 @media (min-width: 50rem) {
   .weather-container {
     max-width: 50rem;
@@ -46,6 +54,7 @@ body {
     width: 100%;
   }
   .weather-row {
+    grid-template-areas: "formattedDateMnemonic temp weather weather-icon";
     grid-template-columns: 1fr 1fr repeat(2, 0fr);
     padding: 0 1rem;
   }
@@ -54,20 +63,17 @@ body {
     display: none;
   }
 
-  .weather-row__formattedDate {
-    word-spacing: 9999px; /* break words */
+  .weather-row .weather-row__formattedDate {
+    display: none;
   }
 
   .app-container {
     padding: 0;
   }
-}
-
-.weather-row {
-  display: grid;
-  vertical-align: middle;
-  grid-template-columns: 1fr 1fr repeat(2, 0fr);
-  position: relative;
+  
+  .mobile-only.mobile-only {
+    display: inherit;
+  }
 }
 
 .weather-row > * {
@@ -77,6 +83,7 @@ body {
 }
 
 .weather-row__formattedDate,
+.weather-row__formattedDateMnemonic,
 .weather-row__temp {
   justify-content: flex-start;
 }
@@ -97,3 +104,13 @@ body {
   right: 0;
   background-color: lightgoldenrodyellow;
 }
+
+.mobile-only {
+  display: none;
+}
+
+.weather-row__formattedDate { grid-area: formattedDate; }
+.weather-row__formattedDateMnemonic { grid-area: formattedDateMnemonic; }
+.weather-row__temp { grid-area: temp; }
+.weather-row__weather { grid-area: weather; }
+.weather-row__weather-icon { grid-area: weather-icon; }
