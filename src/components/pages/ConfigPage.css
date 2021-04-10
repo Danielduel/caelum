@@ -1,0 +1,24 @@
+.config-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.widget-list-container {
+    height: 100%;
+    flex: 1;
+    background-color: aliceblue;
+}
+
+.grid-container {
+    height: 100%;
+    flex: 3;
+}
+
+.drawer-item {
+    width: calc(100% - 2rem);
+    height: 3rem;
+    margin: 1rem;
+    background-color: cadetblue;
+    box-sizing: border-box;
+}
