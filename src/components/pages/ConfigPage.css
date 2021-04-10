@@ -4,15 +4,27 @@
     display: flex;
 }
 
-.widget-list-container {
-    height: 100%;
-    flex: 1;
-    background-color: aliceblue;
-}
-
 .grid-container {
     height: 100%;
     flex: 3;
+}
+
+.widget-list-container {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+}
+
+.list-container {
+    flex-grow: 1;
+}
+
+.widget-list-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 2rem;
 }
 
 .drawer-item {

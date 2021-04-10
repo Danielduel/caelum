@@ -1,9 +1,9 @@
-import GearButton from "../organisms/buttons/GearButton";
+import LinkIcon from "../organisms/buttons/LinkIcon";
 
 const HomePage: React.FunctionComponent = () => {
   return (
     <div>
-      <GearButton to="/config" />
+      <LinkIcon to="/config" iconType="gear" />
       Home
     </div>
   );
