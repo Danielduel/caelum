@@ -24,6 +24,7 @@ const IconLink = styled(Link)`
   width: 100%;
   display: block;
   line-height: 0;
+  z-index: 69;
 `;
 
 const LinkIcon: React.FunctionComponent<LinkIconProps> = ({ to, iconType }: LinkIconProps) => {
