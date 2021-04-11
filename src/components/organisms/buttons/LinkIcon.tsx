@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ReactComponent as GearIcon } from "../../atoms/icons/gear/gear.svg";
+import Icon, { IconTypes } from "../../molecules/Icon";
 
-type GearButtonProps = {
+type LinkIconProps = {
   to: string;
+  iconType: IconTypes;
 };
 
-const GearButtonWrapper = styled.div`
+const LinkIconWrapper = styled.div`
   position: fixed;
   top: 2rem;
   left: 2rem;
@@ -15,6 +16,7 @@ const GearButtonWrapper = styled.div`
   border: 2px solid black;
   border-radius: 50%;
   background: #bbb;
+  z-index: 69;
 `;
 
 const IconLink = styled(Link)`
@@ -24,14 +26,14 @@ const IconLink = styled(Link)`
   line-height: 0;
 `;
 
-const GearButton: React.FunctionComponent<GearButtonProps> = ({ to }: GearButtonProps) => {
+const LinkIcon: React.FunctionComponent<LinkIconProps> = ({ to, iconType }: LinkIconProps) => {
   return (
-    <GearButtonWrapper>
+    <LinkIconWrapper>
       <IconLink to={to}>
-        <GearIcon />
+        <Icon type={iconType} />
       </IconLink>
-    </GearButtonWrapper>
+    </LinkIconWrapper>
   );
 };
 
-export default GearButton;
+export default LinkIcon;
