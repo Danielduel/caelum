@@ -27,7 +27,7 @@
     padding-bottom: 2rem;
 }
 
-.drawer-item {
+.drawer-item, .widget-thumbnail {
     width: calc(100% - 2rem);
     height: 3rem;
     margin: 1rem;

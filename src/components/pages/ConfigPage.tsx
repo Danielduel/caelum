@@ -3,9 +3,15 @@ import "./ConfigPage.css";
 import dragula from "dragula";
 import { Button, Tooltip } from "antd";
 import { DeleteOutlined, CheckOutlined } from "@ant-design/icons";
+import widgetDefinitionList from "../../widgets/Widgets";
 
-const DrawerItem: React.FunctionComponent = () => {
-  return <div className="drawer-item">item</div>;
+const WidgetList: React.FunctionComponent = () => {
+  const items = widgetDefinitionList.map((Item) => <Item.widgetThumbnail key={Item.name} />);
+  return <>{items}</>;
+};
+
+const accepts = (_el?: Element, target?: Element): boolean => {
+  return target?.className === "grid-container";
 };
 
 const ConfigPage: React.FunctionComponent = () => {
@@ -13,16 +19,17 @@ const ConfigPage: React.FunctionComponent = () => {
   const gridContainer = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     if (listContainer.current && gridContainer.current) {
-      dragula([listContainer.current, gridContainer.current]);
+      dragula([listContainer.current, gridContainer.current], {
+        copy: true,
+        accepts
+      });
     }
   }, [listContainer, gridContainer]);
   return (
     <div className="config-container">
       <div className="widget-list-container">
         <div ref={listContainer} className="list-container">
-          <DrawerItem />
-          <DrawerItem />
-          <DrawerItem />
+          <WidgetList></WidgetList>
         </div>
         <div className="widget-list-buttons">
           <Tooltip title="delete">
