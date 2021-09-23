@@ -1,9 +1,8 @@
 import React from "react";
-import cn from "classnames";
 import moment from "moment";
 import "moment/locale/pl";
 import * as OpenWeatherMapForecastAPI from "./typings/OpenWeatherMapForecastAPI";
-import "./App.css";
+import styled from "styled-components";
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 moment.locale("pl");
 
@@ -30,31 +29,50 @@ const transformData = (responseData: OpenWeatherMapForecastAPI.ResponseData) => 
 type TransformData = ReturnType<typeof transformData>;
 type TransformDataItem = Unpacked<TransformData>;
 
+const WeatherRowContainer = styled.div`
+  display: grid;
+  vertical-align: middle;
+  grid-template-areas: "formattedDate temp weather weather-icon";
+  grid-template-columns: 1fr 1fr repeat(2, 0fr);
+  position: relative;
+`;
+
 const WeatherRow = ({ formattedDate, formattedDateMnemonic, temp, weather, tempFeel, icon }: TransformDataItem) => (
-  <div
-    className={cn("weather-row", {
-      marszowagodzina: formattedDate.includes("06:00:00")
-    })}
-    key={formattedDate}
-  >
-    <div className="weather-row__formattedDate">{formattedDate}</div>
-    <div className={cn("weather-row__formattedDateMnemonic", "mobile-only")}>{formattedDateMnemonic}</div>
-    <div className="weather-row__temp">
-      <span className="weather-row__temp-temp">temp&nbsp;</span>
+  <WeatherRowContainer key={formattedDate}>
+    <div>{formattedDate}</div>
+    <div>{formattedDateMnemonic}</div>
+    <div>
+      <span>temp&nbsp;</span>
       {temp}
       <span>&#8451;</span>&nbsp;({tempFeel}
       <span>&#8451;</span>)
     </div>
-    <div className="weather-row__weather">{weather}</div>
-    <div className="weather-row__weather-icon">
+    <div>{weather}</div>
+    <div>
       <img src={icon} alt="weather-icon" />
     </div>
-  </div>
+  </WeatherRowContainer>
 );
 
+const WeatherContainer = styled.div`
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%; /* columnified flex-grow: 1 */
+  font-weight: 600;
+  white-space: normal;
+  padding: 1rem 0;
+`;
+
 const WeatherTable = ({ data }: { data: TransformData | null }) => (
-  <div className="weather-container">{data && data.map(WeatherRow)}</div>
+  <WeatherContainer>{data && data.map(WeatherRow)}</WeatherContainer>
 );
+
+const AppContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem 0;
+  overflow: hidden;
+`;
 
 const App: React.FunctionComponent = () => {
   const [fetched, setFetched] = React.useState(false);
@@ -72,10 +90,10 @@ const App: React.FunctionComponent = () => {
   }, []);
 
   return (
-    <div className="app-container">
+    <AppContainer>
       {!fetched && "Loading..."}
       {fetched && <WeatherTable data={data} />}
-    </div>
+    </AppContainer>
   );
 };
 
