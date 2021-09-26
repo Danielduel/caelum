@@ -3,6 +3,7 @@ import moment from "moment";
 import "moment/locale/pl";
 import * as OpenWeatherMapForecastAPI from "./typings/OpenWeatherMapForecastAPI";
 import styled from "styled-components";
+import { BasicLayout } from "./components/layouts/BasicLayout";
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 moment.locale("pl");
 
@@ -45,7 +46,7 @@ const WeatherRow = ({ formattedDate, formattedDateMnemonic, temp, weather, tempF
       <span>temp&nbsp;</span>
       {temp}
       <span>&#8451;</span>&nbsp;({tempFeel}
-      <span>&#8451;</span>)
+      <span>&#8451;</span>
     </div>
     <div>{weather}</div>
     <div>
@@ -90,10 +91,12 @@ const App: React.FunctionComponent = () => {
   }, []);
 
   return (
-    <AppContainer>
-      {!fetched && "Loading..."}
-      {fetched && <WeatherTable data={data} />}
-    </AppContainer>
+    <BasicLayout>
+      <AppContainer>
+        {!fetched && "Loading..."}
+        {fetched && <WeatherTable data={data} />}
+      </AppContainer>
+    </BasicLayout>
   );
 };
 
