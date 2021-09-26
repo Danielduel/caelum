@@ -1,1 +1,1 @@
-https://caelum-app.herokuapp.com/
+https://caelum-weather.herokuapp.com/
