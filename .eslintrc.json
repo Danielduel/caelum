@@ -15,7 +15,8 @@
   },
   "rules": {
     "quotes": ["error", "double"],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": 0
   },
   "settings": {
     "react": {
