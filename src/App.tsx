@@ -1,29 +1,24 @@
-
 import "moment/locale/pl";
 import React from "react";
 import moment from "moment";
 import ReactJson from "react-json-view";
-import { WeatherData } from "./models/OpenWeatherAPI";
 import { TodayWeather } from "./components/TodayWeather";
 import { AppContainer } from "./components/styled-components/AppContainer";
 import { PageContainer } from "./components/styled-components/PageContainer";
-import { getWeatherData, transformData, TransformData } from "./services/WeatherData";
+import { useOpenWeatherMapOneCall } from "./hooks/useOpenWeatherMapOneCall";
 
 moment.locale("pl");
 
-type UnknownObject = Record<string, unknown>;
-
 const App: React.FunctionComponent = () => {
-  const [fetched, setFetched] = React.useState(false);
-  const [rawData, setRawData] = React.useState<WeatherData | null>(null);
-  const [data, setData] = React.useState<TransformData | null>(null);
+  const [rawData, fetched, fetchData] = useOpenWeatherMapOneCall({
+    lat: "53.4289",
+    lon: "14.553",
+    exclude: ["minutely", "alerts"],
+    units: "metric"
+  });
 
   React.useEffect(() => {
-    getWeatherData().then((data) => {
-      setRawData(data);
-      setData(transformData(data));
-      setFetched(true);
-    });
+    fetchData();
   }, []);
 
   return (

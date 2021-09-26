@@ -9,5 +9,6 @@ import styled, { css } from "styled-components";
 
 export const emptyCss = css``;
 export const emptyDiv = styled.div``;
+export type UnknownObject = Record<string, unknown>;
 export type StyledComponentsCss = ReturnType<typeof css>;
 export type WithChildren = { children: React.ReactNode };
