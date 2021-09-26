@@ -2,7 +2,6 @@ import React from "react";
 import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
 import styled from "styled-components";
 import { FormattedHour, FormattedTemperature } from "./ValueFormatters";
-import moment from "moment";
 
 const TodayWeatherContainer = styled.div`
   display: flex;
