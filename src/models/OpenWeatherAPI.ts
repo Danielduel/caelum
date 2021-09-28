@@ -1,3 +1,7 @@
+/**
+ * API docs: https://openweathermap.org/api/one-call-api
+ */
+
 export type WeatherData = {
   lat: number;
   lon: number;
@@ -7,6 +11,7 @@ export type WeatherData = {
   minutely: MinuteWeatherForecast[];
   hourly: HourWeatherForecast[];
   daily: DayWeatherForecast[];
+  alerts: AlertsInfo[];
 };
 
 export type CurrentWeatherForecast = {
@@ -90,4 +95,13 @@ export type FeelsLikeInfo = {
   night: number;
   eve: number;
   morn: number;
+};
+
+export type AlertsInfo = {
+  sender_name: string;
+  event: string;
+  start: number;
+  end: number;
+  description: string;
+  tags: string[];
 };

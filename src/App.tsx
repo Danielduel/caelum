@@ -1,7 +1,6 @@
 import "moment/locale/pl";
 import React from "react";
 import moment from "moment";
-import ReactJson from "react-json-view";
 import { TodayWeather } from "./components/TodayWeather";
 import { AppContainer } from "./components/styled-components/AppContainer";
 import { PageContainer } from "./components/styled-components/PageContainer";
@@ -28,8 +27,9 @@ const App: React.FunctionComponent = () => {
       <PageContainer>
         {rawData && <TodayWeather currentWeather={rawData.current} hourForecast={rawData.hourly} />}
       </PageContainer>
-      <PageContainer bgColor={"#afe29d"}>today</PageContainer>
-      <PageContainer bgColor={"#9db6e2"}>{rawData && <ReactJson src={rawData} collapsed={true} />}</PageContainer>
+      <PageContainer bgColor={"#afe29d"}>
+        <h1>5-day forecast</h1>
+      </PageContainer>
     </AppContainer>
   );
 };
