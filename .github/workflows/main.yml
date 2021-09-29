@@ -17,3 +17,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "caelum-app" # Must be unique in Heroku
           heroku_email: "maildopdf@gmail.com"
+          branch: master
