@@ -1,5 +1,5 @@
 export const FormattedTemperature = (props: { value: number }): JSX.Element => (
-  <span>{Math.round(props.value)} °C</span>
+  <span>{Math.round(props.value)} <span>°C</span></span>
 );
 
 export const FormattedHour = (props: { value: number }): JSX.Element => {
