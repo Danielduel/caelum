@@ -1,5 +1,5 @@
 import "moment/locale/pl";
-import React, { useState } from "react";
+import React from "react";
 import moment from "moment";
 import { TodayWeather } from "./components/TodayWeather";
 import { AppContainer } from "./components/styled-components/AppContainer";

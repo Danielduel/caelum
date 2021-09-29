@@ -26,9 +26,9 @@ const TodayWeatherBackgroundInfo = styled.div`
   top: 3rem;
   left: 3rem;
   color: white;
-  text-shadow: -.2px -.2px 0 #000, .2px -.2px 0 #000, -.2px .2px 0 #000, .2px .2px 0 #000;
+  text-shadow: -0.2px -0.2px 0 #000, 0.2px -0.2px 0 #000, -0.2px 0.2px 0 #000, 0.2px 0.2px 0 #000;
   font-weight: 500;
-  
+
   transform: scale(5);
   transform-origin: 0 0;
 `;
