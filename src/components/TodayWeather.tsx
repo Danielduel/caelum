@@ -27,6 +27,7 @@ export const TodayWeather: React.FunctionComponent<TodayWeatherProps> = (props) 
       <div>
         <h1>
           <FormattedTemperature value={props.currentWeather.temp} />
+          <i className="wi wi-night-sleet" />
         </h1>
       </div>
       <div>
