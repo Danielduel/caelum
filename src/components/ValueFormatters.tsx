@@ -1,10 +1,25 @@
-export const FormattedTemperature = (props: { value: number }): JSX.Element => (
-  <span>
-    {Math.round(props.value)} <span>°C</span>
+import { StyledClassName } from "../common/helpers";
+
+type FormattedTemperatureProps = StyledClassName & {
+  value: number;
+  withoutSpace?: boolean;
+};
+export const FormattedTemperature = ({
+  value,
+  className,
+  withoutSpace = false
+}: FormattedTemperatureProps): JSX.Element => (
+  <span className={className}>
+    {Math.round(value)}
+    {!withoutSpace && <>&nbsp;</>}
+    <span>°C</span>
   </span>
 );
 
-export const FormattedHour = (props: { value: number }): JSX.Element => {
-  const hour = new Date(props.value * 1000).getHours().toString();
-  return <span>{hour.padStart(2, "0")}:00</span>;
+type FormattedHourProps = StyledClassName & {
+  value: number;
+};
+export const FormattedHour = ({ value, className }: FormattedHourProps): JSX.Element => {
+  const hour = new Date(value * 1000).getHours().toString();
+  return <span className={className}>{hour.padStart(2, "0")}:00</span>;
 };

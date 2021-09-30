@@ -1,19 +1,21 @@
 import React from "react";
-import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
 import styled from "styled-components";
-import { FormattedHour, FormattedTemperature } from "./ValueFormatters";
+import { FormattedTemperature } from "./ValueFormatters";
 import prototypeLandscapeSvg from "./landscapes/prototype.svg";
 import { WeatherIcon } from "./WeatherIcon";
+import { HourlyForecast } from "./HourlyForecast/HourlyForecast";
+import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
+
+export type TodayWeatherProps = {
+  currentWeather: CurrentWeatherForecast;
+  hourForecast: HourWeatherForecast[];
+};
 
 const TodayWeatherWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
-
-  & > * {
-    flex: 1;
-  }
 `;
 const TodayWeatherBackgroundContainer = styled.div`
   position: relative;
@@ -32,7 +34,6 @@ const TodayWeatherBackgroundInfo = styled.div`
   transform: scale(5);
   transform-origin: 0 0;
 `;
-const TodayWeatherBackgroundInfoIcon = styled.i``;
 const TodayWeatherBackgroundInfoLine = styled.div`
   font-size: 0.8em;
   font-weight: 900;
@@ -42,36 +43,19 @@ const TodayWeatherBackgroundInfoLine = styled.div`
   }
 `;
 
-type TodayWeatherProps = {
-  currentWeather: CurrentWeatherForecast;
-  hourForecast: HourWeatherForecast[];
-};
-
 export const TodayWeather: React.FunctionComponent<TodayWeatherProps> = (props) => {
-  const range = Array(6).fill(1);
   return (
     <TodayWeatherWrapper>
       <TodayWeatherBackgroundContainer>
         <TodayWeatherBackground src={prototypeLandscapeSvg} />
         <TodayWeatherBackgroundInfo>
-          <TodayWeatherBackgroundInfoIcon className="wi wi-night-sleet" />
+          <WeatherIcon weatherCode={props.currentWeather.weather[0].id} />
           <TodayWeatherBackgroundInfoLine>
             <FormattedTemperature value={props.currentWeather.temp} />
-            <WeatherIcon weatherCode={props.currentWeather.weather[0].id} />
           </TodayWeatherBackgroundInfoLine>
         </TodayWeatherBackgroundInfo>
       </TodayWeatherBackgroundContainer>
-      <div>
-        {range.map((_, idx) => {
-          return (
-            <h3 key={idx}>
-              <FormattedHour value={props.hourForecast[idx].dt} />
-              {"  "}
-              <FormattedTemperature value={props.hourForecast[idx].temp} />
-            </h3>
-          );
-        })}
-      </div>
+      <HourlyForecast hourForecast={props.hourForecast} />
     </TodayWeatherWrapper>
   );
 };

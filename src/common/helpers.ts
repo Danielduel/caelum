@@ -12,3 +12,6 @@ export const emptyDiv = styled.div``;
 export type UnknownObject = Record<string, unknown>;
 export type StyledComponentsCss = ReturnType<typeof css>;
 export type WithChildren = { children: React.ReactNode };
+export type StyledClassName = { className?: string };
+export const head = (num: number) => (_: unknown, index: number) => index < num;
+export const skipFirst = () => (_: unknown, index: number) => index !== 0;
