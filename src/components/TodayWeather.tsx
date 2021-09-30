@@ -3,6 +3,7 @@ import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeath
 import styled from "styled-components";
 import { FormattedHour, FormattedTemperature } from "./ValueFormatters";
 import prototypeLandscapeSvg from "./landscapes/prototype.svg";
+import { WeatherIcon } from "./WeatherIcon";
 
 const TodayWeatherWrapper = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ export const TodayWeather: React.FunctionComponent<TodayWeatherProps> = (props) 
           <TodayWeatherBackgroundInfoIcon className="wi wi-night-sleet" />
           <TodayWeatherBackgroundInfoLine>
             <FormattedTemperature value={props.currentWeather.temp} />
+            <WeatherIcon weatherCode={props.currentWeather.weather[0].id} />
           </TodayWeatherBackgroundInfoLine>
         </TodayWeatherBackgroundInfo>
       </TodayWeatherBackgroundContainer>

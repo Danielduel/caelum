@@ -7,6 +7,15 @@ import { PageContainer } from "./components/styled-components/PageContainer";
 import { useOpenWeatherMapOneCall } from "./hooks/useOpenWeatherMapOneCall";
 
 moment.locale("pl");
+const weatherIconsConfig: Record<string, string[]> = {};
+
+fetch("./weather-conditions.csv")
+  .then((res) => res.text())
+  .then((res) => {
+    const list = res.split("\n").map((row) => row.split(";"));
+    list.shift();
+    list.forEach((item) => (weatherIconsConfig[item[0]] = item));
+  });
 
 const App: React.FunctionComponent = () => {
   const [rawData, fetched, fetchData] = useOpenWeatherMapOneCall({
@@ -34,4 +43,5 @@ const App: React.FunctionComponent = () => {
   );
 };
 
+export { weatherIconsConfig };
 export default App;
