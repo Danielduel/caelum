@@ -5,6 +5,7 @@ import { TodayWeather } from "./components/TodayWeather";
 import { AppContainer } from "./components/styled-components/AppContainer";
 import { PageContainer } from "./components/styled-components/PageContainer";
 import { useOpenWeatherMapOneCall } from "./hooks/useOpenWeatherMapOneCall";
+import { NextDaysForecast } from "./components/NextDaysForecast";
 
 moment.locale("pl");
 const weatherIconsConfig: Record<string, string[]> = {};
@@ -36,9 +37,7 @@ const App: React.FunctionComponent = () => {
       <PageContainer>
         {rawData && <TodayWeather currentWeather={rawData.current} hourForecast={rawData.hourly} />}
       </PageContainer>
-      <PageContainer bgColor={"#afe29d"}>
-        <h1>5-day forecast</h1>
-      </PageContainer>
+      <PageContainer bgColor={"#c7e4ed"}>{rawData && <NextDaysForecast daily={rawData.daily} />}</PageContainer>
     </AppContainer>
   );
 };
