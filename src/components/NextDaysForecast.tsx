@@ -3,7 +3,7 @@ import { DayWeatherForecast } from "../models/OpenWeatherAPI";
 import moment from "moment";
 import styled from "styled-components";
 import { FormattedTemperature } from "./ValueFormatters";
-import { WeatherIcon } from "./WeatherIcon";
+import { WeatherInfoArrWeatherIcon } from "./WeatherIcon";
 
 export const DailyWeatherListContainer = styled.div`
   display: flex;
@@ -56,7 +56,7 @@ export const NextDaysForecast: React.FunctionComponent<NextDaysProps> = (props) 
         <ItemWeatherInfo>
           <FormattedTemperature value={item.temp.day} />
           <IconContainer>
-            <WeatherIcon weatherCode={item.weather[0].id} />
+            <WeatherInfoArrWeatherIcon weatherInfoArr={item.weather} />
           </IconContainer>
         </ItemWeatherInfo>
       </DailyWeatherListItem>
