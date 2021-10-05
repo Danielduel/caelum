@@ -6,9 +6,10 @@ navigator.permissions
     console.log("Got perms for gyroscope " + result.state);
   })
   .catch(() => {
-    console.log("Gotn't perms for gyroscope");
+    console.log("Catch perms for gyroscope");
   });
 
+const toDeg = (rad: number) => Math.round((rad * 180) / Math.PI);
 const isGyroscopeAvailable = () => typeof (window as any).Gyroscope === "function";
 function _useGyroscopeNotAvailable() {
   return [false, 0, 0, 0] as const;
@@ -22,12 +23,13 @@ function _useGyroscopeAvailable() {
   const gyroscopeRef = React.useRef<Gyroscope>(new GyroscopeClass({ frequency: 5 }));
 
   React.useEffect(() => {
-    console.log("Registered");
     gyroscopeRef.current.addEventListener("reading", () => {
-      console.log("Reading!");
-      setX(gyroscopeRef.current.x ?? 0);
-      setY(gyroscopeRef.current.y ?? 0);
-      setZ(gyroscopeRef.current.z ?? 0);
+      const x = gyroscopeRef.current.x ?? 0;
+      const y = gyroscopeRef.current.y ?? 0;
+      const z = gyroscopeRef.current.z ?? 0;
+      setX(toDeg(x));
+      setY(toDeg(y));
+      setZ(toDeg(z));
     });
     gyroscopeRef.current.start();
   }, [gyroscopeRef, setX, setY, setZ]);
