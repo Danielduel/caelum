@@ -1957,6 +1957,13 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/w3c-generic-sensor@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@types/w3c-generic-sensor/-/w3c-generic-sensor-1.0.5.tgz#5919c5aea90651b7a7ea6c39e3cc5102c6e7d7aa"
+  integrity sha512-tJz1DcXsSpMNPpomLcOrBk0yhSDSnFd4nFQ3eG2a4s76lHmGpL4I+w2WuV1K3p/fVozBUSD0kCFJ3MNBwv35EA==
+  dependencies:
+    typescript "^2.2.2"
+
 "@types/webpack-sources@*":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@types/webpack-sources/-/webpack-sources-2.1.0.tgz#8882b0bd62d1e0ce62f183d0d01b72e6e82e8c10"
@@ -11113,6 +11120,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@^2.2.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
+  integrity sha512-Gr4p6nFNaoufRIY4NMdpQRNmgxVIGMs4Fcu/ujdYk3nAZqk7supzBE9idmvfZIlH/Cuj//dvi+019qEue9lV0w==
 
 typescript@^4.2.3:
   version "4.2.3"
