@@ -23,7 +23,7 @@ const Pop = ({ pop, className }: PopProps) => {
   return (
     <PopWrapper className={className}>
       <PopIcon src={dropletIcon} />
-      <PopText>{pop * 100}%</PopText>
+      <PopText>{Math.ceil(pop * 100)}%</PopText>
     </PopWrapper>
   );
 };

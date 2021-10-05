@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { FormattedTemperature } from "./ValueFormatters";
-import prototypeLandscapeSvg from "./landscapes/prototype.svg";
-import { WeatherIcon } from "./WeatherIcon";
-import { HourlyForecast } from "./HourlyForecast/HourlyForecast";
+import { FormattedTemperature } from "../components/ValueFormatters";
+import prototypeLandscapeSvg from "../components/landscapes/prototype.svg";
+import { WeatherIcon } from "../components/WeatherIcon";
+import { HourlyForecast } from "../components/HourlyForecast/HourlyForecast";
 import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
 
 export type TodayWeatherProps = {
