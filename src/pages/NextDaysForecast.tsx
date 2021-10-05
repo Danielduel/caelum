@@ -2,8 +2,8 @@ import React from "react";
 import { DayWeatherForecast } from "../models/OpenWeatherAPI";
 import moment from "moment";
 import styled from "styled-components";
-import { FormattedTemperature } from "./ValueFormatters";
-import { WeatherInfoArrWeatherIcon } from "./WeatherIcon";
+import { FormattedTemperature } from "../components/ValueFormatters";
+import { WeatherInfoArrWeatherIcon } from "../components/WeatherIcon";
 
 export const DailyWeatherListContainer = styled.div`
   display: flex;

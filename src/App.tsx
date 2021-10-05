@@ -1,11 +1,11 @@
 import "moment/locale/pl";
 import React from "react";
 import moment from "moment";
-import { TodayWeather } from "./components/TodayWeather";
-import { AppContainer } from "./components/styled-components/AppContainer";
-import { PageContainer } from "./components/styled-components/PageContainer";
+import { TodayWeather } from "./pages/TodayWeather";
+import { NextDaysForecast } from "./pages/NextDaysForecast";
+import { AppContainer } from "./components/layouts/AppContainer";
+import { PageContainer } from "./components/layouts/PageContainer";
 import { useOpenWeatherMapOneCall } from "./hooks/useOpenWeatherMapOneCall";
-import { NextDaysForecast } from "./components/NextDaysForecast";
 
 moment.locale("pl");
 const weatherIconsConfig: Record<string, string[]> = {};
@@ -33,7 +33,6 @@ const App: React.FunctionComponent = () => {
   return (
     <AppContainer>
       {!fetched && "Loading..."}
-      {/*{fetched && <WeatherTable data={data} />}*/}
       <PageContainer>
         {rawData && <TodayWeather currentWeather={rawData.current} hourForecast={rawData.hourly} />}
       </PageContainer>

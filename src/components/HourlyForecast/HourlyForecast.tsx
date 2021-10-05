@@ -1,24 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { head, skipFirst } from "../../common/helpers";
-import { TodayWeatherProps } from "../TodayWeather";
+import { TodayWeatherProps } from "../../pages/TodayWeather";
 import { HourWeatherForecast } from "../../models/OpenWeatherAPI";
 import { FormattedHour, FormattedTemperature } from "../ValueFormatters";
 import { WeatherInfoArrWeatherIcon } from "../WeatherIcon";
 import { Pop } from "../common/Pop/Pop";
+import { HorizontalList, HorizontalListItem } from "../layouts/HorizontalList";
 
 // Actually I have no clue how to name those components
-const HorizontalContainer = styled.div`
-  margin-top: 2rem; /* imperative distance from landscape */
-  padding-bottom: 2rem;
-  display: grid;
-  grid-auto-columns: 100px;
-  max-width: 100vw;
-  overflow: scroll;
+const StyledHorizontalList = styled(HorizontalList)`
+  margin-top: 2rem;
 `;
-const HorizontalHourlyItem = styled.div`
-  grid-column: span 1;
-  grid-row: 1;
+const StyledHorizontalListItem = styled(HorizontalListItem)`
   display: grid;
   grid-template-rows: repeat(3, 2em);
   grid-row-gap: 0.1em;
@@ -30,7 +24,6 @@ const HorizontalHourlyItem = styled.div`
   padding: 0.5em 0;
   margin: 0 0.2em;
   border-radius: 1.5em;
-  box-shadow: 2px 2px #ccc;
 `;
 
 const StyledWeatherInfoArrWeatherIcon = styled(WeatherInfoArrWeatherIcon)`
@@ -44,12 +37,12 @@ const StyledFormattedHour = styled(FormattedHour)`
 
 const HourlyItem = (forecast: HourWeatherForecast) => {
   return (
-    <HorizontalHourlyItem>
+    <StyledHorizontalListItem>
       <StyledFormattedHour value={forecast.dt} />
       <StyledWeatherInfoArrWeatherIcon weatherInfoArr={forecast.weather} />
       <FormattedTemperature value={forecast.temp} withoutSpace />
       <Pop pop={forecast.pop} />
-    </HorizontalHourlyItem>
+    </StyledHorizontalListItem>
   );
 };
 type HourlyForecastProps = Pick<TodayWeatherProps, "hourForecast">;
@@ -58,7 +51,7 @@ const HourlyForecast = ({ hourForecast }: HourlyForecastProps) => {
     hourForecast
   ]);
 
-  return <HorizontalContainer>{forecast}</HorizontalContainer>;
+  return <StyledHorizontalList>{forecast}</StyledHorizontalList>;
 };
 
 export { HourlyForecast };
