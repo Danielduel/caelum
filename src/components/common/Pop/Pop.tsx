@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { StyledClassName } from "../../../common/helpers";
+import { useGyroscope } from "../../../hooks/useGyroscope";
 import dropletIcon from "./droplet-icon.svg";
 
 const PopWrapper = styled.div`
@@ -60,6 +61,8 @@ type PopProps = StyledClassName & {
   pop: number;
 };
 const Pop = ({ pop, className }: PopProps) => {
+  const [gyroscopeAvailable, x, y, z] = useGyroscope();
+  console.log(gyroscopeAvailable, x, y, z);
   const popValue = Math.ceil(pop * 100);
   return (
     <PopWrapper className={className}>
@@ -69,6 +72,9 @@ const Pop = ({ pop, className }: PopProps) => {
         </PopIconWrapper>
       </PopFill>
       <PopText>{popValue}%</PopText>
+      <div>
+        {gyroscopeAvailable} {x} {y} {z}
+      </div>
     </PopWrapper>
   );
 };
