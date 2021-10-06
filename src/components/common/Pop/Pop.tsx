@@ -12,8 +12,8 @@ const PopFill = styled.div`
   mix-blend-mode: multiply;
   background: transparent;
 `;
-type PopIconWrapperProps = { popValue: number };
-const linearGradientWithPopValue = ({ popValue }: PopIconWrapperProps) => {
+type PopIconWrapperProps = { popValue: number; angle: number };
+const linearGradientWithPopValue = ({ popValue, angle }: PopIconWrapperProps) => {
   const wetColor = "cyan";
   const dryColor = "#eee";
   if (popValue <= 0) {
@@ -26,13 +26,13 @@ const linearGradientWithPopValue = ({ popValue }: PopIconWrapperProps) => {
       background: ${wetColor};
     `;
   }
-  const gradientOffset = 5;
+  const gradientOffset = 5; // + 3 * (angle / 10); // don't know what I am doing, hokus pokus czary mary
   const gradientDistance = 10;
   const minStop = Math.ceil(Math.max(Math.min(popValue - gradientOffset - gradientDistance / 2, 100), 0));
   const maxStop = Math.ceil(Math.max(Math.min(popValue - gradientOffset + gradientDistance / 2, 100), 0));
   return css`
     background: linear-gradient(
-      0deg,
+      ${angle}deg,
       ${wetColor} 0%,
       ${wetColor} ${minStop}%,
       ${dryColor} ${maxStop}%,
@@ -61,20 +61,17 @@ type PopProps = StyledClassName & {
   pop: number;
 };
 const Pop = ({ pop, className }: PopProps) => {
-  const [gyroscopeAvailable, x, y, z] = useGyroscope();
-  console.log(gyroscopeAvailable, x, y, z);
-  const popValue = Math.ceil(pop * 100);
+  const [gyroscopeAvailable, x, y, z, w] = useGyroscope();
+  console.log(gyroscopeAvailable, x, y, z, w);
+  const popValue = Math.ceil(pop * 100) + 50;
   return (
     <PopWrapper className={className}>
       <PopFill>
-        <PopIconWrapper popValue={popValue}>
+        <PopIconWrapper popValue={popValue} angle={y}>
           <PopIcon src={dropletIcon} />
         </PopIconWrapper>
       </PopFill>
       <PopText>{popValue}%</PopText>
-      <div>
-        {gyroscopeAvailable} {x} {y} {z}
-      </div>
     </PopWrapper>
   );
 };
