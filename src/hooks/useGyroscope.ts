@@ -1,40 +1,45 @@
 import React from "react";
 
-navigator.permissions
-  .query({ name: "gyroscope" as PermissionName })
-  .then((result) => {
-    console.log("Got perms for gyroscope " + result.state);
+Promise.all([
+  navigator.permissions.query({ name: "gyroscope" as PermissionName }),
+  navigator.permissions.query({ name: "magnetometer" as PermissionName }),
+  navigator.permissions.query({ name: "accelerometer" as PermissionName })
+])
+  .then((results) => {
+    console.log("Got perms " + results.flatMap((x) => x.state).join(", "));
   })
   .catch(() => {
-    console.log("Catch perms for gyroscope");
+    console.log("Catch perms");
   });
 
 const toDeg = (rad: number) => Math.round((rad * 180) / Math.PI);
 const isGyroscopeAvailable = () => typeof (window as any).Gyroscope === "function";
 function _useGyroscopeNotAvailable() {
-  return [false, 0, 0, 0] as const;
+  return [false, 0, 0, 0, 0] as const;
 }
 
 function _useGyroscopeAvailable() {
-  const GyroscopeClass = (window as any).Gyroscope;
+  const SensorClass = (window as any).AbsoluteOrientationSensor;
   const [x, setX] = React.useState(0);
   const [y, setY] = React.useState(0);
   const [z, setZ] = React.useState(0);
-  const gyroscopeRef = React.useRef<Gyroscope>(new GyroscopeClass({ frequency: 5 }));
+  const [w, setW] = React.useState(0);
+  const sensorRef = React.useRef<AbsoluteOrientationSensor>(
+    new SensorClass({ frequency: 5, referenceFrame: "screen" })
+  );
 
   React.useEffect(() => {
-    gyroscopeRef.current.addEventListener("reading", () => {
-      const x = gyroscopeRef.current.x ?? 0;
-      const y = gyroscopeRef.current.y ?? 0;
-      const z = gyroscopeRef.current.z ?? 0;
+    sensorRef.current.addEventListener("reading", () => {
+      const [x, y, z, w] = sensorRef.current.quaternion ?? [0, 0, 0, 0];
       setX(toDeg(x));
       setY(toDeg(y));
       setZ(toDeg(z));
+      setW(toDeg(w));
     });
-    gyroscopeRef.current.start();
-  }, [gyroscopeRef, setX, setY, setZ]);
+    sensorRef.current.start();
+  }, [sensorRef, setX, setY, setZ, setW]);
 
-  return [true, x, y, z] as const;
+  return [true, x, y, z, w] as const;
 }
 
 const useGyroscope = isGyroscopeAvailable() ? _useGyroscopeAvailable : _useGyroscopeNotAvailable;
