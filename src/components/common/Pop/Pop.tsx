@@ -61,13 +61,12 @@ type PopProps = StyledClassName & {
   pop: number;
 };
 const Pop = ({ pop, className }: PopProps) => {
-  const [gyroscopeAvailable, x, y, z, w] = useGyroscope();
-  console.log(gyroscopeAvailable, x, y, z, w);
+  const [, x] = useGyroscope();
   const popValue = Math.ceil(pop * 100) + 50;
   return (
     <PopWrapper className={className}>
       <PopFill>
-        <PopIconWrapper popValue={popValue} angle={y}>
+        <PopIconWrapper popValue={popValue} angle={x}>
           <PopIcon src={dropletIcon} />
         </PopIconWrapper>
       </PopFill>
