@@ -1,4 +1,5 @@
 import React from "react";
+import { Quaternion } from "three"; // ya, remove in future
 
 Promise.all([
   navigator.permissions.query({ name: "gyroscope" as PermissionName }),
@@ -12,34 +13,36 @@ Promise.all([
     console.log("Catch perms");
   });
 
-const toDeg = (rad: number) => Math.round((rad * 180) / Math.PI);
 const isGyroscopeAvailable = () => typeof (window as any).Gyroscope === "function";
 function _useGyroscopeNotAvailable() {
-  return [false, 0, 0, 0, 0] as const;
+  return [false, 0] as const;
 }
 
+const portraitReading = [Math.SQRT1_2, 0, 0, Math.SQRT1_2];
+// const landscapeLeftReading = [0.5, 0.5, 0.5, 0.5];
+const landscapeRightReading = [-0.5, -0.5, 0.5, -0.5];
+const relativeQuaternion = new Quaternion(...landscapeRightReading);
 function _useGyroscopeAvailable() {
   const SensorClass = (window as any).AbsoluteOrientationSensor;
   const [x, setX] = React.useState(0);
-  const [y, setY] = React.useState(0);
-  const [z, setZ] = React.useState(0);
-  const [w, setW] = React.useState(0);
   const sensorRef = React.useRef<AbsoluteOrientationSensor>(
     new SensorClass({ frequency: 5, referenceFrame: "screen" })
   );
 
   React.useEffect(() => {
     sensorRef.current.addEventListener("reading", () => {
-      const [x, y, z, w] = sensorRef.current.quaternion ?? [0, 0, 0, 0];
-      setX(toDeg(x));
-      setY(toDeg(y));
-      setZ(toDeg(z));
-      setW(toDeg(w));
+      const _reading = sensorRef.current.quaternion ?? portraitReading;
+      console.log(_reading);
+      const quaternion = new Quaternion(..._reading);
+      const angle = quaternion.angleTo(relativeQuaternion) - Math.PI / 2;
+      const angleDeg = (angle * 180) / Math.PI;
+      console.log(angleDeg);
+      setX(angleDeg);
     });
     sensorRef.current.start();
-  }, [sensorRef, setX, setY, setZ, setW]);
+  }, [sensorRef, setX]);
 
-  return [true, x, y, z, w] as const;
+  return [true, x] as const;
 }
 
 const useGyroscope = isGyroscopeAvailable() ? _useGyroscopeAvailable : _useGyroscopeNotAvailable;
