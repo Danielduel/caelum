@@ -1,20 +1,43 @@
 name: Deploy
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - run: yarn
+  #     - run: yarn build
+  #     - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+  #       with:
+  #         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+  #         heroku_app_name: "caelum-weather" # Must be unique in Heroku
+  #         heroku_email: "maildopdf@gmail.com"
+  #         branch: master
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: deployland
+      url: "http://caelum.guildns.net/_ci/commit/${{ steps.vars.outputs.sha_short }}"
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
       - run: yarn
       - run: yarn build
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "caelum-weather" # Must be unique in Heroku
-          heroku_email: "maildopdf@gmail.com"
-          branch: master
+      - run: cd ./build && zip -r build.zip * && mv build.zip ../build.zip && cd ..
+      - run: echo ${{ steps.vars.outputs.sha_short }}
+      - run: echo "http://caelum.guildns.net/_ci/commit/${{ steps.vars.outputs.sha_short }}"
+      - run: |
+          curl \
+            -F "deploymentKey=${{ secrets.DEPLOYLAND_DEPLOY_KEY }}" \
+            -F "deployment=@./build.zip" \
+            "http://caelum.guildns.net/_ci/commit/${{ steps.vars.outputs.sha_short }}/deploy"
