@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import prototypeLandscapeSvg from "../components/landscapes/prototype.svg";
 import { HourlyForecast } from "../components/HourlyForecast/HourlyForecast";
 import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
 import { BasicInfoFromCurrentWeatherForecast } from "../components/BasicInfo/BasicInfo";
@@ -14,11 +13,6 @@ const TodayWeatherWrapper = styled.div`
   padding-top: 2em;
   padding-left: 1.5em;
   box-sizing: border-box;
-
-  background-image: url(${prototypeLandscapeSvg});
-  background-size: contain;
-  background-repeat: no-repeat;
-
   display: flex;
   flex-direction: column;
 `;

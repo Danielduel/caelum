@@ -36,7 +36,7 @@ const App: React.FunctionComponent = () => {
       <PageContainer>
         {rawData && <TodayWeather currentWeather={rawData.current} hourForecast={rawData.hourly} />}
       </PageContainer>
-      <PageContainer bgColor={"#fff"}>{rawData && <NextDaysForecast daily={rawData.daily} />}</PageContainer>
+      <PageContainer>{rawData && <NextDaysForecast daily={rawData.daily} />}</PageContainer>
     </AppContainer>
   );
 };
