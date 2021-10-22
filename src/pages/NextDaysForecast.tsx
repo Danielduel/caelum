@@ -20,9 +20,9 @@ export const DailyWeatherListItemContainer = styled.div`
 
 export const DailyWeatherListItem = styled.div`
   padding: 0.5rem;
-  background: #eee;
-  box-shadow: 2px 2px #ccc;
-  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
   height: 80%;
   box-sizing: border-box;
   margin: 0 1rem;
@@ -49,7 +49,7 @@ export type NextDaysProps = {
 };
 
 export const NextDaysForecast: React.FunctionComponent<NextDaysProps> = (props) => {
-  const list = props.daily.slice(1, 7).map((item) => (
+  const list = props.daily.slice(1, 6).map((item) => (
     <DailyWeatherListItemContainer key={item.dt}>
       <DailyWeatherListItem>
         <ItemDateInfo>{moment(item.dt * 1000).format("dddd, DD.M")}</ItemDateInfo>

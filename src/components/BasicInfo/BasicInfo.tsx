@@ -6,6 +6,7 @@ import { CurrentWeatherForecast, HourWeatherForecast, WeatherInfo } from "../../
 
 const BasicInfoWrapper = styled.div`
   font-family: "Roboto", sans-serif;
+  opacity: 80%;
 `;
 const BasicInfoHeadline = styled.div``;
 const Separator = styled.span`
