@@ -5,13 +5,21 @@ import { TodayWeatherProps } from "../../pages/TodayWeather";
 import { HourWeatherForecast } from "../../models/OpenWeatherAPI";
 import { FormattedHour, FormattedTemperature } from "../ValueFormatters";
 import { WeatherInfoArrWeatherIcon } from "../WeatherIcon";
-import { Pop } from "../common/Pop/Pop";
 import { HorizontalList, HorizontalListItem } from "../layouts/HorizontalList";
 
-// Actually I have no clue how to name those components
-const StyledHorizontalList = styled(HorizontalList)`
-  margin-top: 2rem;
+const HourlyForecastWrapper = styled.div`
+  background-color: #ffffff7d;
 `;
+const HourlyForecastHeading = styled.div`
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  font-size: 2.25em;
+  font-weight: 500;
+`;
+
+// Actually I have no clue how to name those components
+const StyledHorizontalList = styled(HorizontalList)``;
 const StyledHorizontalListItem = styled(HorizontalListItem)`
   display: grid;
   grid-template-rows: repeat(3, 2em);
@@ -20,19 +28,26 @@ const StyledHorizontalListItem = styled(HorizontalListItem)`
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: #eee;
-  padding: 0.5em 0;
   margin: 0 0.2em;
-  border-radius: 1.5em;
+  box-shadow: none;
 `;
 
 const StyledWeatherInfoArrWeatherIcon = styled(WeatherInfoArrWeatherIcon)`
-  font-size: 1.5em;
-  opacity: 0.5; /* tonning down, font-weight doesn't work, it looks way too pronounced while not translucent */
+  font-size: 2em;
+  opacity: 1; /* tonning down, font-weight doesn't work, it looks way too pronounced while not translucent */
 `;
 
 const StyledFormattedHour = styled(FormattedHour)`
+  font-size: 1.125em;
   width: 100%;
+`;
+
+const StyledFormattedTemperature = styled(FormattedTemperature)`
+  font-weight: 500; // kinda medium
+  font-size: 1.5em; // 24
+  & > span {
+    font-size: 0.75em; // 18
+  }
 `;
 
 const HourlyItem = (forecast: HourWeatherForecast) => {
@@ -40,18 +55,24 @@ const HourlyItem = (forecast: HourWeatherForecast) => {
     <StyledHorizontalListItem>
       <StyledFormattedHour value={forecast.dt} />
       <StyledWeatherInfoArrWeatherIcon weatherInfoArr={forecast.weather} />
-      <FormattedTemperature value={forecast.temp} withoutSpace />
-      <Pop pop={forecast.pop} />
+      <StyledFormattedTemperature value={forecast.temp} withoutSpace />
+      {/* <Pop pop={forecast.pop} /> */}
     </StyledHorizontalListItem>
   );
 };
+
 type HourlyForecastProps = Pick<TodayWeatherProps, "hourForecast">;
 const HourlyForecast = ({ hourForecast }: HourlyForecastProps) => {
   const forecast = React.useMemo(() => hourForecast.filter(skipFirst()).filter(head(8)).flatMap(HourlyItem), [
     hourForecast
   ]);
 
-  return <StyledHorizontalList>{forecast}</StyledHorizontalList>;
+  return (
+    <HourlyForecastWrapper>
+      <HourlyForecastHeading>Hourly</HourlyForecastHeading>
+      <StyledHorizontalList>{forecast}</StyledHorizontalList>
+    </HourlyForecastWrapper>
+  );
 };
 
 export { HourlyForecast };

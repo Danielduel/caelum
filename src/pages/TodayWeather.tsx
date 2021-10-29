@@ -11,7 +11,6 @@ export type TodayWeatherProps = {
 const TodayWeatherWrapper = styled.div`
   height: 100%;
   padding-top: 2em;
-  padding-left: 1.5em;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

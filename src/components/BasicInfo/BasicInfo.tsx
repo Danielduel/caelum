@@ -5,6 +5,7 @@ import { weatherZeroDescription, weatherZeroId } from "../../common/helpers";
 import { CurrentWeatherForecast, HourWeatherForecast, WeatherInfo } from "../../models/OpenWeatherAPI";
 
 const BasicInfoWrapper = styled.div`
+  padding-left: 1.5em;
   font-family: "Roboto", sans-serif;
   opacity: 80%;
 `;
