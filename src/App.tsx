@@ -19,6 +19,7 @@ fetch("./weather-conditions.csv")
   });
 
 const App: React.FunctionComponent = () => {
+  const nextDaysForecastPageRef = React.useRef<HTMLDivElement | null>(null);
   const [rawData, fetched, fetchData] = useOpenWeatherMapOneCall({
     lat: "53.4289",
     lon: "14.553",
@@ -30,13 +31,26 @@ const App: React.FunctionComponent = () => {
     fetchData();
   }, []);
 
+  if (!fetched) {
+    return <AppContainer>Loading...</AppContainer>;
+  }
+
+  if (!rawData) {
+    return <AppContainer>No data</AppContainer>;
+  }
+
   return (
     <AppContainer>
-      {!fetched && "Loading..."}
       <PageContainer>
-        {rawData && <TodayWeather currentWeather={rawData.current} hourForecast={rawData.hourly} />}
+        <TodayWeather
+          nextPageRef={nextDaysForecastPageRef}
+          currentWeather={rawData.current}
+          hourForecast={rawData.hourly}
+        />
       </PageContainer>
-      <PageContainer>{rawData && <NextDaysForecast daily={rawData.daily} />}</PageContainer>
+      <PageContainer ref={nextDaysForecastPageRef}>
+        <NextDaysForecast daily={rawData.daily} />
+      </PageContainer>
     </AppContainer>
   );
 };
