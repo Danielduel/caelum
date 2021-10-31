@@ -23,11 +23,14 @@ export type CurrentWeatherForecast = {
   pressure: number;
   humidity: number;
   dew_point: number;
-  uvi: number;
   clouds: number;
+  uvi: number;
   visibility: number;
   wind_speed: number;
+  wind_gust?: number;
   wind_deg: number;
+  rain?: PrecipitationInfo;
+  snow?: PrecipitationInfo;
   weather: [WeatherInfo];
 };
 
@@ -47,10 +50,12 @@ export type HourWeatherForecast = {
   clouds: number;
   visibility: number;
   wind_speed: number;
+  wind_gust?: number;
   wind_deg: number;
-  wind_gust: number;
-  weather: [WeatherInfo];
   pop: number;
+  rain?: PrecipitationInfo;
+  snow?: PrecipitationInfo;
+  weather: [WeatherInfo];
 };
 
 export type DayWeatherForecast = {
@@ -66,12 +71,14 @@ export type DayWeatherForecast = {
   humidity: number;
   dew_point: number;
   wind_speed: number;
+  wind_gust?: number;
   wind_deg: number;
-  wind_gust: number;
-  weather: [WeatherInfo];
   clouds: number;
-  pop: number;
   uvi: number;
+  pop: number;
+  rain?: number;
+  snow?: number;
+  weather: [WeatherInfo];
 };
 
 export type WeatherInfo = {
@@ -79,6 +86,10 @@ export type WeatherInfo = {
   main: string;
   description: string;
   icon: string;
+};
+
+export type PrecipitationInfo = {
+  "1h": number;
 };
 
 export type TemperatureInfo = {

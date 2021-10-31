@@ -4,6 +4,7 @@ import { HourlyForecast } from "../components/HourlyForecast/HourlyForecast";
 import { BottomDownArrow } from "../components/common/BottomDownArrow/BottomDownArrow";
 import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
 import { BasicInfoFromCurrentWeatherForecast } from "../components/BasicInfo/BasicInfo";
+import { RainWindInfo } from "../components/RainWindInfo/RainWindInfo";
 
 export type TodayWeatherProps = {
   nextPageRef: React.MutableRefObject<HTMLDivElement | null>;
@@ -21,9 +22,12 @@ const TodayWeatherWrapper = styled.div`
 `;
 
 export const TodayWeather = ({ nextPageRef, currentWeather, hourForecast }: TodayWeatherProps) => {
+  const wind = currentWeather.wind_speed;
+  const rain = currentWeather.rain?.["1h"] || 0;
   return (
     <TodayWeatherWrapper>
       <BasicInfoFromCurrentWeatherForecast currentWeather={currentWeather} />
+      <RainWindInfo rainProbability={rain} windSpeed={wind} />
       <HourlyForecast hourForecast={hourForecast} />
       <BottomDownArrow nextPageRef={nextPageRef} />
     </TodayWeatherWrapper>
