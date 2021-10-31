@@ -22,10 +22,12 @@ const TodayWeatherWrapper = styled.div`
 `;
 
 export const TodayWeather = ({ nextPageRef, currentWeather, hourForecast }: TodayWeatherProps) => {
+  const wind = currentWeather.wind_speed;
+  const rain = currentWeather.rain?.["1h"] || 0;
   return (
     <TodayWeatherWrapper>
       <BasicInfoFromCurrentWeatherForecast currentWeather={currentWeather} />
-      <RainWindInfo rainProbability={0.1} windSpeed={5} />
+      <RainWindInfo rainProbability={rain} windSpeed={wind} />
       <HourlyForecast hourForecast={hourForecast} />
       <BottomDownArrow nextPageRef={nextPageRef} />
     </TodayWeatherWrapper>

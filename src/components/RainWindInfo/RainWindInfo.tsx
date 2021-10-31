@@ -28,6 +28,7 @@ const InfoItemText = styled.div`
   height: fit-content;
   font-weight: bold;
   margin-left: 0.5em;
+  opacity: 0.8;
 `;
 
 const InfoItemValue = styled.span`
@@ -52,7 +53,7 @@ export const RainWindInfo = ({ rainProbability, windSpeed }: RainWindInfoProps):
         <RainImg />
         <InfoItemText>
           <InfoItemValue>{rainProbability}</InfoItemValue>
-          <InfoItemUnit>%</InfoItemUnit>
+          <InfoItemUnit>mm</InfoItemUnit>
         </InfoItemText>
       </InfoItem>
     </RainWindInfoWrapper>
