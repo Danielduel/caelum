@@ -20,11 +20,11 @@ const BasicInfoIcon = styled(WeatherIcon)`
 `;
 const BasicInfoTemperature = styled(FormattedTemperature)`
   font-size: 3em;
-  font-weight: 1000; /* doesn't follow design, should be 500 */
+  font-weight: 500;
 `;
 const BasicInfoDescription = styled.div`
   font-size: 2.25em;
-  font-weight: 1000; /* doesn't follow design, should be 500 */
+  font-weight: 500;
 
   &:first-letter {
     text-transform: capitalize;

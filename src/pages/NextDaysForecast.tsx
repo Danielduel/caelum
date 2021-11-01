@@ -30,13 +30,13 @@ export const DailyWeatherListItem = styled.div`
 
 export const ItemDateInfo = styled.div`
   text-transform: capitalize;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1.4rem;
 `;
 
 export const ItemWeatherInfo = styled.div`
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 500;
   margin-top: 0.5rem;
 `;
 

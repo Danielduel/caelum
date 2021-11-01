@@ -26,7 +26,7 @@ const InfoItem = styled.div`
 
 const InfoItemText = styled.div`
   height: fit-content;
-  font-weight: bold;
+  font-weight: 500;
   margin-left: 0.5em;
   opacity: 0.8;
 `;
