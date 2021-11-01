@@ -5,6 +5,7 @@ import { BottomDownArrow } from "../components/common/BottomDownArrow/BottomDown
 import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
 import { BasicInfoFromCurrentWeatherForecast } from "../components/BasicInfo/BasicInfo";
 import { RainWindInfo } from "../components/RainWindInfo/RainWindInfo";
+import { NavigationFab } from "../components/NavigationFab/NavigationFab";
 
 export type TodayWeatherProps = {
   nextPageRef: React.MutableRefObject<HTMLDivElement | null>;
@@ -26,6 +27,7 @@ export const TodayWeather = ({ nextPageRef, currentWeather, hourForecast }: Toda
   const rain = currentWeather.rain?.["1h"] || 0;
   return (
     <TodayWeatherWrapper>
+      <NavigationFab />
       <BasicInfoFromCurrentWeatherForecast currentWeather={currentWeather} />
       <RainWindInfo rainProbability={rain} windSpeed={wind} />
       <HourlyForecast hourForecast={hourForecast} />

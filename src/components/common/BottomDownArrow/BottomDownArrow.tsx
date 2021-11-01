@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ArrowIcon } from "../../Icons/ArrowIcon";
+import { ArrowIcon } from "../../Icon/Icons";
 
 const BottomArrowWrapper = styled.div`
   position: absolute;
