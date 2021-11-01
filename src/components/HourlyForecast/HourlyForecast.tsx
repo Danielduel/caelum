@@ -39,11 +39,12 @@ const StyledWeatherInfoArrWeatherIcon = styled(WeatherInfoArrWeatherIcon)`
 
 const StyledFormattedHour = styled(FormattedHour)`
   font-size: 1.125em;
+  font-weight: 300;
   width: 100%;
 `;
 
 const StyledFormattedTemperature = styled(FormattedTemperature)`
-  font-weight: 500; // kinda medium
+  font-weight: 500;
   font-size: 1.5em; // 24
   & > span {
     font-size: 0.75em; // 18
