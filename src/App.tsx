@@ -6,6 +6,7 @@ import { NextDaysForecast } from "./pages/NextDaysForecast";
 import { AppContainer } from "./components/layouts/AppContainer";
 import { PageContainer } from "./components/layouts/PageContainer";
 import { useOpenWeatherMapOneCall } from "./hooks/useOpenWeatherMapOneCall";
+import { Modal } from "./components/Modal/Modal";
 
 moment.locale("pl");
 const weatherIconsConfig: Record<string, string[]> = {};
@@ -49,6 +50,7 @@ const App: React.FunctionComponent = () => {
         />
       </PageContainer>
       <PageContainer ref={nextDaysForecastPageRef}>
+        <Modal visible={true}>Test 123</Modal>
         <NextDaysForecast daily={rawData.daily} />
       </PageContainer>
     </AppContainer>
