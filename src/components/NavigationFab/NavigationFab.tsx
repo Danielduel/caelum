@@ -21,7 +21,7 @@ const LocationContainer = styled.div`
 `;
 
 const LocationText = styled.div`
-  font-weight: 500; // superbold
+  font-weight: 500;
   font-size: 1.125em;
 `;
 

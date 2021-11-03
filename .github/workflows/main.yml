@@ -35,9 +35,9 @@ jobs:
       - run: yarn build
       - run: cd ./build && zip -r build.zip * && mv build.zip ../build.zip && cd ..
       - run: echo ${{ steps.vars.outputs.sha_short }}
-      - run: echo "https://caelum.guildns.net/_ci/commit/${{ steps.vars.outputs.sha_short }}"
+      - run: echo "https://guildns.net/_ci/caelum/commit/${{ steps.vars.outputs.sha_short }}"
       - run: |
           curl \
             -F "deploymentKey=${{ secrets.DEPLOYLAND_DEPLOY_KEY }}" \
             -F "deployment=@./build.zip" \
-            "https://caelum.guildns.net/_ci/commit/${{ steps.vars.outputs.sha_short }}/deploy"
+            "https://guildns.net/_ci/caelum/commit/${{ steps.vars.outputs.sha_short }}/deploy"
