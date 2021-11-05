@@ -53,7 +53,7 @@ const StyledFormattedTemperature = styled(FormattedTemperature)`
 
 const HourlyItem = (forecast: HourWeatherForecast) => {
   return (
-    <StyledHorizontalListItem>
+    <StyledHorizontalListItem key={forecast.dt}>
       <StyledFormattedHour value={forecast.dt} />
       <StyledWeatherInfoArrWeatherIcon weatherInfoArr={forecast.weather} />
       <StyledFormattedTemperature value={forecast.temp} withoutSpace />
