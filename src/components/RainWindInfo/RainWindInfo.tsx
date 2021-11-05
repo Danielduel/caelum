@@ -4,7 +4,7 @@ import { ReactComponent as WindImg } from "../../assets/icons/wi-strong-wind.svg
 
 export type RainWindInfoProps = {
   windSpeed: number;
-  rainProbability: number;
+  rain: number;
 };
 
 const RainWindInfoWrapper = styled.div`
@@ -52,9 +52,9 @@ const number2HeadTail = (num: number) => {
   return [head, tail];
 };
 
-export const RainWindInfo = ({ rainProbability, windSpeed }: RainWindInfoProps): JSX.Element => {
+export const RainWindInfo = ({ rain, windSpeed }: RainWindInfoProps): JSX.Element => {
   const [windspeedHead, windspeedTail] = number2HeadTail(windSpeed);
-  const [rainProbabilityHead, rainProbabilityTail] = number2HeadTail(rainProbability);
+  const [rainProbabilityHead, rainProbabilityTail] = number2HeadTail(rain);
   return (
     <RainWindInfoWrapper>
       <InfoItem>
