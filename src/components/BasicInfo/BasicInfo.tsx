@@ -11,12 +11,10 @@ const BasicInfoWrapper = styled.div`
 `;
 const BasicInfoHeadline = styled.div``;
 const Separator = styled.span`
-  /* Don't ask plz */
   margin-left: 1em;
 `;
 const BasicInfoIcon = styled(WeatherIcon)`
   font-size: 6em;
-  /* font-weight: 100; - figure out a way to reduce THICCCCCNESS of those icons */
 `;
 const BasicInfoTemperature = styled(FormattedTemperature)`
   font-size: 3em;
