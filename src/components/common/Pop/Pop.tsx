@@ -1,14 +1,14 @@
+import { DropletIcon } from "../../Icon/Icons";
 import styled, { css } from "styled-components";
 import { StyledClassName } from "../../../common/helpers";
 import { useGyroscope } from "../../../hooks/useGyroscope";
-import dropletIcon from "./droplet-icon.svg";
 
 const PopWrapper = styled.div`
   position: relative;
 `;
 const PopFill = styled.div`
   line-height: 0;
-  display: inline-block; /* Nongreedy space */
+  display: inline-block;
   mix-blend-mode: multiply;
   background: transparent;
 `;
@@ -26,7 +26,7 @@ const linearGradientWithPopValue = ({ popValue, angle }: PopIconWrapperProps) =>
       background: ${wetColor};
     `;
   }
-  const gradientOffset = 5; // + 3 * (angle / 10); // don't know what I am doing, hokus pokus czary mary
+  const gradientOffset = 5;
   const gradientDistance = 10;
   const minStop = Math.ceil(Math.max(Math.min(popValue - gradientOffset - gradientDistance / 2, 100), 0));
   const maxStop = Math.ceil(Math.max(Math.min(popValue - gradientOffset + gradientDistance / 2, 100), 0));
@@ -45,7 +45,7 @@ const PopIconWrapper = styled.div`
   isolation: isolate;
   ${linearGradientWithPopValue}
 `;
-const PopIcon = styled.img`
+const PopIcon = styled(DropletIcon)`
   mix-blend-mode: screen;
   background: white;
   width: 4em;
@@ -67,7 +67,7 @@ const Pop = ({ pop, className }: PopProps) => {
     <PopWrapper className={className}>
       <PopFill>
         <PopIconWrapper popValue={popValue} angle={x}>
-          <PopIcon src={dropletIcon} />
+          <PopIcon />
         </PopIconWrapper>
       </PopFill>
       <PopText>{popValue}%</PopText>

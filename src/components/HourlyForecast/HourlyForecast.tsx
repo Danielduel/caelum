@@ -34,7 +34,7 @@ const StyledHorizontalListItem = styled(HorizontalListItem)`
 
 const StyledWeatherInfoArrWeatherIcon = styled(WeatherInfoArrWeatherIcon)`
   font-size: 2em;
-  opacity: 1; /* tonning down, font-weight doesn't work, it looks way too pronounced while not translucent */
+  opacity: 1;
 `;
 
 const StyledFormattedHour = styled(FormattedHour)`
