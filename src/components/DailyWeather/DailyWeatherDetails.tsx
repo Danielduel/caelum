@@ -1,8 +1,8 @@
-import { CloseIcon } from "../Icon/Icons";
 import React from "react";
-import styled from "styled-components";
-import { DailyWeatherProps, IconButton, ItemDateInfo } from "./DailyWeather";
 import moment from "moment";
+import styled from "styled-components";
+import { CloseIcon } from "../Icon/Icons";
+import { DailyWeatherProps, IconButton, ItemDateInfo } from "./DailyWeather";
 
 const DailyWeatherDetailsWrapper = styled.div`
   position: relative;

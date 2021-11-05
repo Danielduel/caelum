@@ -20,11 +20,11 @@ export const BarsIcon = createIconFromSrc(barsIcon);
 import crosshairsIcon from "../../assets/icons/fa-crosshairs.svg";
 export const CrosshairsIcon = createIconFromSrc(crosshairsIcon);
 
-import dropletIcon from "../../assets/icons/custom-droplet.svg";
+import dropletIcon from "../../assets/icons/fa-custom-droplet.svg";
 export const DropletIcon = createIconFromSrc(dropletIcon);
 
-import closeIcon from "../../assets/icons/xmark-solid.svg";
+import closeIcon from "../../assets/icons/fa-close.svg";
 export const CloseIcon = createIconFromSrc(closeIcon);
 
-import arrowRightIcon from "../../assets/icons/angle-right-solid.svg";
+import arrowRightIcon from "../../assets/icons/fa-angle-right.svg";
 export const ArrowRightIcon = createIconFromSrc(arrowRightIcon);

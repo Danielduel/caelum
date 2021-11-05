@@ -16,7 +16,6 @@ const ModalOverlay = styled.div`
 
 const ModalWindow = styled.div`
   width: calc(100% - 2rem);
-  //height: calc(100% - 2rem);
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.8);
   border-radius: 0.5rem;

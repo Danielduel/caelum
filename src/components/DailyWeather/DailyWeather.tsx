@@ -1,10 +1,10 @@
+import React from "react";
 import moment from "moment";
+import styled, { css } from "styled-components";
+import { ArrowRightIcon } from "../Icon/Icons";
 import { FormattedTemperature } from "../ValueFormatters";
 import { WeatherInfoArrWeatherIcon } from "../WeatherIcon";
-import { ArrowRightIcon } from "../Icon/Icons";
-import React from "react";
 import { DayWeatherForecast } from "../../models/OpenWeatherAPI";
-import styled, { css } from "styled-components";
 
 export const DailyWeatherListItem = styled.div`
   padding: 0.5rem;
