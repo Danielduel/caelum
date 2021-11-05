@@ -4,7 +4,7 @@ import { ReactComponent as WindImg } from "../../assets/icons/wi-strong-wind.svg
 
 export type RainWindInfoProps = {
   windSpeed: number;
-  rainProbability: number;
+  rain: number;
 };
 
 const RainWindInfoWrapper = styled.div`
@@ -35,24 +35,41 @@ const InfoItemValue = styled.span`
   font-size: 2.25em;
 `;
 
+const InfoItemValueFraction = styled.span`
+  font-size: 1.5em;
+`;
+
 const InfoItemUnit = styled.span`
   font-size: 1.5em;
 `;
 
-export const RainWindInfo = ({ rainProbability, windSpeed }: RainWindInfoProps): JSX.Element => {
+const number2HeadTail = (num: number) => {
+  const head = Math.floor(num);
+  const _tail = Math.floor((num - head) * 100); // first 2 chars of fraction
+  const __tail = "00" + String(_tail); // add characters to prepare value for leading zero/zeros
+  const ___tail = __tail.slice(-2); // take first characters from the right
+  const tail = ___tail; // set return
+  return [head, tail];
+};
+
+export const RainWindInfo = ({ rain, windSpeed }: RainWindInfoProps): JSX.Element => {
+  const [windspeedHead, windspeedTail] = number2HeadTail(windSpeed);
+  const [rainProbabilityHead, rainProbabilityTail] = number2HeadTail(rain);
   return (
     <RainWindInfoWrapper>
       <InfoItem>
         <WindImg />
         <InfoItemText>
-          <InfoItemValue>{windSpeed}</InfoItemValue>
+          <InfoItemValue>{windspeedHead}</InfoItemValue>
+          {+windspeedTail > 0 && <InfoItemValueFraction>.{windspeedTail}</InfoItemValueFraction>}
           <InfoItemUnit>m/s</InfoItemUnit>
         </InfoItemText>
       </InfoItem>
       <InfoItem>
         <RainImg />
         <InfoItemText>
-          <InfoItemValue>{rainProbability}</InfoItemValue>
+          <InfoItemValue>{rainProbabilityHead}</InfoItemValue>
+          {+rainProbabilityTail > 0 && <InfoItemValueFraction>.{rainProbabilityTail}</InfoItemValueFraction>}
           <InfoItemUnit>mm</InfoItemUnit>
         </InfoItemText>
       </InfoItem>

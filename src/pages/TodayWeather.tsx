@@ -29,7 +29,7 @@ export const TodayWeather = ({ nextPageRef, currentWeather, hourForecast }: Toda
     <TodayWeatherWrapper>
       <NavigationFab />
       <BasicInfoFromCurrentWeatherForecast currentWeather={currentWeather} />
-      <RainWindInfo rainProbability={rain} windSpeed={wind} />
+      <RainWindInfo rain={rain} windSpeed={wind} />
       <HourlyForecast hourForecast={hourForecast} />
       <BottomDownArrow nextPageRef={nextPageRef} />
     </TodayWeatherWrapper>
