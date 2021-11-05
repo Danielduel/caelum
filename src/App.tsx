@@ -50,7 +50,7 @@ const App: React.FunctionComponent = () => {
         />
       </PageContainer>
       <PageContainer ref={nextDaysForecastPageRef}>
-        <Modal visible={true}>Test 123</Modal>
+        <Modal visible={false}>Test 123</Modal>
         <NextDaysForecast daily={rawData.daily} />
       </PageContainer>
     </AppContainer>
