@@ -11,16 +11,17 @@ const ModalOverlay = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 `;
 
 const ModalWindow = styled.div`
   width: calc(100% - 2rem);
-  height: calc(100% - 2rem);
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.8);
   border-radius: 0.5rem;
   box-sizing: border-box;
   padding: 1em;
+  z-index: 1001;
 `;
 
 export type ModalProps = {
