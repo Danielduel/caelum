@@ -22,3 +22,9 @@ export const CrosshairsIcon = createIconFromSrc(crosshairsIcon);
 
 import dropletIcon from "../../assets/icons/custom-droplet.svg";
 export const DropletIcon = createIconFromSrc(dropletIcon);
+
+import closeIcon from "../../assets/icons/xmark-solid.svg";
+export const CloseIcon = createIconFromSrc(closeIcon);
+
+import arrowRightIcon from "../../assets/icons/angle-right-solid.svg";
+export const ArrowRightIcon = createIconFromSrc(arrowRightIcon);
