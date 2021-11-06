@@ -15,7 +15,7 @@ const useTargetLocation = () => {
 
   React.useEffect(() => {
     fetchData();
-  }, [ fetchData ]);
+  }, [fetchData]);
 
   const setTargetLocation = (i18nName: string, lat: string, lon: string) => {
     setI18nName(i18nName);

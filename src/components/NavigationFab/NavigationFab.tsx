@@ -62,19 +62,22 @@ const NavigationFab = () => {
       </NavigationFabContainer>
       <Modal visible={open}>
         <ModalCloseButton onClick={() => setOpen(false)} />
-        {mockCities.map(({ name, lat, lon }) => name !== i18nName && (
-          <div key={`${lat}/${lon}`}>
-            <button
-              onClick={() => {
-                // don't do that in normal code btw
-                setOpen(false);
-                setTargetLocation(name, lat, lon);
-              }}
-            >
-              <h4>{name}</h4>
-            </button>
-          </div>
-        ))}
+        {mockCities.map(
+          ({ name, lat, lon }) =>
+            name !== i18nName && (
+              <div key={`${lat}/${lon}`}>
+                <button
+                  onClick={() => {
+                    // don't do that in normal code btw
+                    setOpen(false);
+                    setTargetLocation(name, lat, lon);
+                  }}
+                >
+                  <h4>{name}</h4>
+                </button>
+              </div>
+            )
+        )}
       </Modal>
     </>
   );

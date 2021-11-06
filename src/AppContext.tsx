@@ -25,11 +25,7 @@ const setupAppContextProvider = () => {
       defaultLocation
     };
 
-    return (
-      <AppContext.Provider value={state}>
-        { children }
-      </AppContext.Provider>
-    );
+    return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
   };
 
   return WrappedAppContextProvider;
