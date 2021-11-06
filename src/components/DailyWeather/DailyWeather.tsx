@@ -1,7 +1,8 @@
 import React from "react";
 import moment from "moment";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { ArrowRightIcon } from "../Icon/Icons";
+import { IconButton } from "../Icon/IconButton";
 import { FormattedTemperature } from "../ValueFormatters";
 import { WeatherInfoArrWeatherIcon } from "../WeatherIcon";
 import { DayWeatherForecast } from "../../models/OpenWeatherAPI";
@@ -31,14 +32,6 @@ export const ItemWeatherInfo = styled.div`
 
 export const IconContainer = styled.span`
   margin-left: 1rem;
-`;
-
-export const IconButton = css`
-  position: absolute;
-  cursor: pointer;
-  opacity: 0.8;
-  width: 2em;
-  height: 2em;
 `;
 
 export const ArrowRightIconStyled = styled(ArrowRightIcon)`

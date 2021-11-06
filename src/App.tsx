@@ -5,7 +5,7 @@ import { TodayWeather } from "./pages/TodayWeather";
 import { NextDaysForecast } from "./pages/NextDaysForecast";
 import { AppContainer } from "./components/layouts/AppContainer";
 import { PageContainer } from "./components/layouts/PageContainer";
-import { useOpenWeatherMapOneCall } from "./hooks/useOpenWeatherMapOneCall";
+import { useAppContextDefaultLocation } from "./hooks/useAppContextDefaultLocation";
 
 moment.locale("pl");
 const weatherIconsConfig: Record<string, string[]> = {};
@@ -20,16 +20,7 @@ fetch("./weather-conditions.csv")
 
 const App: React.FunctionComponent = () => {
   const nextDaysForecastPageRef = React.useRef<HTMLDivElement | null>(null);
-  const [rawData, fetched, fetchData] = useOpenWeatherMapOneCall({
-    lat: "53.4289",
-    lon: "14.553",
-    exclude: ["minutely", "alerts"],
-    units: "metric"
-  });
-
-  React.useEffect(() => {
-    fetchData();
-  }, []);
+  const { fetched, rawData } = useAppContextDefaultLocation();
 
   if (!fetched) {
     return <AppContainer>Loading...</AppContainer>;
