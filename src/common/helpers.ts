@@ -10,6 +10,7 @@ import { WeatherInfo } from "../models/OpenWeatherAPI";
 
 export const emptyCss = css``;
 export const emptyDiv = styled.div``;
+export const emptyFn = () => undefined;
 export type UnknownObject = Record<string, unknown>;
 export type StyledComponentsCss = ReturnType<typeof css>;
 export type WithChildren = { children: React.ReactNode };

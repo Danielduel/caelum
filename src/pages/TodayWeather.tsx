@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { RainWindInfo } from "../components/RainWindInfo/RainWindInfo";
+import { NavigationFab } from "../components/NavigationFab/NavigationFab";
 import { HourlyForecast } from "../components/HourlyForecast/HourlyForecast";
 import { BottomDownArrow } from "../components/common/BottomDownArrow/BottomDownArrow";
 import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
 import { BasicInfoFromCurrentWeatherForecast } from "../components/BasicInfo/BasicInfo";
-import { RainWindInfo } from "../components/RainWindInfo/RainWindInfo";
-import { NavigationFab } from "../components/NavigationFab/NavigationFab";
 
 export type TodayWeatherProps = {
   nextPageRef: React.MutableRefObject<HTMLDivElement | null>;
