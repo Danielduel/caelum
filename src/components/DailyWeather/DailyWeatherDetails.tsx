@@ -43,6 +43,9 @@ export const DailyWeatherDetails = ({ setSelectedDay, forecast }: DailyWeatherPr
       <DetailItem label={"temp"}>
         <FormattedTemperature className={"temperature-value"} value={forecast.temp.day} />
       </DetailItem>
+      <DetailItem label={"wind"}>
+        <DetailValue>{forecast.wind_speed}</DetailValue>m/s
+      </DetailItem>
       <DetailItem label={"pressure"}>
         <DetailValue>{forecast.pressure}</DetailValue>hPa
       </DetailItem>
