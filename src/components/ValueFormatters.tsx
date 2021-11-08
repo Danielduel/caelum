@@ -5,7 +5,7 @@ type FormattedTemperatureProps = StyledClassName & {
 };
 export const FormattedTemperature = ({ value, className }: FormattedTemperatureProps): JSX.Element => (
   <span className={className}>
-    {Math.round(value)}
+    <span>{Math.round(value)}</span>
     <span>°C</span>
   </span>
 );

@@ -18,10 +18,10 @@ export const DailyWeatherListItem = styled.div`
   position: relative;
 `;
 
-export const ItemDateInfo = styled.div`
+export const ItemDateInfo = styled.div<{ fontSize?: string }>`
   text-transform: capitalize;
   font-weight: 500;
-  font-size: 1.4rem;
+  font-size: ${({ fontSize }) => fontSize || "1.4rem"};
 `;
 
 export const ItemWeatherInfo = styled.div`

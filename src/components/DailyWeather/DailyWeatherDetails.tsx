@@ -4,29 +4,56 @@ import { ModalCloseButton } from "../Modal/ModalCloseButton";
 import { DailyWeatherProps, ItemDateInfo } from "./DailyWeather";
 import { DetailItem } from "./DetailItem";
 import { weatherZeroDescription } from "../../common/helpers";
-import { FormattedHour, FormattedTemperature, FormattedTime } from "../ValueFormatters";
+import { FormattedTemperature, FormattedTime } from "../ValueFormatters";
 
 const DailyWeatherDetailsWrapper = styled.div`
   position: relative;
   min-height: 5rem;
+
+  .temperature-value > span:first-child,
+  .time-value {
+    font-size: 1.2em;
+  }
+`;
+
+const WeatherDescription = styled.div`
+  font-size: 0.8em;
+  display: inline;
+  vertical-align: bottom;
+`;
+
+const Spacer = styled.div`
+  width: 100%;
+  height: 1rem;
+`;
+
+const DetailValue = styled.span`
+  font-size: 1.2em;
 `;
 
 export const DailyWeatherDetails = ({ setSelectedDay, forecast }: DailyWeatherProps): JSX.Element => {
   return (
     <DailyWeatherDetailsWrapper>
-      <ItemDateInfo>{moment(forecast.dt * 1000).format("dddd, DD.M")}</ItemDateInfo>
+      <ItemDateInfo fontSize={"1.6rem"}>{moment(forecast.dt * 1000).format("dddd, DD.M")}</ItemDateInfo>
+      <Spacer />
       <ModalCloseButton onClick={() => setSelectedDay(null)} />
-      <DetailItem label={"weather"}>{weatherZeroDescription(forecast.weather)}</DetailItem>
-      <DetailItem label={"temp"}>
-        <FormattedTemperature value={forecast.temp.day} />
+      <DetailItem label={"weather"}>
+        <WeatherDescription>{weatherZeroDescription(forecast.weather)}</WeatherDescription>
       </DetailItem>
-      <DetailItem label={"pressure"}>{forecast.pressure}hPa</DetailItem>
-      <DetailItem label={"rain"}>{forecast.pop}%</DetailItem>
+      <DetailItem label={"temp"}>
+        <FormattedTemperature className={"temperature-value"} value={forecast.temp.day} />
+      </DetailItem>
+      <DetailItem label={"pressure"}>
+        <DetailValue>{forecast.pressure}</DetailValue>hPa
+      </DetailItem>
+      <DetailItem label={"rain"}>
+        <DetailValue>{forecast.pop}</DetailValue>%
+      </DetailItem>
       <DetailItem label={"sunrise"}>
-        <FormattedTime value={forecast.sunrise} />
+        <FormattedTime className={"time-value"} value={forecast.sunrise} />
       </DetailItem>
       <DetailItem label={"sunset"}>
-        <FormattedTime value={forecast.sunset} />
+        <FormattedTime className={"time-value"} value={forecast.sunset} />
       </DetailItem>
     </DailyWeatherDetailsWrapper>
   );
