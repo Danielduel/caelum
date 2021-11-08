@@ -7,3 +7,8 @@ export const ModalCloseButton = styled(CloseIcon)`
   right: 0;
   ${IconButton}
 `;
+
+export const ModalCloseButtonWithOffset = styled(ModalCloseButton)`
+  top: 1rem;
+  right: 1rem;
+`;

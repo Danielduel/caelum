@@ -26,4 +26,5 @@ const useTargetLocation = () => {
   return { rawData, fetched, i18nName, setTargetLocation } as const;
 };
 
+export type SetTargetLocation = ReturnType<typeof useTargetLocation>["setTargetLocation"];
 export { useTargetLocation };
