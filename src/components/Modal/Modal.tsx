@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { StyledClassName } from "../../common/helpers";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -29,16 +30,16 @@ export type ModalProps = {
   visible: boolean;
   close?: () => void;
   children: React.ReactNode;
-};
+} & StyledClassName;
 
-export const Modal = ({ visible, children }: ModalProps): JSX.Element | null => {
+export const Modal = ({ visible, children, className }: ModalProps): JSX.Element | null => {
   if (!visible) {
     return null;
   }
 
   return (
     <ModalOverlay>
-      <ModalWindow>{children}</ModalWindow>
+      <ModalWindow className={className}>{children}</ModalWindow>
     </ModalOverlay>
   );
 };
