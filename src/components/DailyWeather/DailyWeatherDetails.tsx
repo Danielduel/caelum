@@ -14,6 +14,10 @@ const DailyWeatherDetailsWrapper = styled.div`
   .time-value {
     font-size: 1.2em;
   }
+
+  .detail-item-wrapper {
+    border-bottom: 1px solid rgba(80, 80, 80, 0.2);
+  }
 `;
 
 const WeatherDescription = styled.div`

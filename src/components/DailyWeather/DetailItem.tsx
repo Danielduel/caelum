@@ -23,7 +23,7 @@ export type DetailItemProps = {
 
 export const DetailItem = ({ label, children }: DetailItemProps): JSX.Element => {
   return (
-    <DetailItemWrapper>
+    <DetailItemWrapper className={"detail-item-wrapper"}>
       <DetailItemLabel>{label}</DetailItemLabel>
       <DetailItemValue>{children}</DetailItemValue>
     </DetailItemWrapper>
