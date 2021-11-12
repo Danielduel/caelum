@@ -36,9 +36,10 @@ const DetailValue = styled.span`
 `;
 
 export const DailyWeatherDetails = ({ setSelectedDay, forecast }: DailyWeatherProps): JSX.Element => {
+  const date = moment(forecast.dt * 1000).format("dddd, DD.M");
   return (
     <DailyWeatherDetailsWrapper>
-      <ItemDateInfo fontSize={"1.6rem"}>{moment(forecast.dt * 1000).format("dddd, DD.M")}</ItemDateInfo>
+      <ItemDateInfo fontSize={"1.6rem"}>{date}</ItemDateInfo>
       <Spacer />
       <ModalCloseButton onClick={() => setSelectedDay(null)} />
       <DetailItem label={"weather"}>
