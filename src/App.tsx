@@ -7,7 +7,7 @@ import { AppContainer } from "./components/layouts/AppContainer";
 import { PageContainer } from "./components/layouts/PageContainer";
 import { useAppContextDefaultLocation } from "./hooks/useAppContextDefaultLocation";
 
-moment.locale("pl");
+moment.locale("en");
 const weatherIconsConfig: Record<string, string[]> = {};
 
 fetch("./weather-conditions.csv")

@@ -39,7 +39,7 @@ export const BasicInfo = ({ temp, description, weatherCode }: BasicInfoProps) =>
       <BasicInfoHeadline>
         <BasicInfoIcon weatherCode={weatherCode} />
         <Separator />
-        <BasicInfoTemperature value={temp} withoutSpace />
+        <BasicInfoTemperature value={temp} />
       </BasicInfoHeadline>
       <BasicInfoDescription>{description}</BasicInfoDescription>
     </BasicInfoWrapper>

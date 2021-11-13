@@ -56,7 +56,7 @@ const HourlyItem = (forecast: HourWeatherForecast) => {
     <StyledHorizontalListItem key={forecast.dt}>
       <StyledFormattedHour value={forecast.dt} />
       <StyledWeatherInfoArrWeatherIcon weatherInfoArr={forecast.weather} />
-      <StyledFormattedTemperature value={forecast.temp} withoutSpace />
+      <StyledFormattedTemperature value={forecast.temp} />
       {/* <Pop pop={forecast.pop} /> */}
     </StyledHorizontalListItem>
   );
