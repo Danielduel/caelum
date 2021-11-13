@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import React from "react";
+import { StyledClassName } from "../../common/helpers";
 
-const DetailItemWrapper = styled.div`
+export const DetailItemWrapper = styled.div`
   display: flex;
   margin: 1rem;
   opacity: 0.8;
@@ -19,11 +20,11 @@ const DetailItemValue = styled.div``;
 export type DetailItemProps = {
   label: string;
   children: React.ReactNode;
-};
+} & StyledClassName;
 
-export const DetailItem = ({ label, children }: DetailItemProps): JSX.Element => {
+export const DetailItem = ({ label, children, className }: DetailItemProps): JSX.Element => {
   return (
-    <DetailItemWrapper className={"detail-item-wrapper"}>
+    <DetailItemWrapper className={className}>
       <DetailItemLabel>{label}</DetailItemLabel>
       <DetailItemValue>{children}</DetailItemValue>
     </DetailItemWrapper>

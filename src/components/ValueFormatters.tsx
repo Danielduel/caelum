@@ -1,13 +1,21 @@
 import { StyledClassName } from "../common/helpers";
+import styled from "styled-components";
 
 type FormattedTemperatureProps = StyledClassName & {
   value: number;
 };
+
+export const FormattedTemperatureValue = styled.span``;
+
+export const FormattedTemperatureUnit = styled.span``;
+
+export const FormattedTemperatureWrapper = styled.span``;
+
 export const FormattedTemperature = ({ value, className }: FormattedTemperatureProps): JSX.Element => (
-  <span className={className}>
-    <span>{Math.round(value)}</span>
-    <span>°C</span>
-  </span>
+  <FormattedTemperatureWrapper className={className}>
+    <FormattedTemperatureValue>{Math.round(value)}</FormattedTemperatureValue>
+    <FormattedTemperatureUnit>°C</FormattedTemperatureUnit>
+  </FormattedTemperatureWrapper>
 );
 
 type FormattedHourProps = StyledClassName & {
@@ -21,11 +29,14 @@ export const FormattedHour = ({ value, className }: FormattedHourProps): JSX.Ele
 type FormattedTimeProps = StyledClassName & {
   value: number;
 };
+
+export const FormattedTimeWrapper = styled.span``;
+
 export const FormattedTime = ({ value, className }: FormattedTimeProps): JSX.Element => {
   const date = new Date(value * 1000);
   return (
-    <span className={className}>
+    <FormattedTimeWrapper className={className}>
       {date.getHours()}:{date.getMinutes()}
-    </span>
+    </FormattedTimeWrapper>
   );
 };

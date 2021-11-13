@@ -2,20 +2,26 @@ import moment from "moment";
 import styled from "styled-components";
 import { ModalCloseButton } from "../Modal/ModalCloseButton";
 import { DailyWeatherProps, ItemDateInfo } from "./DailyWeather";
-import { DetailItem } from "./DetailItem";
-import { weatherZeroDescription } from "../../common/helpers";
-import { FormattedTemperature, FormattedTime } from "../ValueFormatters";
+import { DetailItem, DetailItemWrapper } from "./DetailItem";
+import { forecastWeatherZeroDescription } from "../../common/helpers";
+import {
+  FormattedTemperature,
+  FormattedTemperatureValue,
+  FormattedTime,
+  FormattedTimeWrapper
+} from "../ValueFormatters";
+import React from "react";
 
 const DailyWeatherDetailsWrapper = styled.div`
   position: relative;
   min-height: 5rem;
 
-  .temperature-value > span:first-child,
-  .time-value {
+  ${FormattedTemperatureValue},
+  ${FormattedTimeWrapper} {
     font-size: 1.2em;
   }
 
-  .detail-item-wrapper {
+  ${DetailItemWrapper} {
     border-bottom: 1px solid rgba(80, 80, 80, 0.2);
   }
 `;
@@ -36,32 +42,34 @@ const DetailValue = styled.span`
 `;
 
 export const DailyWeatherDetails = ({ setSelectedDay, forecast }: DailyWeatherProps): JSX.Element => {
-  const date = moment(forecast.dt * 1000).format("dddd, DD.M");
+  const date = React.useCallback(() => moment(forecast.dt * 1000).format("dddd, DD.M"), [forecast]);
+  const { wind_speed, pressure, pop, sunrise, sunset } = forecast;
+  const dayTemperature = forecast.temp.day;
   return (
     <DailyWeatherDetailsWrapper>
       <ItemDateInfo fontSize={"1.6rem"}>{date}</ItemDateInfo>
       <Spacer />
       <ModalCloseButton onClick={() => setSelectedDay(null)} />
       <DetailItem label={"weather"}>
-        <WeatherDescription>{weatherZeroDescription(forecast.weather)}</WeatherDescription>
+        <WeatherDescription>{forecastWeatherZeroDescription(forecast)}</WeatherDescription>
       </DetailItem>
       <DetailItem label={"temp"}>
-        <FormattedTemperature className={"temperature-value"} value={forecast.temp.day} />
+        <FormattedTemperature value={dayTemperature} />
       </DetailItem>
       <DetailItem label={"wind"}>
-        <DetailValue>{forecast.wind_speed}</DetailValue>m/s
+        <DetailValue>{wind_speed}</DetailValue>m/s
       </DetailItem>
       <DetailItem label={"pressure"}>
-        <DetailValue>{forecast.pressure}</DetailValue>hPa
+        <DetailValue>{pressure}</DetailValue>hPa
       </DetailItem>
       <DetailItem label={"rain"}>
-        <DetailValue>{forecast.pop}</DetailValue>%
+        <DetailValue>{pop}</DetailValue>%
       </DetailItem>
       <DetailItem label={"sunrise"}>
-        <FormattedTime className={"time-value"} value={forecast.sunrise} />
+        <FormattedTime value={sunrise} />
       </DetailItem>
       <DetailItem label={"sunset"}>
-        <FormattedTime className={"time-value"} value={forecast.sunset} />
+        <FormattedTime value={sunset} />
       </DetailItem>
     </DailyWeatherDetailsWrapper>
   );
