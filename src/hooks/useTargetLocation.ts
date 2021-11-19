@@ -9,7 +9,7 @@ const useTargetLocation = () => {
   const [rawData, fetched, fetchData] = useOpenWeatherMapOneCall({
     lat,
     lon,
-    exclude: ["minutely", "alerts"],
+    exclude: ["minutely"],
     units: "metric"
   });
 

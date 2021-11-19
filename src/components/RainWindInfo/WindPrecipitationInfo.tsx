@@ -1,22 +1,13 @@
 import styled from "styled-components";
-import { ReactComponent as RainImg } from "../../assets/icons/wi-raindrops.svg";
-import { ReactComponent as WindImg } from "../../assets/icons/wi-strong-wind.svg";
-
-export type RainWindInfoProps = {
-  windSpeed: number;
-  rain: number;
-};
+import { CurrentWeatherForecast } from "../../models/OpenWeatherAPI";
+import { PrecipitationIcon } from "./PrecipitationIcon";
+import { rainAmount, snowAmount } from "../../common/helpers";
+import { WindIconStyled } from "./StyledIcons";
 
 const RainWindInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.75em;
-
-  svg {
-    height: 5em;
-    width: 5em;
-    fill: rgba(0, 163, 255, 0.5);
-  }
 `;
 
 const InfoItem = styled.div`
@@ -52,13 +43,21 @@ const number2HeadTail = (num: number) => {
   return [head, tail];
 };
 
-export const RainWindInfo = ({ rain, windSpeed }: RainWindInfoProps): JSX.Element => {
-  const [windspeedHead, windspeedTail] = number2HeadTail(windSpeed);
-  const [rainProbabilityHead, rainProbabilityTail] = number2HeadTail(rain);
+export type RainPrecipitationInfoProps = {
+  currentWeather: Pick<CurrentWeatherForecast, "wind_speed" | "rain" | "snow" | "temp">;
+};
+
+export const WindPrecipitationInfo = ({ currentWeather }: RainPrecipitationInfoProps): JSX.Element => {
+  const wind = currentWeather.wind_speed;
+  const rain = rainAmount(currentWeather);
+  const snow = snowAmount(currentWeather);
+  const temperature = currentWeather.temp;
+  const [windspeedHead, windspeedTail] = number2HeadTail(wind);
+  const [rainfallAmountHead, rainfallAmountTail] = number2HeadTail(rain + snow);
   return (
     <RainWindInfoWrapper>
       <InfoItem>
-        <WindImg />
+        <WindIconStyled />
         <InfoItemText>
           <InfoItemValue>{windspeedHead}</InfoItemValue>
           {+windspeedTail > 0 && <InfoItemValueFraction>.{windspeedTail}</InfoItemValueFraction>}
@@ -66,10 +65,10 @@ export const RainWindInfo = ({ rain, windSpeed }: RainWindInfoProps): JSX.Elemen
         </InfoItemText>
       </InfoItem>
       <InfoItem>
-        <RainImg />
+        <PrecipitationIcon temperature={temperature} rain={rain} snow={snow} />
         <InfoItemText>
-          <InfoItemValue>{rainProbabilityHead}</InfoItemValue>
-          {+rainProbabilityTail > 0 && <InfoItemValueFraction>.{rainProbabilityTail}</InfoItemValueFraction>}
+          <InfoItemValue>{rainfallAmountHead}</InfoItemValue>
+          {+rainfallAmountTail > 0 && <InfoItemValueFraction>.{rainfallAmountTail}</InfoItemValueFraction>}
           <InfoItemUnit>mm</InfoItemUnit>
         </InfoItemText>
       </InfoItem>

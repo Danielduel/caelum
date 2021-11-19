@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { RainWindInfo } from "../components/RainWindInfo/RainWindInfo";
+import { WindPrecipitationInfo } from "../components/RainWindInfo/WindPrecipitationInfo";
 import { NavigationFab } from "../components/NavigationFab/NavigationFab";
 import { HourlyForecast } from "../components/HourlyForecast/HourlyForecast";
 import { BottomDownArrow } from "../components/common/BottomDownArrow/BottomDownArrow";
@@ -23,13 +23,11 @@ const TodayWeatherWrapper = styled.div`
 `;
 
 export const TodayWeather = ({ nextPageRef, currentWeather, hourForecast }: TodayWeatherProps) => {
-  const wind = currentWeather.wind_speed;
-  const rain = currentWeather.rain?.["1h"] || 0;
   return (
     <TodayWeatherWrapper>
       <NavigationFab />
       <BasicInfoFromCurrentWeatherForecast currentWeather={currentWeather} />
-      <RainWindInfo rain={rain} windSpeed={wind} />
+      <WindPrecipitationInfo currentWeather={currentWeather} />
       <HourlyForecast hourForecast={hourForecast} />
       <BottomDownArrow nextPageRef={nextPageRef} />
     </TodayWeatherWrapper>

@@ -28,3 +28,12 @@ export const CloseIcon = createIconFromSrc(closeIcon);
 
 import arrowRightIcon from "../../assets/icons/fa-angle-right.svg";
 export const ArrowRightIcon = createIconFromSrc(arrowRightIcon);
+
+import rainIcon from "../../assets/icons/fa-raindrops.svg";
+export const RainIcon = createIconFromSrc(rainIcon);
+
+import snowIcon from "../../assets/icons/fa-snowflake.svg";
+export const SnowIcon = createIconFromSrc(snowIcon);
+
+import windIcon from "../../assets/icons/fa-strong-wind.svg";
+export const WindIcon = createIconFromSrc(windIcon);
