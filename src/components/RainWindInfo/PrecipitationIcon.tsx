@@ -1,5 +1,4 @@
-import { ReactComponent as RainImg } from "../../assets/icons/fa-raindrops.svg";
-import { ReactComponent as SnowImg } from "../../assets/icons/fa-snowflake.svg";
+import { RainIconStyled, SnowIconStyled } from "./StyledIcons";
 
 type PrecipitationIconProps = {
   rain: number;
@@ -9,10 +8,10 @@ type PrecipitationIconProps = {
 
 export const PrecipitationIcon = ({ rain, snow, temperature }: PrecipitationIconProps): JSX.Element => {
   if (snow > 0) {
-    return <SnowImg />;
+    return <SnowIconStyled />;
   }
   if (rain > 0) {
-    return <RainImg />;
+    return <RainIconStyled />;
   }
-  return temperature > 0 ? <RainImg /> : <SnowImg />;
+  return temperature > 0 ? <RainIconStyled /> : <SnowIconStyled />;
 };

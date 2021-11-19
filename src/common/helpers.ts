@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { DayWeatherForecast, WeatherInfo } from "../models/OpenWeatherAPI";
+import { CurrentWeatherForecast, DayWeatherForecast, WeatherInfo } from "../models/OpenWeatherAPI";
 
 /*
   Most likely this file will be split in future, just store handy things here
@@ -22,3 +22,7 @@ export const weatherZeroId = (weather: [WeatherInfo]) => arrZero(weather).id;
 export const weatherZeroDescription = (weather: [WeatherInfo]) => arrZero(weather).description;
 export const forecastWeatherZeroDescription = (forecast: DayWeatherForecast) =>
   weatherZeroDescription(forecast.weather);
+export const rainAmount = (currentWeather: Pick<CurrentWeatherForecast, "rain">): number =>
+  currentWeather.rain?.["1h"] || 0;
+export const snowAmount = (currentWeather: Pick<CurrentWeatherForecast, "snow">): number =>
+  currentWeather.snow?.["1h"] || 0;

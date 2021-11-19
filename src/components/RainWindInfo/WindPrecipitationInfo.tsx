@@ -1,18 +1,13 @@
 import styled from "styled-components";
-import { ReactComponent as WindImg } from "../../assets/icons/fa-strong-wind.svg";
 import { CurrentWeatherForecast } from "../../models/OpenWeatherAPI";
 import { PrecipitationIcon } from "./PrecipitationIcon";
+import { rainAmount, snowAmount } from "../../common/helpers";
+import { WindIconStyled } from "./StyledIcons";
 
 const RainWindInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.75em;
-
-  svg {
-    height: 5em;
-    width: 5em;
-    fill: rgba(0, 163, 255, 0.5);
-  }
 `;
 
 const InfoItem = styled.div`
@@ -54,15 +49,15 @@ export type RainPrecipitationInfoProps = {
 
 export const WindPrecipitationInfo = ({ currentWeather }: RainPrecipitationInfoProps): JSX.Element => {
   const wind = currentWeather.wind_speed;
-  const rain = currentWeather.rain?.["1h"] || 0;
-  const snow = currentWeather.snow?.["1h"] || 0;
+  const rain = rainAmount(currentWeather);
+  const snow = snowAmount(currentWeather);
   const temperature = currentWeather.temp;
   const [windspeedHead, windspeedTail] = number2HeadTail(wind);
   const [rainfallAmountHead, rainfallAmountTail] = number2HeadTail(rain + snow);
   return (
     <RainWindInfoWrapper>
       <InfoItem>
-        <WindImg />
+        <WindIconStyled />
         <InfoItemText>
           <InfoItemValue>{windspeedHead}</InfoItemValue>
           {+windspeedTail > 0 && <InfoItemValueFraction>.{windspeedTail}</InfoItemValueFraction>}
