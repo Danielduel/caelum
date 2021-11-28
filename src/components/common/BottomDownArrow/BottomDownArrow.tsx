@@ -3,9 +3,6 @@ import styled from "styled-components";
 import { ArrowIcon } from "../../Icon/Icons";
 
 const BottomArrowWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   overflow: hidden;
   display: flex;

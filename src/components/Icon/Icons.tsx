@@ -51,3 +51,6 @@ export const SnowIcon = createIconFromSrc(snowIcon, "#00A3FF80");
 
 import windIcon from "../../assets/icons/fa-strong-wind.svg";
 export const WindIcon = createIconFromSrc(windIcon, "#00A3FF80");
+
+import warningIcon from "../../assets/icons/fa-triangle-exclamation.svg";
+export const WarningIcon = createIconFromSrc(warningIcon);
