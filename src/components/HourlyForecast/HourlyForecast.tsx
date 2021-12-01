@@ -64,9 +64,10 @@ const HourlyItem = (forecast: HourWeatherForecast) => {
 
 type HourlyForecastProps = Pick<TodayWeatherProps, "hourForecast">;
 const HourlyForecast = ({ hourForecast }: HourlyForecastProps) => {
-  const forecast = React.useMemo(() => hourForecast.filter(skipFirst()).filter(head(8)).flatMap(HourlyItem), [
-    hourForecast
-  ]);
+  const forecast = React.useMemo(
+    () => hourForecast.filter(skipFirst()).filter(head(8)).flatMap(HourlyItem),
+    [hourForecast]
+  );
 
   return (
     <HourlyForecastWrapper>

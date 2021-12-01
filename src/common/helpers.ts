@@ -26,3 +26,8 @@ export const rainAmount = (currentWeather: Pick<CurrentWeatherForecast, "rain">)
   currentWeather.rain?.["1h"] || 0;
 export const snowAmount = (currentWeather: Pick<CurrentWeatherForecast, "snow">): number =>
   currentWeather.snow?.["1h"] || 0;
+export const prop =
+  <T, K extends keyof T>(attrName: K, defaultValue = "") =>
+  (props: T) => {
+    return props[attrName] || defaultValue;
+  };
