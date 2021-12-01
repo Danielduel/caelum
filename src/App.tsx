@@ -21,9 +21,7 @@ fetch("./weather-conditions.csv")
 const App: React.FunctionComponent = () => {
   const nextDaysForecastPageRef = React.useRef<HTMLDivElement | null>(null);
   const { fetched, rawData } = useAppContextDefaultLocation();
-  const [alert] = rawData?.alerts || [
-    { description: "123", tags: ["asd"], start: 0, end: 0, event: "dfsf", sender_name: "cxz" }
-  ];
+  const [alert] = rawData?.alerts || [];
 
   if (!fetched) {
     return <AppContainer>Loading...</AppContainer>;
