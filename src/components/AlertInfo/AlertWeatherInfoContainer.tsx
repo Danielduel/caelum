@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AlertInfo, AlertInfoProps } from "./AlertInfo";
+import { AlertInfo } from "./AlertInfo";
 import { AlertsInfo } from "../../models/OpenWeatherAPI";
 import styled from "styled-components";
 
@@ -11,8 +11,6 @@ export type AlertWeatherInfoContainerProps = {
 const OuterContentContainer = styled.div`
   flex: 1;
 `;
-
-const AlertContainer = styled.div``;
 
 export const AlertWeatherInfoContainer = ({ alert, children }: AlertWeatherInfoContainerProps): JSX.Element => {
   const [alertOpen, setAlertOpen] = useState(false);
