@@ -6,6 +6,7 @@ import { IconButton } from "../Icon/IconButton";
 import { FormattedTemperature } from "../ValueFormatters";
 import { WeatherInfoArrWeatherIcon } from "../WeatherIcon";
 import { DayWeatherForecast } from "../../models/OpenWeatherAPI";
+import { prop } from "../../common/helpers";
 
 export const DailyWeatherListItem = styled.div`
   padding: 0.5rem;
@@ -20,10 +21,6 @@ export const DailyWeatherListItem = styled.div`
 
 export type ItemDateInfoProps = {
   fontSize?: string;
-};
-
-export const prop = <T, K extends keyof T>(attrName: K, defaultValue = "") => (props: T) => {
-  return props[attrName] || defaultValue;
 };
 
 export const ItemDateInfo = styled.div<ItemDateInfoProps>`
