@@ -4,13 +4,15 @@ import { WindPrecipitationInfo } from "../components/RainWindInfo/WindPrecipitat
 import { NavigationFab } from "../components/NavigationFab/NavigationFab";
 import { HourlyForecast } from "../components/HourlyForecast/HourlyForecast";
 import { BottomDownArrow } from "../components/common/BottomDownArrow/BottomDownArrow";
-import { CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
+import { AlertsInfo, CurrentWeatherForecast, HourWeatherForecast } from "../models/OpenWeatherAPI";
 import { BasicInfoFromCurrentWeatherForecast } from "../components/BasicInfo/BasicInfo";
+import { AlertWeatherInfoContainer } from "../components/AlertInfo/AlertWeatherInfoContainer";
 
 export type TodayWeatherProps = {
   nextPageRef: React.MutableRefObject<HTMLDivElement | null>;
   currentWeather: CurrentWeatherForecast;
   hourForecast: HourWeatherForecast[];
+  alert: AlertsInfo | undefined;
 };
 
 const TodayWeatherWrapper = styled.div`
@@ -22,12 +24,14 @@ const TodayWeatherWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const TodayWeather = ({ nextPageRef, currentWeather, hourForecast }: TodayWeatherProps) => {
+export const TodayWeather = ({ nextPageRef, currentWeather, hourForecast, alert }: TodayWeatherProps) => {
   return (
     <TodayWeatherWrapper>
       <NavigationFab />
       <BasicInfoFromCurrentWeatherForecast currentWeather={currentWeather} />
-      <WindPrecipitationInfo currentWeather={currentWeather} />
+      <AlertWeatherInfoContainer alert={alert}>
+        <WindPrecipitationInfo currentWeather={currentWeather} />
+      </AlertWeatherInfoContainer>
       <HourlyForecast hourForecast={hourForecast} />
       <BottomDownArrow nextPageRef={nextPageRef} />
     </TodayWeatherWrapper>

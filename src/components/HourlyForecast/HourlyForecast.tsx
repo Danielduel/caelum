@@ -9,6 +9,7 @@ import { HorizontalList, HorizontalListItem } from "../layouts/HorizontalList";
 
 const HourlyForecastWrapper = styled.div`
   background-color: #ffffff7d;
+  min-height: 18rem; /* temp - remove this */
 `;
 const HourlyForecastHeading = styled.div`
   padding-top: 1rem;
