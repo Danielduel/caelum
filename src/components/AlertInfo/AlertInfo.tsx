@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ArrowIcon, WarningIcon } from "../Icon/Icons";
+import { hexToCssFilter } from "../../common/hexToCssFilter";
 
 export type AlertInfoProps = {
   header: string;
@@ -19,7 +20,7 @@ const AlertContainer = styled.div`
   border-radius: 6px;
   margin: 1em;
   padding: 0.2em 1em;
-  max-height: ${({ open }: AlertContainerProps) => (open ? "20rem" : "2rem")};
+  max-height: ${({ open }: AlertContainerProps) => (open ? "16rem" : "1.6rem")};
   transition: max-height 1s ease-in-out;
   overflow: hidden;
 `;
@@ -46,13 +47,14 @@ type StyledArrowIconProps = {
 };
 const StyledArrowIcon = styled(ArrowIcon)`
   width: 1.4em;
-  filter: ${({ open }: StyledArrowIconProps) =>
-    open ? "drop-shadow(-1px -1px 3px black)" : "drop-shadow(1px 1px 3px black)"};
+  filter: ${hexToCssFilter("#3c3c3cfc")};
   transform: ${({ open }: StyledArrowIconProps) => (open ? "rotate(180deg)" : "rotate(0deg)")};
 `;
 
 const WarningIconStyled = styled(WarningIcon)`
+  filter: ${hexToCssFilter("#f4432bcc")};
   margin-right: 1em;
+  width: 1.4em;
 `;
 
 export const AlertInfo = ({ header, description, setAlertOpen, alertOpen }: AlertInfoProps): JSX.Element => {
