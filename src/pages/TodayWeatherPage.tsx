@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { PageContainer } from "../components/layouts/PageContainer";
 import { WindPrecipitationInfo } from "../components/RainWindInfo/WindPrecipitationInfo";
 import { NavigationFab } from "../components/NavigationFab/NavigationFab";
 import { HourlyForecast } from "../components/HourlyForecast/HourlyForecast";
@@ -8,14 +9,14 @@ import { AlertsInfo, CurrentWeatherForecast, HourWeatherForecast } from "../mode
 import { BasicInfoFromCurrentWeatherForecast } from "../components/BasicInfo/BasicInfo";
 import { AlertWeatherInfoContainer } from "../components/AlertInfo/AlertWeatherInfoContainer";
 
-export type TodayWeatherProps = {
+export type TodayWeatherPageProps = {
   nextPageRef: React.MutableRefObject<HTMLDivElement | null>;
   currentWeather: CurrentWeatherForecast;
   hourForecast: HourWeatherForecast[];
   alert: AlertsInfo | undefined;
 };
 
-const TodayWeatherWrapper = styled.div`
+const TodayWeatherPageWrapper = styled.div`
   position: relative;
   height: 100%;
   padding-top: 2em;
@@ -24,16 +25,18 @@ const TodayWeatherWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const TodayWeather = ({ nextPageRef, currentWeather, hourForecast, alert }: TodayWeatherProps) => {
+export const TodayWeatherPage = ({ nextPageRef, currentWeather, hourForecast, alert }: TodayWeatherPageProps) => {
   return (
-    <TodayWeatherWrapper>
-      <NavigationFab />
-      <BasicInfoFromCurrentWeatherForecast currentWeather={currentWeather} />
-      <AlertWeatherInfoContainer alert={alert}>
-        <WindPrecipitationInfo currentWeather={currentWeather} />
-      </AlertWeatherInfoContainer>
-      <HourlyForecast hourForecast={hourForecast} />
-      <BottomDownArrow nextPageRef={nextPageRef} />
-    </TodayWeatherWrapper>
+    <PageContainer>
+      <TodayWeatherPageWrapper>
+        <NavigationFab />
+        <BasicInfoFromCurrentWeatherForecast currentWeather={currentWeather} />
+        <AlertWeatherInfoContainer alert={alert}>
+          <WindPrecipitationInfo currentWeather={currentWeather} />
+        </AlertWeatherInfoContainer>
+        <HourlyForecast hourForecast={hourForecast} />
+        <BottomDownArrow nextPageRef={nextPageRef} />
+      </TodayWeatherPageWrapper>
+    </PageContainer>
   );
 };

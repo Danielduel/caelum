@@ -1,11 +1,10 @@
 import "moment/locale/pl";
 import React from "react";
 import moment from "moment";
-import { TodayWeather } from "./pages/TodayWeather";
-import { NextDaysForecast } from "./pages/NextDaysForecast";
 import { AppContainer } from "./components/layouts/AppContainer";
-import { PageContainer } from "./components/layouts/PageContainer";
 import { useAppContextDefaultLocation } from "./hooks/useAppContextDefaultLocation";
+import { TodayWeatherPage } from "./pages/TodayWeatherPage";
+import { NextDaysForecastPage } from "./pages/NextDaysForecastPage";
 
 moment.locale("en");
 const weatherIconsConfig: Record<string, string[]> = {};
@@ -33,17 +32,13 @@ const App: React.FunctionComponent = () => {
 
   return (
     <AppContainer>
-      <PageContainer>
-        <TodayWeather
-          nextPageRef={nextDaysForecastPageRef}
-          currentWeather={rawData.current}
-          hourForecast={rawData.hourly}
-          alert={alert}
-        />
-      </PageContainer>
-      <PageContainer ref={nextDaysForecastPageRef}>
-        <NextDaysForecast daily={rawData.daily} />
-      </PageContainer>
+      <TodayWeatherPage
+        nextPageRef={nextDaysForecastPageRef}
+        currentWeather={rawData.current}
+        hourForecast={rawData.hourly}
+        alert={alert}
+      />
+      <NextDaysForecastPage pageRef={nextDaysForecastPageRef} daily={rawData.daily} />
     </AppContainer>
   );
 };

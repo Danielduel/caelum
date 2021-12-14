@@ -11,6 +11,7 @@ import {
   FormattedTimeWrapper
 } from "../ValueFormatters";
 import React from "react";
+import { useAppContextModal } from "../../hooks/useAppContextModal";
 
 const DailyWeatherDetailsWrapper = styled.div`
   position: relative;
@@ -41,15 +42,17 @@ const DetailValue = styled.span`
   font-size: 1.2em;
 `;
 
-export const DailyWeatherDetails = ({ setSelectedDay, forecast }: DailyWeatherProps): JSX.Element => {
+type DailyWeatherDetailsProps = Pick<DailyWeatherProps, "forecast">;
+export const DailyWeatherDetails = ({ forecast }: DailyWeatherDetailsProps): JSX.Element => {
   const date = React.useCallback(() => moment(forecast.dt * 1000).format("dddd, DD.M"), [forecast]);
+  const { closeModals } = useAppContextModal();
   const { wind_speed, pressure, pop, sunrise, sunset } = forecast;
   const dayTemperature = forecast.temp.day;
   return (
     <DailyWeatherDetailsWrapper>
       <ItemDateInfo fontSize={"1.6rem"}>{date}</ItemDateInfo>
       <Spacer />
-      <ModalCloseButton onClick={() => setSelectedDay(null)} />
+      <ModalCloseButton onClick={closeModals} />
       <DetailItem label={"weather"}>
         <WeatherDescription>{forecastWeatherZeroDescription(forecast)}</WeatherDescription>
       </DetailItem>
