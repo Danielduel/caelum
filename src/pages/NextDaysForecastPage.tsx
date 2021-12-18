@@ -43,7 +43,7 @@ export const NextDaysForecastPage = ({ daily, pageRef }: NextDaysPageProps) => {
   ));
 
   return (
-    <PageContainer ref={pageRef}>
+    <PageContainer forwardRef={pageRef}>
       <DailyWeatherListContainer>{list}</DailyWeatherListContainer>
       <ModalPortal modalName="DAY_MODAL">
         <DailyWeatherDetails forecast={selectedDay} />

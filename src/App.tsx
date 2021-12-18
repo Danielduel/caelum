@@ -5,6 +5,8 @@ import { AppContainer } from "./components/layouts/AppContainer";
 import { useAppContextDefaultLocation } from "./hooks/useAppContextDefaultLocation";
 import { TodayWeatherPage } from "./pages/TodayWeatherPage";
 import { NextDaysForecastPage } from "./pages/NextDaysForecastPage";
+import { ModalRootStyles } from "./portals/ModalRootStyles";
+import { useAppContextModal } from "./hooks/useAppContextModal";
 
 moment.locale("en");
 const weatherIconsConfig: Record<string, string[]> = {};
@@ -18,6 +20,7 @@ fetch("./weather-conditions.csv")
   });
 
 const App: React.FunctionComponent = () => {
+  const { isModalOpen } = useAppContextModal();
   const nextDaysForecastPageRef = React.useRef<HTMLDivElement | null>(null);
   const { fetched, rawData } = useAppContextDefaultLocation();
   const [alert] = rawData?.alerts || [];
@@ -32,6 +35,7 @@ const App: React.FunctionComponent = () => {
 
   return (
     <AppContainer>
+      <ModalRootStyles isModalOpen={isModalOpen} />
       <TodayWeatherPage
         nextPageRef={nextDaysForecastPageRef}
         currentWeather={rawData.current}

@@ -4,7 +4,7 @@ import { MODAL_NAME } from "../common/constants";
 import { WithChildren } from "../common/helpers";
 import { useAppContextModal } from "../hooks/useAppContextModal";
 
-const _modalRoot = document.getElementById("modal-root");
+const _modalRoot = document.getElementById("modal_root") as HTMLDivElement;
 if (!_modalRoot) {
   console.error("Modal root is missing");
   throw "Modal root is missing";

@@ -14,6 +14,8 @@ export const emptyFn = () => undefined;
 export type UnknownObject = Record<string, unknown>;
 export type StyledComponentsCss = ReturnType<typeof css>;
 export type WithChildren = { children: React.ReactNode };
+export type WithForwardRef<T> = { forwardRef?: React.MutableRefObject<T> };
+export type WithForwardRefDiv = WithForwardRef<HTMLDivElement | null>;
 export type StyledClassName = { className?: string };
 export const head = (num: number) => (_: unknown, index: number) => index < num;
 export const skipFirst = () => (_: unknown, index: number) => index !== 0;
