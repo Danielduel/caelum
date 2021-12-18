@@ -10,7 +10,7 @@ if (!_modalRoot) {
   throw "Modal root is missing";
 }
 const modalRoot = _modalRoot || document.createElement("div"); // fallback, shouldn't happen
-const emptyModal = document.createElement("div");
+// const emptyModal = document.createElement("div");
 
 type ModalPortalProps = WithChildren & {
   modalName: MODAL_NAME;
@@ -22,7 +22,7 @@ const ModalPortal = ({ modalName, children }: ModalPortalProps) => {
     const isChildOfModalRoot = modalRoot.contains(element);
     if (isChildOfModalRoot) {
       console.log(`Remove ${modalName}`);
-      element.remove();
+      modalRoot.removeChild(element);
     }
   };
 
@@ -41,7 +41,7 @@ const ModalPortal = ({ modalName, children }: ModalPortalProps) => {
     };
   }, [_actualOpenModalName]);
 
-  return ReactDOM.createPortal(children, modalRoot, modalName);
+  return ReactDOM.createPortal(children, element, modalName);
 };
 
 export { ModalPortal };
