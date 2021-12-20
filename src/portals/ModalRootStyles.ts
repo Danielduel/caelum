@@ -6,21 +6,22 @@ type ModalRootStylesProps = {
 const isModalOpenModalRootStyles = ({ isModalOpen }: ModalRootStylesProps) =>
   isModalOpen
     ? css`
-        transform: translateX(0vw);
+        right: 0;
       `
     : css`
-        transform: translateX(80vw);
+        right: -80vw;
       `;
 
 export const ModalRootStyles = createGlobalStyle`
   #modal_root {
     position: fixed;
     top: 0;
-    right: 0;
     bottom: 0;
+    right: -80vw;
     width: 80vw;
+    background-color: rgba(255, 255, 255, 0.7);
 
-    transition: transform 0.2s ease-in-out;
+    transition: right 0.2s ease-in-out;
     ${isModalOpenModalRootStyles}
   }
 `;
