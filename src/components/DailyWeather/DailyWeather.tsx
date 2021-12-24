@@ -70,7 +70,7 @@ export const ArrowRightIconWrapper = styled.div`
 
 export type DailyWeatherProps = {
   forecast: DayWeatherForecast;
-  setSelectedDay: React.Dispatch<React.SetStateAction<DayWeatherForecast | null>>;
+  setSelectedDay: React.Dispatch<DayWeatherForecast>;
 };
 
 export const DailyWeather = ({ forecast, setSelectedDay }: DailyWeatherProps): JSX.Element => {

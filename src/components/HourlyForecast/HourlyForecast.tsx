@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { head, skipFirst } from "../../common/helpers";
-import { TodayWeatherProps } from "../../pages/TodayWeather";
 import { HourWeatherForecast } from "../../models/OpenWeatherAPI";
 import { FormattedHour, FormattedTemperature } from "../ValueFormatters";
 import { WeatherInfoArrWeatherIcon } from "../WeatherIcon";
 import { HorizontalList, HorizontalListItem } from "../layouts/HorizontalList";
+import { TodayWeatherPageProps } from "../../pages/TodayWeatherPage";
 
 const HourlyForecastWrapper = styled.div`
   background-color: #ffffff7d;
@@ -63,7 +63,7 @@ const HourlyItem = (forecast: HourWeatherForecast) => {
   );
 };
 
-type HourlyForecastProps = Pick<TodayWeatherProps, "hourForecast">;
+type HourlyForecastProps = Pick<TodayWeatherPageProps, "hourForecast">;
 const HourlyForecast = ({ hourForecast }: HourlyForecastProps) => {
   const forecast = React.useMemo(
     () => hourForecast.filter(skipFirst()).filter(head(8)).flatMap(HourlyItem),

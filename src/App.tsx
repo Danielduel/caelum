@@ -1,11 +1,12 @@
 import "moment/locale/pl";
 import React from "react";
 import moment from "moment";
-import { TodayWeather } from "./pages/TodayWeather";
-import { NextDaysForecast } from "./pages/NextDaysForecast";
 import { AppContainer } from "./components/layouts/AppContainer";
-import { PageContainer } from "./components/layouts/PageContainer";
 import { useAppContextDefaultLocation } from "./hooks/useAppContextDefaultLocation";
+import { TodayWeatherPage } from "./pages/TodayWeatherPage";
+import { NextDaysForecastPage } from "./pages/NextDaysForecastPage";
+import { ModalRootStyles } from "./portals/ModalRootStyles";
+import { useAppContextModal } from "./hooks/useAppContextModal";
 
 moment.locale("en");
 const weatherIconsConfig: Record<string, string[]> = {};
@@ -19,6 +20,7 @@ fetch("./weather-conditions.csv")
   });
 
 const App: React.FunctionComponent = () => {
+  const { isModalOpen } = useAppContextModal();
   const nextDaysForecastPageRef = React.useRef<HTMLDivElement | null>(null);
   const { fetched, rawData } = useAppContextDefaultLocation();
   const [alert] = rawData?.alerts || [];
@@ -33,17 +35,14 @@ const App: React.FunctionComponent = () => {
 
   return (
     <AppContainer>
-      <PageContainer>
-        <TodayWeather
-          nextPageRef={nextDaysForecastPageRef}
-          currentWeather={rawData.current}
-          hourForecast={rawData.hourly}
-          alert={alert}
-        />
-      </PageContainer>
-      <PageContainer ref={nextDaysForecastPageRef}>
-        <NextDaysForecast daily={rawData.daily} />
-      </PageContainer>
+      <ModalRootStyles isModalOpen={isModalOpen} />
+      <TodayWeatherPage
+        nextPageRef={nextDaysForecastPageRef}
+        currentWeather={rawData.current}
+        hourForecast={rawData.hourly}
+        alert={alert}
+      />
+      <NextDaysForecastPage pageRef={nextDaysForecastPageRef} daily={rawData.daily} />
     </AppContainer>
   );
 };
