@@ -59,8 +59,9 @@ export const ArrowRightIconStyled = styled(ArrowRightIcon)`
 `;
 
 export const ArrowRightIconWrapper = styled.div`
+  --border-radius: 10px;
   background: rgba(196, 196, 196, 0.5);
-  border-radius: 10px 0;
+  border-radius: var(--border-radius) 0;
   position: absolute;
   cursor: pointer;
   padding: 0.6em;
