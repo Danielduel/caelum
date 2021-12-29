@@ -1,7 +1,6 @@
 import moment from "moment";
 import styled from "styled-components";
-import { ModalCloseButton } from "../Modal/ModalCloseButton";
-import { DailyWeatherProps, ItemDateInfo } from "./DailyWeather";
+import { ArrowRightIconStyled, ArrowRightIconWrapper, DailyWeatherProps, ItemDateInfo } from "./DailyWeather";
 import { DetailItem, DetailItemWrapper } from "./DetailItem";
 import { forecastWeatherZeroDescription } from "../../common/helpers";
 import {
@@ -33,26 +32,46 @@ const WeatherDescription = styled.div`
   vertical-align: bottom;
 `;
 
-const Spacer = styled.div`
-  width: 100%;
-  height: 1rem;
-`;
-
 const DetailValue = styled.span`
   font-size: 1.2em;
 `;
 
+const TitleContainer = styled.div`
+  height: 8.125rem;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+const ItemDateInfoStyled = styled(ItemDateInfo)`
+  margin-left: 0.5rem;
+`;
+
+const ArrowRightIconWrapperRestyled = styled(ArrowRightIconWrapper)`
+  position: relative;
+  height: 3em;
+  width: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+`;
+
 type DailyWeatherDetailsProps = Pick<DailyWeatherProps, "forecast">;
 export const DailyWeatherDetails = ({ forecast }: DailyWeatherDetailsProps): JSX.Element => {
-  const date = React.useCallback(() => moment(forecast.dt * 1000).format("dddd, DD.M"), [forecast]);
   const { closeModals } = useAppContextModal();
+  const date = React.useMemo(() => moment(forecast.dt * 1000).format("dddd, DD.M"), [forecast]);
   const { wind_speed, pressure, pop, sunrise, sunset } = forecast;
   const dayTemperature = forecast.temp.day;
   return (
     <DailyWeatherDetailsWrapper>
-      <ItemDateInfo fontSize={"1.6rem"}>{date}</ItemDateInfo>
-      <Spacer />
-      <ModalCloseButton onClick={closeModals} />
+      <TitleContainer>
+        <ArrowRightIconWrapperRestyled onClick={closeModals}>
+          <ArrowRightIconStyled />
+        </ArrowRightIconWrapperRestyled>
+        <ItemDateInfoStyled fontSize="1.8rem">{date}</ItemDateInfoStyled>
+      </TitleContainer>
       <DetailItem label={"weather"}>
         <WeatherDescription>{forecastWeatherZeroDescription(forecast)}</WeatherDescription>
       </DetailItem>
