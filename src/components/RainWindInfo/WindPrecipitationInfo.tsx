@@ -3,6 +3,7 @@ import { CurrentWeatherForecast } from "../../models/OpenWeatherAPI";
 import { PrecipitationIcon } from "./PrecipitationIcon";
 import { rainAmount, snowAmount } from "../../common/helpers";
 import { WindIconStyled } from "./StyledIcons";
+import { WindDescription } from "./WindDescription";
 
 const RainWindInfoWrapper = styled.div`
   display: flex;
@@ -63,6 +64,7 @@ export const WindPrecipitationInfo = ({ currentWeather }: RainPrecipitationInfoP
           {+windspeedTail > 0 && <InfoItemValueFraction>.{windspeedTail}</InfoItemValueFraction>}
           <InfoItemUnit>m/s</InfoItemUnit>
         </InfoItemText>
+        <WindDescription windSpeed={wind} />
       </InfoItem>
       <InfoItem>
         <PrecipitationIcon temperature={temperature} rain={rain} snow={snow} />
