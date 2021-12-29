@@ -35,6 +35,12 @@ const InfoItemUnit = styled.span`
   font-size: 1.5em;
 `;
 
+const WindDescriptionStyled = styled(WindDescription)`
+  font-size: 1.2em;
+  margin-left: 0.5em;
+  padding-top: 0.4em;
+`;
+
 const number2HeadTail = (num: number) => {
   const head = Math.floor(num);
   const _tail = Math.floor((num - head) * 100); // first 2 chars of fraction
@@ -64,7 +70,7 @@ export const WindPrecipitationInfo = ({ currentWeather }: RainPrecipitationInfoP
           {+windspeedTail > 0 && <InfoItemValueFraction>.{windspeedTail}</InfoItemValueFraction>}
           <InfoItemUnit>m/s</InfoItemUnit>
         </InfoItemText>
-        <WindDescription windSpeed={wind} />
+        <WindDescriptionStyled windSpeed={wind} />
       </InfoItem>
       <InfoItem>
         <PrecipitationIcon temperature={temperature} rain={rain} snow={snow} />

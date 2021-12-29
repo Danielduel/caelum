@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { StyledClassName } from "../../common/helpers";
 
-export type WindDescriptionProps = {
+export type WindDescriptionProps = StyledClassName & {
   windSpeed: number;
 };
 
@@ -22,14 +23,10 @@ const WindSpeedValues: WindSpeedDescription[] = [
   { min: 30, max: 1000, label: "hurricane" }
 ];
 
-export const WindDescriptionWrapper = styled.span`
-  font-size: 1.2em;
-  margin-left: 0.5em;
-  padding-top: 0.4em;
-`;
+export const WindDescriptionWrapper = styled.span``;
 
-export const WindDescription = ({ windSpeed }: WindDescriptionProps): JSX.Element => {
+export const WindDescription = ({ windSpeed, className }: WindDescriptionProps): JSX.Element => {
   const item = WindSpeedValues.find(({ min, max }) => windSpeed >= min && windSpeed < max);
   const { label } = item || WindSpeedValues[0];
-  return <WindDescriptionWrapper>({label})</WindDescriptionWrapper>;
+  return <WindDescriptionWrapper className={className}>({label})</WindDescriptionWrapper>;
 };
