@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { WeatherIcon } from "../WeatherIcon";
-import { FormattedTemperature } from "../ValueFormatters";
+import { FormattedTemperature, FormattedTemperatureUnit } from "../ValueFormatters";
 import { weatherZeroDescription, weatherZeroId } from "../../common/helpers";
 import { CurrentWeatherForecast, HourWeatherForecast, WeatherInfo } from "../../models/OpenWeatherAPI";
 
@@ -8,20 +8,23 @@ const BasicInfoWrapper = styled.div`
   padding-left: 1.5em;
   font-family: "Roboto", sans-serif;
   opacity: 0.8;
+  display: flex;
 `;
-const BasicInfoHeadline = styled.div``;
-const Separator = styled.span`
-  margin-left: 1em;
+const BasicInfoData = styled.div`
+  margin-left: 1rem;
 `;
 const BasicInfoIcon = styled(WeatherIcon)`
   font-size: 6em;
 `;
 const BasicInfoTemperature = styled(FormattedTemperature)`
-  font-size: 3em;
+  font-size: 3.5em;
   font-weight: 500;
+  ${FormattedTemperatureUnit} {
+    font-size: 0.75em;
+  }
 `;
 const BasicInfoDescription = styled.div`
-  font-size: 2.25em;
+  font-size: 2em;
   font-weight: 500;
 
   &:first-letter {
@@ -36,12 +39,11 @@ type BasicInfoProps = {
 export const BasicInfo = ({ temp, description, weatherCode }: BasicInfoProps) => {
   return (
     <BasicInfoWrapper>
-      <BasicInfoHeadline>
-        <BasicInfoIcon weatherCode={weatherCode} />
-        <Separator />
+      <BasicInfoIcon weatherCode={weatherCode} />
+      <BasicInfoData>
         <BasicInfoTemperature value={temp} />
-      </BasicInfoHeadline>
-      <BasicInfoDescription>{description}</BasicInfoDescription>
+        <BasicInfoDescription>{description}</BasicInfoDescription>
+      </BasicInfoData>
     </BasicInfoWrapper>
   );
 };
