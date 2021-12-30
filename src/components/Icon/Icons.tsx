@@ -54,3 +54,6 @@ export const WindIcon = createIconFromSrc(windIcon, "#00A3FF80");
 
 import warningIcon from "../../assets/icons/fa-triangle-exclamation.svg";
 export const WarningIcon = createIconFromSrc(warningIcon);
+
+import windDirectionIcon from "../../assets/icons/fa-wind-direction.svg";
+export const WindDirectionIcon = createIconFromSrc(windDirectionIcon);
