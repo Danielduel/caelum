@@ -11,6 +11,7 @@ import {
 } from "../ValueFormatters";
 import React from "react";
 import { useAppContextModal } from "../../hooks/useAppContextModal";
+import { WindDirectionIcon } from "../Icon/Icons";
 
 const DailyWeatherDetailsWrapper = styled.div`
   position: relative;
@@ -58,11 +59,22 @@ const ArrowRightIconWrapperRestyled = styled(ArrowRightIconWrapper)`
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 `;
 
+const WindDirectionWrapper = styled.span`
+  position: relative;
+`;
+
+const WindDirectionIconStyled = styled(WindDirectionIcon)`
+  position: absolute;
+  transform: ${({ deg }) => `rotate(${deg}deg)`};
+  height: 1.5em;
+  right: 0.2em;
+`;
+
 type DailyWeatherDetailsProps = Pick<DailyWeatherProps, "forecast">;
 export const DailyWeatherDetails = ({ forecast }: DailyWeatherDetailsProps): JSX.Element => {
   const { closeModals } = useAppContextModal();
   const date = React.useMemo(() => moment(forecast.dt * 1000).format("dddd, DD.M"), [forecast]);
-  const { wind_speed, pressure, pop, sunrise, sunset } = forecast;
+  const { wind_speed, wind_deg, pressure, pop, sunrise, sunset } = forecast;
   const dayTemperature = forecast.temp.day;
   return (
     <DailyWeatherDetailsWrapper>
@@ -79,6 +91,9 @@ export const DailyWeatherDetails = ({ forecast }: DailyWeatherDetailsProps): JSX
         <FormattedTemperature value={dayTemperature} />
       </DetailItem>
       <DetailItem label={"wind"}>
+        <WindDirectionWrapper>
+          <WindDirectionIconStyled deg={wind_deg} />
+        </WindDirectionWrapper>
         <DetailValue>{wind_speed}</DetailValue>m/s
       </DetailItem>
       <DetailItem label={"pressure"}>
