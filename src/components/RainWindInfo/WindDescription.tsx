@@ -1,5 +1,6 @@
+import React from "react";
 import styled from "styled-components";
-import { StyledClassName } from "../../common/helpers";
+import { arrZero, StyledClassName } from "../../common/helpers";
 
 export type WindDescriptionProps = StyledClassName & {
   windSpeed: number;
@@ -26,7 +27,11 @@ const WindSpeedValues: WindSpeedDescription[] = [
 export const WindDescriptionWrapper = styled.span``;
 
 export const WindDescription = ({ windSpeed, className }: WindDescriptionProps): JSX.Element => {
-  const item = WindSpeedValues.find(({ min, max }) => windSpeed >= min && windSpeed < max);
-  const { label } = item || WindSpeedValues[0];
+  const item = React.useMemo(
+    () => WindSpeedValues.find(({ min, max }) => windSpeed >= min && windSpeed < max),
+    [windSpeed]
+  );
+  const defaultWindSpeedValue = arrZero(WindSpeedValues);
+  const { label } = item || defaultWindSpeedValue;
   return <WindDescriptionWrapper className={className}>({label})</WindDescriptionWrapper>;
 };
