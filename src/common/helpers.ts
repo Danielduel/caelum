@@ -19,7 +19,7 @@ export type WithForwardRefDiv = WithForwardRef<HTMLDivElement | null>;
 export type StyledClassName = { className?: string };
 export const head = (num: number) => (_: unknown, index: number) => index < num;
 export const skipFirst = () => (_: unknown, index: number) => index !== 0;
-export const arrZero = <T>(arr: [T]) => arr[0];
+export const arrZero = <T>(arr: T[]) => arr[0];
 export const weatherZeroId = (weather: [WeatherInfo]) => arrZero(weather).id;
 export const weatherZeroDescription = (weather: [WeatherInfo]) => arrZero(weather).description;
 export const forecastWeatherZeroDescription = (forecast: DayWeatherForecast) =>
