@@ -33,7 +33,7 @@ const useWeatherIconsConfig = () => {
     });
   }, []);
 
-  return { weatherIconsConfig, fetched };
+  return { weatherIconsConfig, fetched } as const;
 };
 
 export { useWeatherIconsConfig };
