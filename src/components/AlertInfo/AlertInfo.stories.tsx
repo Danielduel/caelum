@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   width: 400px;
 `;
 
-export const Alert: ComponentStory<typeof AlertInfo> = (args) => {
+export const Info: ComponentStory<typeof AlertInfo> = (args) => {
   const [alertOpen, setAlertOpen] = useState(false);
   return (
     <Wrapper>
@@ -21,7 +21,7 @@ export const Alert: ComponentStory<typeof AlertInfo> = (args) => {
   );
 };
 
-Alert.args = {
+Info.args = {
   header: "Snow/Ice",
   description: "It is forecasted snowfall causing snow cover increase by 10 cm to 12 cm in places."
 };
