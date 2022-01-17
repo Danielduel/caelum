@@ -18,7 +18,13 @@
     "@typescript-eslint/no-explicit-any": "off",
     "quotes": ["error", "double"],
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   },
   "settings": {
     "react": {

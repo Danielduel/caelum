@@ -1,18 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import { Modal } from "./Modal";
 import { head } from "../../common/helpers";
 import { CrosshairsIcon } from "../Icon/Icons";
-import { ModalCloseButtonWithOffset } from "./ModalCloseButton";
 import { City, mockCities } from "../../assets/mock/mockCities";
 import { SetTargetLocation } from "../../hooks/useTargetLocation";
+import { useAppContextDefaultLocation } from "../../hooks/useAppContextDefaultLocation";
+import { DrawerHeader } from "../DrawerHeader/DrawerHeader";
+import { useAppContextModal } from "../../hooks/useAppContextModal";
 
 type LocationModalProps = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   i18nName: string;
   setTargetLocation: SetTargetLocation;
 };
+
+const LocationWrapper = styled.div``;
+
+const LocationModalContent = styled.div`
+  padding: 1rem;
+`;
 
 const CrosshairsIconStyled = styled(CrosshairsIcon)`
   width: 1.25em;
@@ -21,7 +26,7 @@ const CrosshairsIconStyled = styled(CrosshairsIcon)`
 
 const LocationModalInput = styled.input`
   width: 100%;
-  margin-top: 3rem;
+  margin-top: 2rem;
   padding: 0.5rem 0.75rem 0.5rem 0.75rem;
   border: 1px solid black;
   border-radius: 0.25rem;
@@ -43,19 +48,17 @@ const LocationModalOption = styled.div`
   display: flex;
 `;
 
-const LocationModalStyled = styled(Modal)`
-  min-height: 20rem;
-`;
+type LocationModalListItemProps = Pick<LocationModalProps, "setTargetLocation">;
 
-type LocationModalListItemProps = Pick<LocationModalProps, "setOpen" | "setTargetLocation">;
-const LocationModalListItem = ({ setOpen, setTargetLocation }: LocationModalListItemProps) => {
+const LocationModalListItem = ({ setTargetLocation }: LocationModalListItemProps) => {
+  const { closeModals } = useAppContextModal();
   const _LocationModalListItem = ({ name, lat, lon }: City) => {
     return (
       <LocationModalOption
         key={`${lat}/${lon}`}
         onClick={() => {
           // don't do that in normal code btw
-          setOpen(false);
+          closeModals();
           setTargetLocation(name, lat, lon);
         }}
       >
@@ -64,26 +67,26 @@ const LocationModalListItem = ({ setOpen, setTargetLocation }: LocationModalList
       </LocationModalOption>
     );
   };
-
   return _LocationModalListItem;
 };
 
-const LocationModal = ({ open, setOpen, i18nName, setTargetLocation }: LocationModalProps) => {
+const LocationModal = () => {
   const [searchField, setSearchField] = React.useState("");
+  const { setTargetLocation, i18nName } = useAppContextDefaultLocation();
   const filteredCities = mockCities
     .filter(head(6))
     .filter((city) => city.name !== i18nName)
     .filter((city) => city.name.includes(searchField));
   return (
-    <LocationModalStyled visible={open}>
-      <ModalCloseButtonWithOffset onClick={() => setOpen(false)} />
-      <LocationModalInput onChange={(e) => setSearchField(e.target.value)} value={searchField} />
-      <LocationModalListContainer>
-        {filteredCities.length > 0
-          ? filteredCities.map(LocationModalListItem({ setOpen, setTargetLocation }))
-          : "No results"}
-      </LocationModalListContainer>
-    </LocationModalStyled>
+    <LocationWrapper>
+      <DrawerHeader title={"Location"} />
+      <LocationModalContent>
+        <LocationModalInput onChange={(e) => setSearchField(e.target.value)} value={searchField} />
+        <LocationModalListContainer>
+          {filteredCities.length > 0 ? filteredCities.map(LocationModalListItem({ setTargetLocation })) : "No results"}
+        </LocationModalListContainer>
+      </LocationModalContent>
+    </LocationWrapper>
   );
 };
 

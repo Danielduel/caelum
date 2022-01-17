@@ -1,6 +1,6 @@
 import moment from "moment";
 import styled from "styled-components";
-import { ArrowRightIconStyled, ArrowRightIconWrapper, DailyWeatherProps, ItemDateInfo } from "./DailyWeather";
+import { DailyWeatherProps } from "./DailyWeather";
 import { DetailItem, DetailItemWrapper } from "./DetailItem";
 import { forecastWeatherZeroDescription } from "../../common/helpers";
 import {
@@ -10,8 +10,8 @@ import {
   FormattedTimeWrapper
 } from "../ValueFormatters";
 import React from "react";
-import { useAppContextModal } from "../../hooks/useAppContextModal";
 import { WindDirectionIcon } from "../Icon/Icons";
+import { DrawerHeader } from "../DrawerHeader/DrawerHeader";
 
 const DailyWeatherDetailsWrapper = styled.div`
   position: relative;
@@ -37,28 +37,6 @@ const DetailValue = styled.span`
   font-size: 1.2em;
 `;
 
-const TitleContainer = styled.div`
-  height: 8.125rem;
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-`;
-
-const ItemDateInfoStyled = styled(ItemDateInfo)`
-  margin-left: 0.5rem;
-`;
-
-const ArrowRightIconWrapperRestyled = styled(ArrowRightIconWrapper)`
-  position: relative;
-  height: 3em;
-  width: 3em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
-`;
-
 const WindDirectionWrapper = styled.span`
   position: relative;
 `;
@@ -72,18 +50,12 @@ const WindDirectionIconStyled = styled(WindDirectionIcon)`
 
 type DailyWeatherDetailsProps = Pick<DailyWeatherProps, "forecast">;
 export const DailyWeatherDetails = ({ forecast }: DailyWeatherDetailsProps): JSX.Element => {
-  const { closeModals } = useAppContextModal();
   const date = React.useMemo(() => moment(forecast.dt * 1000).format("dddd, DD.M"), [forecast]);
   const { wind_speed, wind_deg, pressure, pop, sunrise, sunset } = forecast;
   const dayTemperature = forecast.temp.day;
   return (
     <DailyWeatherDetailsWrapper>
-      <TitleContainer>
-        <ArrowRightIconWrapperRestyled onClick={closeModals}>
-          <ArrowRightIconStyled />
-        </ArrowRightIconWrapperRestyled>
-        <ItemDateInfoStyled fontSize="1.8rem">{date}</ItemDateInfoStyled>
-      </TitleContainer>
+      <DrawerHeader title={date} />
       <DetailItem label={"weather"}>
         <WeatherDescription>{forecastWeatherZeroDescription(forecast)}</WeatherDescription>
       </DetailItem>
