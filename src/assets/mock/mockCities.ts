@@ -1,6 +1,6 @@
 // TODO - remove
 export type City = { name: string; lat: string; lon: string };
-const city = (name: string, lat: string, lon: string) => ({ name, lat, lon });
+export const city = (name: string, lat: string, lon: string) => ({ name, lat, lon });
 export const mockCities: City[] = [
   city("Szczecin", "53.428543", "14.552812"),
   city("Szydłowo", "53.1620341", "16.5942987"),
