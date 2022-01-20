@@ -3,17 +3,11 @@ import styled from "styled-components";
 import { head } from "../../common/helpers";
 import { CrosshairsIcon } from "../Icon/Icons";
 import { City, mockCities } from "../../assets/mock/mockCities";
-import { SetTargetLocation } from "../../hooks/useTargetLocation";
 import { useAppContextDefaultLocation } from "../../hooks/useAppContextDefaultLocation";
 import { DrawerHeader } from "../DrawerHeader/DrawerHeader";
 import { useAppContextModal } from "../../hooks/useAppContextModal";
 import { LastLocations } from "./LastLocations";
 import { useLastLocations } from "../../hooks/useLastLocations";
-
-type LocationModalProps = {
-  i18nName: string;
-  setTargetLocation: SetTargetLocation;
-};
 
 const LocationWrapper = styled.div``;
 
@@ -79,7 +73,7 @@ const LocationModal = () => {
 
   const setLocation = React.useCallback(
     (location: City) => {
-      setTargetLocation(location.lat, location.lon, location.name);
+      setTargetLocation(location.name, location.lat, location.lon);
       selectLastLocation(location);
       closeModals();
     },
