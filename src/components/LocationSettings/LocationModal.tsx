@@ -77,7 +77,7 @@ const LocationModal = () => {
       selectLastLocation(location);
       closeModals();
     },
-    [setTargetLocation, selectLastLocation]
+    [setTargetLocation, selectLastLocation, closeModals]
   );
 
   return (

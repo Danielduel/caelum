@@ -39,7 +39,7 @@ const LastLocationsItem = ({ location }: LastLocationsItemProps): JSX.Element =>
   return (
     <LastLocationsItemWrapper>
       <CrosshairsIconStyled />
-      <span>{location?.name}</span>
+      <span>{location.name}</span>
     </LastLocationsItemWrapper>
   );
 };
