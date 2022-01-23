@@ -3,15 +3,11 @@ import styled from "styled-components";
 import { head } from "../../common/helpers";
 import { CrosshairsIcon } from "../Icon/Icons";
 import { City, mockCities } from "../../assets/mock/mockCities";
-import { SetTargetLocation } from "../../hooks/useTargetLocation";
 import { useAppContextDefaultLocation } from "../../hooks/useAppContextDefaultLocation";
 import { DrawerHeader } from "../DrawerHeader/DrawerHeader";
 import { useAppContextModal } from "../../hooks/useAppContextModal";
-
-type LocationModalProps = {
-  i18nName: string;
-  setTargetLocation: SetTargetLocation;
-};
+import { LastLocations } from "./LastLocations";
+import { useLastLocations } from "../../hooks/useLastLocations";
 
 const LocationWrapper = styled.div``;
 
@@ -48,22 +44,16 @@ const LocationModalOption = styled.div`
   display: flex;
 `;
 
-type LocationModalListItemProps = Pick<LocationModalProps, "setTargetLocation">;
+type LocationModalListItemProps = {
+  setLocation: (location: City) => void;
+};
 
-const LocationModalListItem = ({ setTargetLocation }: LocationModalListItemProps) => {
-  const { closeModals } = useAppContextModal();
-  const _LocationModalListItem = ({ name, lat, lon }: City) => {
+const LocationModalListItem = ({ setLocation }: LocationModalListItemProps) => {
+  const _LocationModalListItem = (city: City) => {
     return (
-      <LocationModalOption
-        key={`${lat}/${lon}`}
-        onClick={() => {
-          // don't do that in normal code btw
-          closeModals();
-          setTargetLocation(name, lat, lon);
-        }}
-      >
+      <LocationModalOption key={`${city.lat}/${city.lon}`} onClick={() => setLocation(city)}>
         <CrosshairsIconStyled />
-        {name}
+        {city.name}
       </LocationModalOption>
     );
   };
@@ -73,17 +63,31 @@ const LocationModalListItem = ({ setTargetLocation }: LocationModalListItemProps
 const LocationModal = () => {
   const [searchField, setSearchField] = React.useState("");
   const { setTargetLocation, i18nName } = useAppContextDefaultLocation();
+  const { closeModals } = useAppContextModal();
+  const [lastLocations, selectLastLocation] = useLastLocations();
+
   const filteredCities = mockCities
     .filter(head(6))
     .filter((city) => city.name !== i18nName)
     .filter((city) => city.name.includes(searchField));
+
+  const setLocation = React.useCallback(
+    (location: City) => {
+      setTargetLocation(location.name, location.lat, location.lon);
+      selectLastLocation(location);
+      closeModals();
+    },
+    [setTargetLocation, selectLastLocation, closeModals]
+  );
+
   return (
     <LocationWrapper>
       <DrawerHeader title={"Location"} />
       <LocationModalContent>
+        <LastLocations locations={lastLocations} />
         <LocationModalInput onChange={(e) => setSearchField(e.target.value)} value={searchField} />
         <LocationModalListContainer>
-          {filteredCities.length > 0 ? filteredCities.map(LocationModalListItem({ setTargetLocation })) : "No results"}
+          {filteredCities.length > 0 ? filteredCities.map(LocationModalListItem({ setLocation })) : "No results"}
         </LocationModalListContainer>
       </LocationModalContent>
     </LocationWrapper>
