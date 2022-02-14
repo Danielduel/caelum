@@ -7,8 +7,12 @@ import { TodayWeatherPage } from "./pages/TodayWeatherPage";
 import { NextDaysForecastPage } from "./pages/NextDaysForecastPage";
 import { ModalRootStyles } from "./portals/ModalRootStyles";
 import { useAppContextModal } from "./hooks/useAppContextModal";
+import initI18n from "./common/initI18n";
 
-moment.locale("en");
+const EN = "en";
+
+moment.locale(EN);
+initI18n(EN);
 
 const App: React.FunctionComponent = () => {
   const { isModalOpen } = useAppContextModal();

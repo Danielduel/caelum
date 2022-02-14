@@ -1,0 +1,22 @@
+{
+  "hourly": "Hourly",
+  "location": "Location",
+  "lastLocations": "Last locations:",
+  "noResults": "No results",
+  "weather": "weather",
+  "temp": "temp",
+  "wind": "wind",
+  "pressure": "pressure",
+  "rain": "rain",
+  "sunrise": "sunrise",
+  "sunset": "sunset",
+  "windDescr_1": "no wind",
+  "windDescr_2": "light wind",
+  "windDescr_3": "medium wind",
+  "windDescr_4": "strong wind",
+  "windDescr_5": "very strong wind",
+  "windDescr_6": "storm",
+  "windDescr_7": "strong storm",
+  "windDescr_8": "violent storm",
+  "windDescr_9": "hurricane"
+}
