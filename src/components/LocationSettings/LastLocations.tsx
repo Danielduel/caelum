@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { CrosshairsIcon } from "../Icon/Icons";
 import { City } from "../../assets/mock/mockCities";
+import { useTranslation } from "react-i18next";
 
 const LastLocationsContainer = styled.div`
   margin-bottom: 1rem;
@@ -50,9 +51,10 @@ type LastLocationsProps = {
 
 export const LastLocations = ({ locations }: LastLocationsProps): JSX.Element => {
   const [city1, city2, city3, city4] = locations;
+  const { t } = useTranslation();
   return (
     <LastLocationsContainer>
-      <LastLocationsHeader>Last locations:</LastLocationsHeader>
+      <LastLocationsHeader>{t("lastLocations")}</LastLocationsHeader>
       <LastLocationsRow>
         <LastLocationsItem location={city1} />
         <LastLocationsItem location={city2} />

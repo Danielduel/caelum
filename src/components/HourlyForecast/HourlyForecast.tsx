@@ -6,6 +6,7 @@ import { FormattedHour, FormattedTemperature } from "../ValueFormatters";
 import { WeatherInfoArrWeatherIcon } from "../WeatherIcon";
 import { HorizontalList, HorizontalListItem } from "../layouts/HorizontalList";
 import { TodayWeatherPageProps } from "../../pages/TodayWeatherPage";
+import { useTranslation } from "react-i18next";
 
 const HourlyForecastWrapper = styled.div`
   background-color: #ffffff7d;
@@ -65,6 +66,7 @@ const HourlyItem = (forecast: HourWeatherForecast) => {
 
 type HourlyForecastProps = Pick<TodayWeatherPageProps, "hourForecast">;
 const HourlyForecast = ({ hourForecast }: HourlyForecastProps) => {
+  const { t } = useTranslation();
   const forecast = React.useMemo(
     () => hourForecast.filter(skipFirst()).filter(head(8)).flatMap(HourlyItem),
     [hourForecast]
@@ -72,7 +74,7 @@ const HourlyForecast = ({ hourForecast }: HourlyForecastProps) => {
 
   return (
     <HourlyForecastWrapper>
-      <HourlyForecastHeading>Hourly</HourlyForecastHeading>
+      <HourlyForecastHeading>{t("hourly")}</HourlyForecastHeading>
       <StyledHorizontalList>{forecast}</StyledHorizontalList>
     </HourlyForecastWrapper>
   );

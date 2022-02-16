@@ -12,6 +12,7 @@ import {
 import React from "react";
 import { WindDirectionIcon } from "../Icon/Icons";
 import { DrawerHeader } from "../DrawerHeader/DrawerHeader";
+import { useTranslation } from "react-i18next";
 
 const DailyWeatherDetailsWrapper = styled.div`
   position: relative;
@@ -53,31 +54,32 @@ export const DailyWeatherDetails = ({ forecast }: DailyWeatherDetailsProps): JSX
   const date = React.useMemo(() => moment(forecast.dt * 1000).format("dddd, DD.M"), [forecast]);
   const { wind_speed, wind_deg, pressure, pop, sunrise, sunset } = forecast;
   const dayTemperature = forecast.temp.day;
+  const { t } = useTranslation();
   return (
     <DailyWeatherDetailsWrapper>
       <DrawerHeader title={date} />
-      <DetailItem label={"weather"}>
+      <DetailItem label={t("weather")}>
         <WeatherDescription>{forecastWeatherZeroDescription(forecast)}</WeatherDescription>
       </DetailItem>
-      <DetailItem label={"temp"}>
+      <DetailItem label={t("temp")}>
         <FormattedTemperature value={dayTemperature} />
       </DetailItem>
-      <DetailItem label={"wind"}>
+      <DetailItem label={t("wind")}>
         <WindDirectionWrapper>
           <WindDirectionIconStyled deg={wind_deg} />
         </WindDirectionWrapper>
         <DetailValue>{wind_speed}</DetailValue>m/s
       </DetailItem>
-      <DetailItem label={"pressure"}>
+      <DetailItem label={t("pressure")}>
         <DetailValue>{pressure}</DetailValue>hPa
       </DetailItem>
-      <DetailItem label={"rain"}>
+      <DetailItem label={t("rain")}>
         <DetailValue>{pop}</DetailValue>%
       </DetailItem>
-      <DetailItem label={"sunrise"}>
+      <DetailItem label={t("sunrise")}>
         <FormattedTime value={sunrise} />
       </DetailItem>
-      <DetailItem label={"sunset"}>
+      <DetailItem label={t("sunset")}>
         <FormattedTime value={sunset} />
       </DetailItem>
     </DailyWeatherDetailsWrapper>

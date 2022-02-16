@@ -8,6 +8,7 @@ import { DrawerHeader } from "../DrawerHeader/DrawerHeader";
 import { useAppContextModal } from "../../hooks/useAppContextModal";
 import { LastLocations } from "./LastLocations";
 import { useLastLocations } from "../../hooks/useLastLocations";
+import { useTranslation } from "react-i18next";
 
 const LocationWrapper = styled.div``;
 
@@ -65,6 +66,7 @@ const LocationModal = () => {
   const { setTargetLocation, i18nName } = useAppContextDefaultLocation();
   const { closeModals } = useAppContextModal();
   const [lastLocations, selectLastLocation] = useLastLocations();
+  const { t } = useTranslation();
 
   const filteredCities = mockCities
     .filter(head(6))
@@ -82,12 +84,12 @@ const LocationModal = () => {
 
   return (
     <LocationWrapper>
-      <DrawerHeader title={"Location"} />
+      <DrawerHeader title={t("location")} />
       <LocationModalContent>
         <LastLocations locations={lastLocations} />
         <LocationModalInput onChange={(e) => setSearchField(e.target.value)} value={searchField} />
         <LocationModalListContainer>
-          {filteredCities.length > 0 ? filteredCities.map(LocationModalListItem({ setLocation })) : "No results"}
+          {filteredCities.length > 0 ? filteredCities.map(LocationModalListItem({ setLocation })) : t("noResults")}
         </LocationModalListContainer>
       </LocationModalContent>
     </LocationWrapper>
