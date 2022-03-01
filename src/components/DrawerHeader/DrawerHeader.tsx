@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { ArrowRightIconStyled, ArrowRightIconWrapper, ItemDateInfo } from "../DailyWeather/DailyWeather";
 import React from "react";
-import { useAppContextModal } from "../../hooks/useAppContextModal";
+import styled from "styled-components";
+import { ModalContext } from "../../AppContext";
+import { ArrowRightIconStyled, ArrowRightIconWrapper, ItemDateInfo } from "../DailyWeather/DailyWeather";
 
 const TitleContainer = styled.div`
   height: 8.125rem;
@@ -30,7 +30,7 @@ type DrawerHeaderProps = {
 };
 
 export const DrawerHeader = ({ title }: DrawerHeaderProps) => {
-  const { closeModals } = useAppContextModal();
+  const { closeModals } = ModalContext.wrappedHook();
   return (
     <TitleContainer>
       <ArrowRightIconWrapperRestyled onClick={closeModals}>

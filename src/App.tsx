@@ -2,12 +2,11 @@ import "moment/locale/pl";
 import React from "react";
 import moment from "moment";
 import { AppContainer } from "./components/layouts/AppContainer";
-import { useAppContextDefaultLocation } from "./hooks/useAppContextDefaultLocation";
 import { TodayWeatherPage } from "./pages/TodayWeatherPage";
 import { NextDaysForecastPage } from "./pages/NextDaysForecastPage";
 import { ModalRootStyles } from "./portals/ModalRootStyles";
-import { useAppContextModal } from "./hooks/useAppContextModal";
 import initI18n from "./common/initI18n";
+import { ModalContext, TargetLocationContext } from "./AppContext";
 
 const EN = "en";
 
@@ -15,9 +14,9 @@ moment.locale(EN);
 initI18n(EN);
 
 const App: React.FunctionComponent = () => {
-  const { isModalOpen } = useAppContextModal();
+  const { isModalOpen } = ModalContext.wrappedHook();
+  const { fetched, rawData } = TargetLocationContext.wrappedHook();
   const nextDaysForecastPageRef = React.useRef<HTMLDivElement | null>(null);
-  const { fetched, rawData } = useAppContextDefaultLocation();
   const [alert] = rawData?.alerts || [];
 
   if (!fetched) {

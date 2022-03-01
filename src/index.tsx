@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import App from "./App";
-import { setupAppContextProvider } from "./AppContext";
 import "./index.css";
+import AppProvider from "./AppContext";
 
 // This enables HMR
 // TODO: check if it affects prod build
@@ -10,11 +10,9 @@ if ((module as unknown as Record<string, unknown>)?.hot) {
   (module as unknown as Record<"hot", { accept: () => void }>)?.hot?.accept();
 }
 
-const WrappedAppContextProvider = setupAppContextProvider();
-
 ReactDOM.render(
-  <WrappedAppContextProvider>
+  <AppProvider>
     <App />
-  </WrappedAppContextProvider>,
+  </AppProvider>,
   document.getElementById("root")
 );

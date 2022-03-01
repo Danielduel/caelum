@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
+import { ModalContext } from "../../AppContext";
 import { WithChildren, WithForwardRefDiv } from "../../common/helpers";
-import { useAppContextModal } from "../../hooks/useAppContextModal";
 
 type PageContainerWrapperProps = {
   isModalOpen: boolean;
@@ -22,7 +22,7 @@ const PageContainerWrapper = styled.div`
 `;
 
 export const PageContainer = ({ children, forwardRef }: WithChildren & WithForwardRefDiv) => {
-  const { isModalOpen } = useAppContextModal();
+  const { isModalOpen } = ModalContext.wrappedHook();
   return (
     <PageContainerWrapper ref={forwardRef} isModalOpen={isModalOpen}>
       {children}

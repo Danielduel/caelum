@@ -2,8 +2,8 @@ import React from "react";
 import cn from "classnames";
 import { StyledClassName } from "../common/helpers";
 import { WeatherInfo } from "../models/OpenWeatherAPI";
+import { WeatherIconsConfigContext } from "../AppContext";
 import { WeatherIconsConfig } from "../hooks/useWeatherIconsConfig";
-import { useAppContextWeatherIconsConfig } from "../hooks/useAppContextWeatherIconsConfig";
 
 const getDayNightIcon = (iconsConfig: WeatherIconsConfig, weatherCode: number) => {
   const now = new Date().getHours();
@@ -18,7 +18,7 @@ type WeatherIconProps = StyledClassName & {
   weatherCode: number;
 };
 export const WeatherIcon = ({ weatherCode, className }: WeatherIconProps): JSX.Element => {
-  const { weatherIconsConfig, fetched } = useAppContextWeatherIconsConfig();
+  const { weatherIconsConfig, fetched } = WeatherIconsConfigContext.wrappedHook();
   if (!fetched) {
     return <></>;
   }

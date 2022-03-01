@@ -5,7 +5,7 @@ import { PageContainer } from "../components/layouts/PageContainer";
 import { DailyWeather } from "../components/DailyWeather/DailyWeather";
 import { ModalPortal } from "../portals/ModalPortal";
 import { DailyWeatherDetails } from "../components/DailyWeather/DailyWeatherDetails";
-import { useAppContextModal } from "../hooks/useAppContextModal";
+import { ModalContext } from "../AppContext";
 
 export const DailyWeatherListContainer = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export type NextDaysPageProps = {
 };
 
 export const NextDaysForecastPage = ({ daily, pageRef }: NextDaysPageProps) => {
-  const { openModal } = useAppContextModal();
+  const { openModal } = ModalContext.wrappedHook();
   const [selectedDay, _setSelectedDay] = React.useState<DayWeatherForecast>(daily[0]);
   const setSelectedDay = React.useCallback(
     (f: DayWeatherForecast) => {

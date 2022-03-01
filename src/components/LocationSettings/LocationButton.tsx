@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { CrosshairsIcon } from "../Icon/Icons";
-import { useAppContextDefaultLocation } from "../../hooks/useAppContextDefaultLocation";
-import { useAppContextModal } from "../../hooks/useAppContextModal";
+import { ModalContext, TargetLocationContext } from "../../AppContext";
 
 const NavigationFabContainer = styled.div`
   position: absolute;
@@ -31,8 +30,8 @@ const CrosshairsIconStyled = styled(CrosshairsIcon)`
 `;
 
 const LocationButton = () => {
-  const { openModal } = useAppContextModal();
-  const { i18nName } = useAppContextDefaultLocation();
+  const { openModal } = ModalContext.wrappedHook();
+  const { i18nName } = TargetLocationContext.wrappedHook();
   return (
     <>
       <NavigationFabContainer>
