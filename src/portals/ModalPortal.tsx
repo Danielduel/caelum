@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { ModalContext } from "../AppContext";
 import { MODAL_NAME } from "../common/constants";
 import { WithChildren } from "../common/helpers";
-import { useAppContextModal } from "../hooks/useAppContextModal";
 
 const _modalRoot = document.getElementById("modal_root") as HTMLDivElement;
 if (!_modalRoot) {
@@ -16,7 +16,7 @@ type ModalPortalProps = WithChildren & {
   modalName: MODAL_NAME;
 };
 const ModalPortal = ({ modalName, children }: ModalPortalProps) => {
-  const { _actualOpenModalName } = useAppContextModal();
+  const { _actualOpenModalName } = ModalContext.wrappedHook();
   const element = React.useMemo(() => document.createElement("div"), []);
   const removeElementFromModalRoot = () => {
     const isChildOfModalRoot = modalRoot.contains(element);

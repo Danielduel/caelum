@@ -3,12 +3,11 @@ import styled from "styled-components";
 import { head } from "../../common/helpers";
 import { CrosshairsIcon } from "../Icon/Icons";
 import { City, mockCities } from "../../assets/mock/mockCities";
-import { useAppContextDefaultLocation } from "../../hooks/useAppContextDefaultLocation";
 import { DrawerHeader } from "../DrawerHeader/DrawerHeader";
-import { useAppContextModal } from "../../hooks/useAppContextModal";
 import { LastLocations } from "./LastLocations";
 import { useLastLocations } from "../../hooks/useLastLocations";
 import { useTranslation } from "react-i18next";
+import { ModalContext, TargetLocationContext } from "../../AppContext";
 
 const LocationWrapper = styled.div``;
 
@@ -63,8 +62,8 @@ const LocationModalListItem = ({ setLocation }: LocationModalListItemProps) => {
 
 const LocationModal = () => {
   const [searchField, setSearchField] = React.useState("");
-  const { setTargetLocation, i18nName } = useAppContextDefaultLocation();
-  const { closeModals } = useAppContextModal();
+  const { setTargetLocation, i18nName } = TargetLocationContext.wrappedHook();
+  const { closeModals } = ModalContext.wrappedHook();
   const [lastLocations, selectLastLocation] = useLastLocations();
   const { t } = useTranslation();
 
