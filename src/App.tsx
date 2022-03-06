@@ -21,7 +21,7 @@ const App: React.FunctionComponent = () => {
   const [alert] = rawData?.alerts || [];
 
   if (!fetched) {
-    return <AppContainer>Loading...</AppContainer>;
+    return <AppContainer data-testid={"app-container"}>Loading...</AppContainer>;
   }
 
   if (!rawData) {
