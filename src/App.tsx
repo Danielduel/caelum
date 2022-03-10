@@ -21,7 +21,7 @@ const App: React.FunctionComponent = () => {
   const [alert] = rawData?.alerts || [];
 
   if (!fetched) {
-    return <AppContainer data-testid={"app-container"}>Loading...</AppContainer>;
+    return <AppContainer>Loading...</AppContainer>;
   }
 
   if (!rawData) {
@@ -29,7 +29,7 @@ const App: React.FunctionComponent = () => {
   }
 
   return (
-    <AppContainer>
+    <AppContainer data-testid={"app-container"}>
       <ModalRootStyles isModalOpen={isModalOpen} />
       <TodayWeatherPage
         nextPageRef={nextDaysForecastPageRef}

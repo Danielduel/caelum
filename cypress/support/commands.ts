@@ -35,3 +35,7 @@ addMatchImageSnapshotCommand({
 Cypress.Commands.add("getByTestId", (testId: string) => {
   return cy.get(`[data-testid=${testId}]`);
 });
+
+Cypress.Commands.add("getByTestIdLike", (testId: string) => {
+  return cy.get(`[data-testid*=${testId}]`);
+});
