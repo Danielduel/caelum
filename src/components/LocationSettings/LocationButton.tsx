@@ -35,7 +35,7 @@ const LocationButton = () => {
   return (
     <>
       <NavigationFabContainer>
-        <LocationContainer onClick={() => openModal("LOCATION_MODAL")}>
+        <LocationContainer data-testid={"location-button"} onClick={() => openModal("LOCATION_MODAL")}>
           <CrosshairsIconStyled />
           <LocationText>{i18nName}</LocationText>
         </LocationContainer>

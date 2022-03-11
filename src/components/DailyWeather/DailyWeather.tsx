@@ -84,7 +84,10 @@ export const DailyWeather = ({ forecast, setSelectedDay }: DailyWeatherProps): J
       <IconContainer>
         <StyledWeatherInfoArrWeatherIcon weatherInfoArr={forecast.weather} />
       </IconContainer>
-      <ArrowRightIconWrapper onClick={() => setSelectedDay(forecast)}>
+      <ArrowRightIconWrapper
+        data-testid={"open-details-button-" + forecast.dt}
+        onClick={() => setSelectedDay(forecast)}
+      >
         <ArrowRightIconStyled />
       </ArrowRightIconWrapper>
     </DailyWeatherListItem>

@@ -28,7 +28,7 @@ const App: React.FunctionComponent = () => {
   }
 
   return (
-    <AppContainer>
+    <AppContainer data-testid={"app-container"}>
       <ModalRootStyles isModalOpen={isModalOpen} />
       <TodayWeatherPage
         nextPageRef={nextDaysForecastPageRef}
