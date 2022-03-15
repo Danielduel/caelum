@@ -1,0 +1,56 @@
+ID;main;description;day icon;night icon
+200;Thunderstorm;thunderstorm with light rain;wi-day-storm-showers;wi-night-storm-showers
+201;Thunderstorm;thunderstorm with rain;wi-day-sleet-storm;wi-night-sleet-storm
+202;Thunderstorm;thunderstorm with heavy rain;wi-day-thunderstorm;wi-night-thunderstorm
+210;Thunderstorm;light thunderstorm;wi-day-lightning;wi-night-lightning
+211;Thunderstorm;thunderstorm;wi-day-lightning;wi-night-lightning
+212;Thunderstorm;heavy thunderstorm;wi-day-lightning;wi-night-lightning
+221;Thunderstorm;ragged thunderstorm;wi-day-lightning;wi-night-lightning
+230;Thunderstorm;thunderstorm with light drizzle;wi-day-storm-showers;wi-night-storm-showers
+231;Thunderstorm;thunderstorm with drizzle;wi-day-storm-showers;wi-night-storm-showers
+232;Thunderstorm;thunderstorm with heavy drizzle;wi-day-storm-showers;wi-night-storm-showers
+300;Drizzle;light intensity drizzle;wi-day-sleet;wi-night-sleet
+301;Drizzle;drizzle;wi-day-sleet;wi-night-sleet
+302;Drizzle;heavy intensity drizzle;wi-day-sleet;wi-night-sleet
+310;Drizzle;light intensity drizzle rain;wi-day-showers;wi-night-showers
+311;Drizzle;drizzle rain;wi-day-showers;wi-night-showers
+312;Drizzle;heavy intensity drizzle rain;wi-day-showers;wi-night-showers
+313;Drizzle;shower rain and drizzle;wi-day-rain;wi-night-rain
+314;Drizzle;heavy shower rain and drizzle;wi-day-rain;wi-night-rain
+321;Drizzle;shower drizzle;wi-day-rain;wi-night-rain
+500;Rain;light rain;wi-day-showers;wi-night-showers
+501;Rain;moderate rain;wi-day-showers;wi-night-showers
+502;Rain;heavy intensity rain;wi-day-showers;wi-night-showers
+503;Rain;very heavy rain;wi-day-rain;wi-night-rain
+504;Rain;extreme rain;wi-day-rain;wi-night-rain
+511;Rain;freezing rain;wi-snowflake-cold;wi-snowflake-cold
+520;Rain;light intensity shower rain;wi-day-showers;wi-night-showers
+521;Rain;shower rain;wi-day-showers;wi-night-showers
+522;Rain;heavy intensity shower rain;wi-day-rain;wi-night-rain
+531;Rain;ragged shower rain;wi-day-rain;wi-night-rain
+600;Snow;light snow;wi-day-snow;wi-night-snow
+601;Snow;Snow;wi-day-snow;wi-night-snow
+602;Snow;Heavy snow;wi-day-snow;wi-night-snow
+611;Snow;Sleet;wi-day-sleet;wi-night-sleet
+612;Snow;Light shower sleet;wi-day-sleet;wi-night-sleet
+613;Snow;Shower sleet;wi-day-sleet;wi-night-sleet
+615;Snow;Light rain and snow;wi-day-sleet;wi-night-sleet
+616;Snow;Rain and snow;wi-day-sleet;wi-night-sleet
+620;Snow;Light shower snow;wi-day-sleet;wi-night-sleet
+621;Snow;Shower snow;wi-day-sleet;wi-night-sleet
+622;Snow;Heavy shower snow;wi-day-sleet;wi-night-sleet
+701;Mist;mist;wi-day-fog;wi-night-fog
+711;Smoke;Smoke;wi-day-fog;wi-night-fog
+721;Haze;Haze;wi-day-fog;wi-night-fog
+731;Dust;sand/ dust whirls;wi-sandstorm;wi-sandstorm
+741;Fog;fog;wi-fog;wi-fog
+751;Sand;sand;wi-sandstorm;wi-sandstorm
+761;Dust;dust;wi-dust;wi-dust
+762;Ash;volcanic ash;wi-volcano;wi-volcano
+771;Squall;squalls;wi-strong-wind;wi-strong-wind
+781;Tornado;tornado;wi-tornado;wi-tornado
+800;Clear;clear sky;wi-day-sunny;wi-night-clear
+801;Clouds;few clouds: 11-25%;wi-day-sunny-overcast;wi-night-partly-cloudy
+802;Clouds;scattered clouds: 25-50%;wi-day-cloudy;wi-night-cloudy
+803;Clouds;broken clouds: 51-84%;wi-day-cloudy;wi-night-cloudy
+804;Clouds;overcast clouds: 85-100%;wi-cloudy;wi-cloudy
