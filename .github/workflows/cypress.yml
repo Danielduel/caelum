@@ -1,0 +1,29 @@
+name: Cypress Tests using Cypress Docker Image
+
+on: [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    container: cypress/included:3.4.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Install
+        run: yarn install
+      
+      - name: Cypress install
+        run: yarn add cypress
+
+
+      - name: Build
+        run: yarn build
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          # Specify Browser since container image is compile with Firefox
+          browser: firefox
