@@ -33,3 +33,10 @@ export const prop =
   (props: T) => {
     return props[attrName] || defaultValue;
   };
+export const debounce = <T extends (...args: any[]) => void>(fn: T, timeout: number): T => {
+  let timer: NodeJS.Timeout;
+  return ((...args: Parameters<T>) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(args), timeout);
+  }) as T;
+};

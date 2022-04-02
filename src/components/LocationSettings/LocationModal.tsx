@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { head } from "../../common/helpers";
+import { debounce, head } from "../../common/helpers";
 import { CrosshairsIcon } from "../Icon/Icons";
 import { City, mockCities } from "../../assets/mock/mockCities";
 import { DrawerHeader } from "../DrawerHeader/DrawerHeader";
@@ -8,6 +8,7 @@ import { LastLocations } from "./LastLocations";
 import { useLastLocations } from "../../hooks/useLastLocations";
 import { useTranslation } from "react-i18next";
 import { ModalContext, TargetLocationContext } from "../../AppContext";
+import { useGeocoding } from "../../hooks/useGeocoding";
 
 const LocationWrapper = styled.div``;
 
@@ -65,6 +66,7 @@ const LocationModal = () => {
   const { setTargetLocation, i18nName } = TargetLocationContext.wrappedHook();
   const { closeModals } = ModalContext.wrappedHook();
   const [lastLocations, selectLastLocation] = useLastLocations();
+  const [rawData, fetched, fetchData] = useGeocoding(searchField);
   const { t } = useTranslation();
 
   const filteredCities = mockCities
@@ -81,14 +83,25 @@ const LocationModal = () => {
     [setTargetLocation, selectLastLocation, closeModals]
   );
 
+  const onInputChange = React.useCallback(
+    (inputValue: string) => {
+      setSearchField(inputValue);
+      if (inputValue.length > 3) {
+        fetchData();
+      }
+    },
+    [setSearchField, useGeocoding]
+  );
+
   return (
     <LocationWrapper>
       <DrawerHeader title={t("location")} />
       <LocationModalContent>
         <LastLocations locations={lastLocations} />
-        <LocationModalInput onChange={(e) => setSearchField(e.target.value)} value={searchField} />
+        <LocationModalInput onChange={(e) => onInputChange(e.target.value)} value={searchField} />
         <LocationModalListContainer>
           {filteredCities.length > 0 ? filteredCities.map(LocationModalListItem({ setLocation })) : t("noResults")}
+          {rawData}
         </LocationModalListContainer>
       </LocationModalContent>
     </LocationWrapper>
