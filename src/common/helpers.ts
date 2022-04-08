@@ -40,3 +40,5 @@ export const debounce = <T extends (...args: any[]) => void>(fn: T, timeout: num
     timer = setTimeout(() => fn(args), timeout);
   }) as T;
 };
+export const uniqueBy = <T>(items: T[], compareFn: (item1: T, item2: T) => boolean): T[] =>
+  items.filter((item1, idx) => items.findIndex((item2) => compareFn(item1, item2)) == idx);

@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { debounce, head } from "../../common/helpers";
+import { debounce, uniqueBy } from "../../common/helpers";
 import { CrosshairsIcon } from "../Icon/Icons";
-import { City, mockCities } from "../../assets/mock/mockCities";
 import { DrawerHeader } from "../DrawerHeader/DrawerHeader";
 import { LastLocations } from "./LastLocations";
 import { useLastLocations } from "../../hooks/useLastLocations";
 import { useTranslation } from "react-i18next";
 import { ModalContext, TargetLocationContext } from "../../AppContext";
 import { useGeocoding } from "../../hooks/useGeocoding";
+import { GeoLocation } from "../../models/GeocodingAPI";
 
 const LocationWrapper = styled.div``;
 
@@ -46,37 +46,50 @@ const LocationModalOption = styled.div`
 `;
 
 type LocationModalListItemProps = {
-  setLocation: (location: City) => void;
+  setLocation: (location: GeoLocation) => void;
+};
+
+type LocationModalListProps = {
+  setLocation: (location: GeoLocation) => void;
+  cities: GeoLocation[];
 };
 
 const LocationModalListItem = ({ setLocation }: LocationModalListItemProps) => {
-  const _LocationModalListItem = (city: City) => {
+  const _LocationModalListItem = (location: GeoLocation) => {
     return (
-      <LocationModalOption key={`${city.lat}/${city.lon}`} onClick={() => setLocation(city)}>
+      <LocationModalOption key={`${location.lat}/${location.lon}`} onClick={() => setLocation(location)}>
         <CrosshairsIconStyled />
-        {city.name}
+        {location.name} {location.state} [{location.country}]
       </LocationModalOption>
     );
   };
   return _LocationModalListItem;
 };
 
+const LocationModalList = ({ cities, setLocation }: LocationModalListProps): JSX.Element => {
+  const { t } = useTranslation();
+  const compareFn = (item1: GeoLocation, item2: GeoLocation) =>
+    item1.name === item2.name && item1.state === item2.state && item1.country === item2.country;
+  if (!cities || cities.length <= 0) {
+    return t("noResults");
+  }
+  const items = uniqueBy(cities, compareFn).map(LocationModalListItem({ setLocation }));
+  return <LocationModalListContainer>{items}</LocationModalListContainer>;
+};
+
 const LocationModal = () => {
   const [searchField, setSearchField] = React.useState("");
-  const { setTargetLocation, i18nName } = TargetLocationContext.wrappedHook();
+  const { setTargetLocation } = TargetLocationContext.wrappedHook();
   const { closeModals } = ModalContext.wrappedHook();
   const [lastLocations, selectLastLocation] = useLastLocations();
-  const [rawData, fetched, fetchData] = useGeocoding(searchField);
+  const [cities, , fetchData] = useGeocoding();
   const { t } = useTranslation();
 
-  const filteredCities = mockCities
-    .filter(head(6))
-    .filter((city) => city.name !== i18nName)
-    .filter((city) => city.name.includes(searchField));
+  const debouncedFetchData = React.useCallback(debounce(fetchData, 700), [debounce, fetchData]);
 
   const setLocation = React.useCallback(
-    (location: City) => {
-      setTargetLocation(location.name, location.lat, location.lon);
+    (location: GeoLocation) => {
+      setTargetLocation(location.name, location.lat.toString(), location.lon.toString());
       selectLastLocation(location);
       closeModals();
     },
@@ -87,22 +100,19 @@ const LocationModal = () => {
     (inputValue: string) => {
       setSearchField(inputValue);
       if (inputValue.length > 3) {
-        fetchData();
+        debouncedFetchData(inputValue);
       }
     },
-    [setSearchField, useGeocoding]
+    [setSearchField, debouncedFetchData]
   );
 
   return (
     <LocationWrapper>
       <DrawerHeader title={t("location")} />
       <LocationModalContent>
-        <LastLocations locations={lastLocations} />
+        <LastLocations setLocation={setLocation} locations={lastLocations} />
         <LocationModalInput onChange={(e) => onInputChange(e.target.value)} value={searchField} />
-        <LocationModalListContainer>
-          {filteredCities.length > 0 ? filteredCities.map(LocationModalListItem({ setLocation })) : t("noResults")}
-          {rawData}
-        </LocationModalListContainer>
+        <LocationModalList setLocation={setLocation} cities={cities || []} />
       </LocationModalContent>
     </LocationWrapper>
   );

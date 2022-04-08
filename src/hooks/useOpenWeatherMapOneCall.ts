@@ -14,22 +14,13 @@ type OpenWeatherOneCallParams = {
   units: "metric";
 };
 
-const getUrl = ({ lat, lon, exclude, units }: OpenWeatherOneCallParams) => {
-  // TODO helper for that?
-  return (
-    openWeatherEndpoint +
-    "?" +
-    `lat=${lat}&` +
-    `lon=${lon}&` +
-    `exclude=${exclude.join(",")}&` +
-    `units=${units}&` +
-    `appid=${APP_ID}`
+function useOpenWeatherMapOneCall() {
+  const getUrl = React.useCallback(
+    ({ lat, lon, exclude, units }: OpenWeatherOneCallParams) =>
+      `${openWeatherEndpoint}?lat=${lat}&lon=${lon}&exclude=${exclude.join(",")}&units=${units}&appid=${APP_ID}`,
+    [openWeatherEndpoint, APP_ID]
   );
-};
-
-function useOpenWeatherMapOneCall(params: OpenWeatherOneCallParams) {
-  const url = React.useMemo(() => getUrl(params), [params]);
-  return useFetchData<WeatherData>(url);
+  return useFetchData<WeatherData, [OpenWeatherOneCallParams]>(getUrl);
 }
 
 export { useOpenWeatherMapOneCall };
