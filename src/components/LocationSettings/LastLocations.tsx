@@ -15,11 +15,18 @@ const LastLocationsHeader = styled.div`
 
 const LastLocationsRow = styled.div`
   display: flex;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const LastLocationsItemWrapper = styled.div`
   flex: 1;
-  padding: 10px;
+  padding: 5px 10px;
+  margin: 5px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 16px;
   white-space: nowrap;
   overflow: hidden;
   display: flex;

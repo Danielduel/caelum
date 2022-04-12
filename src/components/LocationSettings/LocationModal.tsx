@@ -10,6 +10,8 @@ import { ModalContext, TargetLocationContext } from "../../AppContext";
 import { useGeocoding } from "../../hooks/useGeocoding";
 import { GeoLocation } from "../../models/GeocodingAPI";
 
+const MIN_CITY_NAME_LEN = 3;
+
 const LocationWrapper = styled.div``;
 
 const LocationModalContent = styled.div`
@@ -71,7 +73,7 @@ const LocationModalList = ({ cities, setLocation }: LocationModalListProps): JSX
   const compareFn = (item1: GeoLocation, item2: GeoLocation) =>
     item1.name === item2.name && item1.state === item2.state && item1.country === item2.country;
   if (!cities || cities.length <= 0) {
-    return t("noResults");
+    return <LocationModalListContainer>{t("noResults")}</LocationModalListContainer>;
   }
   const items = uniqueBy(cities, compareFn).map(LocationModalListItem({ setLocation }));
   return <LocationModalListContainer>{items}</LocationModalListContainer>;
@@ -82,7 +84,7 @@ const LocationModal = () => {
   const { setTargetLocation } = TargetLocationContext.wrappedHook();
   const { closeModals } = ModalContext.wrappedHook();
   const [lastLocations, selectLastLocation] = useLastLocations();
-  const [cities, , fetchData] = useGeocoding();
+  const [cities, fetched, fetchData] = useGeocoding();
   const { t } = useTranslation();
 
   const debouncedFetchData = React.useCallback(debounce(fetchData, 700), [debounce, fetchData]);
@@ -99,7 +101,7 @@ const LocationModal = () => {
   const onInputChange = React.useCallback(
     (inputValue: string) => {
       setSearchField(inputValue);
-      if (inputValue.length > 3) {
+      if (inputValue.length >= MIN_CITY_NAME_LEN) {
         debouncedFetchData(inputValue);
       }
     },
@@ -111,8 +113,14 @@ const LocationModal = () => {
       <DrawerHeader title={t("location")} />
       <LocationModalContent>
         <LastLocations setLocation={setLocation} locations={lastLocations} />
-        <LocationModalInput onChange={(e) => onInputChange(e.target.value)} value={searchField} />
-        <LocationModalList setLocation={setLocation} cities={cities || []} />
+        <LocationModalInput
+          onChange={(e) => onInputChange(e.target.value)}
+          value={searchField}
+          placeholder={t("cityInputPlaceholder")}
+        />
+        {searchField.length >= MIN_CITY_NAME_LEN && fetched && (
+          <LocationModalList setLocation={setLocation} cities={cities || []} />
+        )}
       </LocationModalContent>
     </LocationWrapper>
   );
