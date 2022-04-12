@@ -93,6 +93,7 @@ const LocationModal = () => {
     (location: GeoLocation) => {
       setTargetLocation(location.name, location.lat.toString(), location.lon.toString());
       selectLastLocation(location);
+      setSearchField("");
       closeModals();
     },
     [setTargetLocation, selectLastLocation, closeModals]

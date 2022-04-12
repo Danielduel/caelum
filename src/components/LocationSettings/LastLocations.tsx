@@ -46,7 +46,7 @@ type LastLocationsItemProps = {
 
 const LastLocationsItem = ({ location, setLocation }: LastLocationsItemProps): JSX.Element => {
   if (!location) {
-    return <LastLocationsItemWrapper />;
+    return <></>;
   }
   return (
     <LastLocationsItemWrapper onClick={() => setLocation(location)}>
@@ -66,7 +66,7 @@ export const LastLocations = ({ locations, setLocation }: LastLocationsProps): J
   const { t } = useTranslation();
   return (
     <LastLocationsContainer>
-      <LastLocationsHeader>{t("lastLocations")}</LastLocationsHeader>
+      {!!locations.length && <LastLocationsHeader>{t("lastLocations")}</LastLocationsHeader>}
       <LastLocationsRow>
         <LastLocationsItem setLocation={setLocation} location={city1} />
         <LastLocationsItem setLocation={setLocation} location={city2} />
