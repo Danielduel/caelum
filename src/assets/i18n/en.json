@@ -3,6 +3,7 @@
   "location": "Location",
   "lastLocations": "Last locations:",
   "noResults": "No results",
+  "cityInputPlaceholder": "Find a city...",
   "weather": "weather",
   "temp": "temp",
   "wind": "wind",

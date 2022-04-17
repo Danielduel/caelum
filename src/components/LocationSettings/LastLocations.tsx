@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CrosshairsIcon } from "../Icon/Icons";
-import { City } from "../../assets/mock/mockCities";
 import { useTranslation } from "react-i18next";
+import { GeoLocation } from "../../models/GeocodingAPI";
 
 const LastLocationsContainer = styled.div`
   margin-bottom: 1rem;
@@ -15,13 +15,23 @@ const LastLocationsHeader = styled.div`
 
 const LastLocationsRow = styled.div`
   display: flex;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const LastLocationsItemWrapper = styled.div`
   flex: 1;
-  padding: 5px;
+  padding: 5px 10px;
+  margin: 5px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 16px;
   white-space: nowrap;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 `;
 
 const CrosshairsIconStyled = styled(CrosshairsIcon)`
@@ -30,38 +40,40 @@ const CrosshairsIconStyled = styled(CrosshairsIcon)`
 `;
 
 type LastLocationsItemProps = {
-  location: City | undefined;
+  location: GeoLocation | undefined;
+  setLocation: (location: GeoLocation) => void;
 };
 
-const LastLocationsItem = ({ location }: LastLocationsItemProps): JSX.Element => {
+const LastLocationsItem = ({ location, setLocation }: LastLocationsItemProps): JSX.Element => {
   if (!location) {
-    return <LastLocationsItemWrapper />;
+    return <></>;
   }
   return (
-    <LastLocationsItemWrapper>
+    <LastLocationsItemWrapper onClick={() => setLocation(location)}>
       <CrosshairsIconStyled />
-      <span>{location.name}</span>
+      <div>{location.name}</div>
     </LastLocationsItemWrapper>
   );
 };
 
 type LastLocationsProps = {
-  locations: City[];
+  locations: GeoLocation[];
+  setLocation: (location: GeoLocation) => void;
 };
 
-export const LastLocations = ({ locations }: LastLocationsProps): JSX.Element => {
+export const LastLocations = ({ locations, setLocation }: LastLocationsProps): JSX.Element => {
   const [city1, city2, city3, city4] = locations;
   const { t } = useTranslation();
   return (
     <LastLocationsContainer>
-      <LastLocationsHeader>{t("lastLocations")}</LastLocationsHeader>
+      {!!locations.length && <LastLocationsHeader>{t("lastLocations")}</LastLocationsHeader>}
       <LastLocationsRow>
-        <LastLocationsItem location={city1} />
-        <LastLocationsItem location={city2} />
+        <LastLocationsItem setLocation={setLocation} location={city1} />
+        <LastLocationsItem setLocation={setLocation} location={city2} />
       </LastLocationsRow>
       <LastLocationsRow>
-        <LastLocationsItem location={city3} />
-        <LastLocationsItem location={city4} />
+        <LastLocationsItem setLocation={setLocation} location={city3} />
+        <LastLocationsItem setLocation={setLocation} location={city4} />
       </LastLocationsRow>
     </LastLocationsContainer>
   );
