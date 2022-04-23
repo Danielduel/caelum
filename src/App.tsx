@@ -44,7 +44,7 @@ const App: React.FunctionComponent = () => {
       </MobileContainer>
       <DesktopContainer>
         <AppContainer data-testid={"app-container-desktop"}>
-          <DesktopDashboardPage />
+          <DesktopDashboardPage currentWeather={rawData.current} />
         </AppContainer>
       </DesktopContainer>
     </>
