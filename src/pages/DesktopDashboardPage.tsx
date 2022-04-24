@@ -5,7 +5,9 @@ import { WindIconStyled } from "../components/RainWindInfo/StyledIcons";
 import { WeatherIcon } from "../components/WeatherIcon";
 import { PrecipitationIcon } from "../components/RainWindInfo/PrecipitationIcon";
 import { CurrentWeatherForecast } from "../models/OpenWeatherAPI";
-import { rainAmount, snowAmount, weatherZeroId } from "../common/helpers";
+import { rainAmount, snowAmount, weatherZeroDescription, weatherZeroId } from "../common/helpers";
+import { BasicInfoDescription, BasicInfoTemperature } from "../components/BasicInfo/BasicInfo";
+import { WindDescription } from "../components/RainWindInfo/WindDescription";
 
 const PageContainer = styled.div`
   display: flex;
@@ -28,7 +30,7 @@ const DesktopDashboardContent = styled.div`
 `;
 
 const WeatherIconStyled = styled(WeatherIcon)`
-  font-size: 3rem;
+  font-size: 4rem;
 `;
 
 type DesktopDashboardPageProps = {
@@ -36,7 +38,7 @@ type DesktopDashboardPageProps = {
 };
 
 export const DesktopDashboardPage = ({ currentWeather }: DesktopDashboardPageProps): JSX.Element => {
-  const { temp, weather } = currentWeather;
+  const { temp, weather, wind_speed } = currentWeather;
   const rain = rainAmount(currentWeather);
   const snow = snowAmount(currentWeather);
   return (
@@ -45,11 +47,14 @@ export const DesktopDashboardPage = ({ currentWeather }: DesktopDashboardPagePro
       <DesktopDashboardContent>
         <DashboardClock />
         <DashboardSingleItem icon={<WeatherIconStyled weatherCode={weatherZeroId(weather)} />}>
-          temp: {temp}
+          <BasicInfoTemperature value={temp} />
+          <BasicInfoDescription>{weatherZeroDescription(weather)}</BasicInfoDescription>
         </DashboardSingleItem>
-        <DashboardSingleItem icon={<WindIconStyled />}>wind</DashboardSingleItem>
         <DashboardSingleItem icon={<PrecipitationIcon temperature={temp} rain={rain} snow={snow} />}>
-          rain
+          {rain + snow}mm
+        </DashboardSingleItem>
+        <DashboardSingleItem icon={<WindIconStyled />}>
+          <WindDescription windSpeed={wind_speed} />
         </DashboardSingleItem>
       </DesktopDashboardContent>
     </PageContainer>

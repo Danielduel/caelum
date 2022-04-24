@@ -16,14 +16,14 @@ const BasicInfoData = styled.div`
 const BasicInfoIcon = styled(WeatherIcon)`
   font-size: 6em;
 `;
-const BasicInfoTemperature = styled(FormattedTemperature)`
+export const BasicInfoTemperature = styled(FormattedTemperature)`
   font-size: 3.5em;
   font-weight: 500;
   ${FormattedTemperatureUnit} {
     font-size: 0.75em;
   }
 `;
-const BasicInfoDescription = styled.div`
+export const BasicInfoDescription = styled.div`
   font-size: 2em;
   font-weight: 500;
 
