@@ -1,6 +1,6 @@
 describe("Mobile app", () => {
   beforeEach(() => {
-    cy.intercept("GET", "https://api.openweathermap.org/data/2.5/onecall*", {fixture: "weather-data.json"}).as(
+    cy.intercept("GET", "https://api.openweathermap.org/data/2.5/onecall*", { fixture: "weather-data.json" }).as(
       "data-fetch"
     );
     // cy.clock(1640297914000);
@@ -32,13 +32,13 @@ describe("Mobile app", () => {
   });
 
   it("next days weather should match image snapshot", () => {
-    cy.getByTestId("app-container").scrollTo("bottom");
+    cy.getByTestId("app-container-mobile").scrollTo("bottom");
     cy.contains("Friday");
     cy.matchImageSnapshot();
   });
 
   it("weather details should match image snapshot", () => {
-    cy.getByTestId("app-container").scrollTo("bottom");
+    cy.getByTestId("app-container-mobile").scrollTo("bottom");
     cy.getByTestIdLike("open-details-button").first().click();
     cy.matchImageSnapshot();
   });

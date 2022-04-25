@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import moment from "moment";
+import React from "react";
 
 const DashboardClockWrapper = styled.div`
   font-size: 6rem;
@@ -8,6 +9,10 @@ const DashboardClockWrapper = styled.div`
 `;
 
 export const DashboardClock = () => {
-  const currentHour = moment().format("HH:mm");
-  return <DashboardClockWrapper>{currentHour}</DashboardClockWrapper>;
+  const [currentTime, setCurrentTime] = React.useState("");
+  React.useEffect(() => {
+    const timerHandler = setInterval(() => setCurrentTime(moment().format("HH:mm:ss")), 1000);
+    return () => clearInterval(timerHandler);
+  }, []);
+  return <DashboardClockWrapper>{currentTime}</DashboardClockWrapper>;
 };
