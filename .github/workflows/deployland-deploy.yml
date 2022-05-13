@@ -1,31 +1,31 @@
-name: Deploy to deployland
+# name: Deploy to deployland
 
-on: push
+# on: push
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    environment:
-      name: deployland
-      url: "https://caelum.guildns.net/_ci/commit/${{ steps.vars.outputs.sha_short }}"
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     environment:
+#       name: deployland
+#       url: "https://caelum.guildns.net/_ci/commit/${{ steps.vars.outputs.sha_short }}"
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/cache@v2
+#         with:
+#           path: '**/node_modules'
+#           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Set outputs
-        id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+#       - name: Set outputs
+#         id: vars
+#         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
-      - run: yarn
-      - run: yarn build
-      - run: cd ./build && zip -r build.zip * && mv build.zip ../build.zip && cd ..
-      - run: echo ${{ steps.vars.outputs.sha_short }}
-      - run: echo "https://guildns.net/_ci/caelum/commit/${{ steps.vars.outputs.sha_short }}"
-      - run: |
-          curl \
-            -F "deploymentKey=${{ secrets.DEPLOYLAND_DEPLOY_KEY }}" \
-            -F "deployment=@./build.zip" \
-            "https://guildns.net/_ci/caelum/commit/${{ steps.vars.outputs.sha_short }}/deploy"
+#       - run: yarn
+#       - run: yarn build
+#       - run: cd ./build && zip -r build.zip * && mv build.zip ../build.zip && cd ..
+#       - run: echo ${{ steps.vars.outputs.sha_short }}
+#       - run: echo "https://guildns.net/_ci/caelum/commit/${{ steps.vars.outputs.sha_short }}"
+#       - run: |
+#           curl \
+#             -F "deploymentKey=${{ secrets.DEPLOYLAND_DEPLOY_KEY }}" \
+#             -F "deployment=@./build.zip" \
+#             "https://guildns.net/_ci/caelum/commit/${{ steps.vars.outputs.sha_short }}/deploy"
