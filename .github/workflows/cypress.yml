@@ -1,10 +1,6 @@
 name: Cypress Tests using Cypress Docker Image
 
-<<<<<<< HEAD
 on: push
-=======
-on: [push]
->>>>>>> b57accf (Cypress action)
 
 jobs:
   cypress-run:
