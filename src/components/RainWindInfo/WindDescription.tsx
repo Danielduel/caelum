@@ -35,5 +35,5 @@ export const WindDescription = ({ windSpeed, className }: WindDescriptionProps):
   const defaultWindSpeedValue = arrZero(WindSpeedValues);
   const { i18nLabelKey } = item || defaultWindSpeedValue;
   const { t } = useTranslation();
-  return <WindDescriptionWrapper className={className}>({t(i18nLabelKey)})</WindDescriptionWrapper>;
+  return <WindDescriptionWrapper className={className}>{t(i18nLabelKey)}</WindDescriptionWrapper>;
 };

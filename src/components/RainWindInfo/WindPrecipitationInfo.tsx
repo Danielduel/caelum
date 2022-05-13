@@ -35,7 +35,7 @@ const InfoItemUnit = styled.span`
   font-size: 1.5em;
 `;
 
-const WindDescriptionStyled = styled(WindDescription)`
+const WindDescriptionStyled = styled.span`
   font-size: 1.2em;
   margin-left: 0.5em;
   padding-top: 0.4em;
@@ -70,7 +70,9 @@ export const WindPrecipitationInfo = ({ currentWeather }: RainPrecipitationInfoP
           {+windspeedTail > 0 && <InfoItemValueFraction>.{windspeedTail}</InfoItemValueFraction>}
           <InfoItemUnit>m/s</InfoItemUnit>
         </InfoItemText>
-        <WindDescriptionStyled windSpeed={wind} />
+        <WindDescriptionStyled>
+          (<WindDescription windSpeed={wind} />)
+        </WindDescriptionStyled>
       </InfoItem>
       <InfoItem>
         <PrecipitationIcon temperature={temperature} rain={rain} snow={snow} />

@@ -1,12 +1,13 @@
 import "moment/locale/pl";
 import React from "react";
 import moment from "moment";
-import { AppContainer } from "./components/layouts/AppContainer";
+import { AppContainer, DesktopContainer, MobileContainer } from "./components/layouts/AppContainer";
 import { TodayWeatherPage } from "./pages/TodayWeatherPage";
 import { NextDaysForecastPage } from "./pages/NextDaysForecastPage";
 import { ModalRootStyles } from "./portals/ModalRootStyles";
 import initI18n from "./common/initI18n";
 import { ModalContext, TargetLocationContext } from "./AppContext";
+import { DesktopDashboardPage } from "./pages/DesktopDashboardPage";
 
 const EN = "en";
 
@@ -28,16 +29,25 @@ const App: React.FunctionComponent = () => {
   }
 
   return (
-    <AppContainer data-testid={"app-container"}>
-      <ModalRootStyles isModalOpen={isModalOpen} />
-      <TodayWeatherPage
-        nextPageRef={nextDaysForecastPageRef}
-        currentWeather={rawData.current}
-        hourForecast={rawData.hourly}
-        alert={alert}
-      />
-      <NextDaysForecastPage pageRef={nextDaysForecastPageRef} daily={rawData.daily} />
-    </AppContainer>
+    <>
+      <MobileContainer>
+        <AppContainer data-testid={"app-container-mobile"}>
+          <ModalRootStyles isModalOpen={isModalOpen} />
+          <TodayWeatherPage
+            nextPageRef={nextDaysForecastPageRef}
+            currentWeather={rawData.current}
+            hourForecast={rawData.hourly}
+            alert={alert}
+          />
+          <NextDaysForecastPage pageRef={nextDaysForecastPageRef} daily={rawData.daily} />
+        </AppContainer>
+      </MobileContainer>
+      <DesktopContainer>
+        <AppContainer data-testid={"app-container-desktop"}>
+          <DesktopDashboardPage currentWeather={rawData.current} />
+        </AppContainer>
+      </DesktopContainer>
+    </>
   );
 };
 
