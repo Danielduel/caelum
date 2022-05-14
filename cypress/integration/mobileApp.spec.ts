@@ -31,15 +31,15 @@ describe("Mobile app", () => {
     cy.matchImageSnapshot();
   });
 
-  it("next days weather should match image snapshot", () => {
-    cy.getByTestId("app-container-mobile").scrollTo("bottom");
-    cy.contains("Friday");
-    cy.matchImageSnapshot();
-  });
-
-  it("weather details should match image snapshot", () => {
-    cy.getByTestId("app-container-mobile").scrollTo("bottom");
-    cy.getByTestIdLike("open-details-button").first().click();
-    cy.matchImageSnapshot();
-  });
+  // it("next days weather should match image snapshot", () => {
+  //   cy.getByTestId("app-container-mobile").scrollTo("bottom");
+  //   cy.contains("Friday");
+  //   cy.matchImageSnapshot();
+  // });
+  //
+  // it("weather details should match image snapshot", () => {
+  //   cy.getByTestId("app-container-mobile").scrollTo("bottom");
+  //   cy.getByTestIdLike("open-details-button").first().click();
+  //   cy.matchImageSnapshot();
+  // });
 });
