@@ -12,6 +12,4 @@ COPY .prettierrc.json .
 
 COPY tsconfig.json .
 
-COPY .env .
-
 # No cmd, it is just a def for docker-compose
