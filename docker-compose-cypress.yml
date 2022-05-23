@@ -1,0 +1,25 @@
+version: '3.2'
+services:
+  caelum:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      # binding basically everything
+      - ./docs:/code/app/docs
+      - ./public:/code/app/public
+      - ./src:/code/app/src
+    command: yarn dev:start
+  cypress:
+    build:
+      context: .
+      dockerfile: cypress.Dockerfile
+    depends_on:
+      - caelum
+    environment:
+      # pass base url to test pointing at the web application
+      - CYPRESS_baseUrl=http://caelum:3000
+    # share the current folder as volume to avoid copying
+    volumes:
+      - ./cypress:/cypress
+      - ./cypress.json:/cypress.json
