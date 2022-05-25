@@ -1,16 +1,16 @@
 import { APP_ID } from "../common/constants";
-import { useFetchData } from "./useFetchData";
-import React from "react";
 import { GeoLocation } from "../models/GeocodingAPI";
+import { useQuery } from "react-query";
 
 const geocodingApiUrl = "https://api.openweathermap.org/geo/1.0/direct";
 
-const useGeocoding = () => {
-  const getUrl = React.useCallback(
-    (cityName: string) => `${geocodingApiUrl}?q=${cityName}&limit=10&appid=${APP_ID}`,
-    [geocodingApiUrl, APP_ID]
-  );
-  return useFetchData<GeoLocation[], [string]>(getUrl);
+const getCityCoordinates = async (cityName: string): Promise<GeoLocation[]> => {
+  const url = `${geocodingApiUrl}?q=${cityName}&limit=10&appid=${APP_ID}`;
+  const response = await fetch(url);
+  return await response.json();
 };
+
+const useGeocoding = (cityName: string) =>
+  useQuery(["weatherData", cityName], () => getCityCoordinates(cityName), { enabled: false });
 
 export { useGeocoding };

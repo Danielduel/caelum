@@ -84,10 +84,10 @@ const LocationModal = () => {
   const { setTargetLocation } = TargetLocationContext.wrappedHook();
   const { closeModals } = ModalContext.wrappedHook();
   const [lastLocations, selectLastLocation] = useLastLocations();
-  const [cities, fetched, fetchData] = useGeocoding();
+  const { data, isFetching, refetch } = useGeocoding(searchField);
   const { t } = useTranslation();
 
-  const debouncedFetchData = React.useCallback(debounce(fetchData, 700), [debounce, fetchData]);
+  const debouncedFetchData = React.useCallback(debounce(refetch, 700), [debounce, refetch]);
 
   const setLocation = React.useCallback(
     (location: GeoLocation) => {
@@ -103,7 +103,7 @@ const LocationModal = () => {
     (inputValue: string) => {
       setSearchField(inputValue);
       if (inputValue.length >= MIN_CITY_NAME_LEN) {
-        debouncedFetchData(inputValue);
+        debouncedFetchData();
       }
     },
     [setSearchField, debouncedFetchData]
@@ -119,8 +119,8 @@ const LocationModal = () => {
           value={searchField}
           placeholder={t("cityInputPlaceholder")}
         />
-        {searchField.length >= MIN_CITY_NAME_LEN && fetched && (
-          <LocationModalList setLocation={setLocation} cities={cities || []} />
+        {searchField.length >= MIN_CITY_NAME_LEN && !isFetching && (
+          <LocationModalList setLocation={setLocation} cities={data || []} />
         )}
       </LocationModalContent>
     </LocationWrapper>
