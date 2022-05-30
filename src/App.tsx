@@ -16,15 +16,15 @@ initI18n(EN);
 
 const App: React.FunctionComponent = () => {
   const { isModalOpen } = ModalContext.wrappedHook();
-  const { fetched, rawData } = TargetLocationContext.wrappedHook();
+  const { data, isFetching } = TargetLocationContext.wrappedHook();
   const nextDaysForecastPageRef = React.useRef<HTMLDivElement | null>(null);
-  const [alert] = rawData?.alerts || [];
+  const [alert] = data?.alerts || [];
 
-  if (!fetched) {
+  if (isFetching) {
     return <AppContainer>Loading...</AppContainer>;
   }
 
-  if (!rawData) {
+  if (!data) {
     return <AppContainer>No data</AppContainer>;
   }
 
@@ -35,16 +35,16 @@ const App: React.FunctionComponent = () => {
           <ModalRootStyles isModalOpen={isModalOpen} />
           <TodayWeatherPage
             nextPageRef={nextDaysForecastPageRef}
-            currentWeather={rawData.current}
-            hourForecast={rawData.hourly}
+            currentWeather={data.current}
+            hourForecast={data.hourly}
             alert={alert}
           />
-          <NextDaysForecastPage pageRef={nextDaysForecastPageRef} daily={rawData.daily} />
+          <NextDaysForecastPage pageRef={nextDaysForecastPageRef} daily={data.daily} />
         </AppContainer>
       </MobileContainer>
       <DesktopContainer>
         <AppContainer data-testid={"app-container-desktop"}>
-          <DesktopDashboardPage currentWeather={rawData.current} />
+          <DesktopDashboardPage currentWeather={data.current} />
         </AppContainer>
       </DesktopContainer>
     </>
